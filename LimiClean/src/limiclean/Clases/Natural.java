@@ -8,6 +8,15 @@ package limiclean.Clases;
  *
  * @author valer
  */
-public class Natural {
+public class Natural extends Cliente {
+    private final String dni;
+    private String apellido;
     
+    public Natural(int idCliente, String nombre, String direccion, String correo, String telefono,
+            String dni, String apellido)
+    {
+        super(idCliente, nombre, direccion, correo, telefono);
+        this.dni= dni;
+        this.apellido = apellido;
+    }
 }
