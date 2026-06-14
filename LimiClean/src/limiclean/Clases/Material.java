@@ -9,5 +9,12 @@ package limiclean.Clases;
  * @author valer
  */
 public class Material {
+    private int idMaterial;
+    private String nombMaterial;
     
+    public Material(int idMaterial, String nombMaterial)
+    {
+        this.idMaterial = idMaterial;
+        this.nombMaterial = nombMaterial;
+    }
 }

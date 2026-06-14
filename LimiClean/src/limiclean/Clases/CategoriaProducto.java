@@ -9,5 +9,12 @@ package limiclean.Clases;
  * @author valer
  */
 public class CategoriaProducto {
+    private int idCategoriaProducto;
+    private String nombCategoriaProducto;
     
+    public CategoriaProducto(int idCategoriaProducto, String nombCategoriaProducto)
+    {
+        this.idCategoriaProducto = idCategoriaProducto;
+        this.nombCategoriaProducto = nombCategoriaProducto;
+    }
 }

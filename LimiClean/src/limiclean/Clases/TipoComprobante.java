@@ -9,5 +9,12 @@ package limiclean.Clases;
  * @author valer
  */
 public class TipoComprobante {
+    private int idTipoComprobante;
+    private String nombre;
     
+    public TipoComprobante(int idTipoComprobante, String nombre)
+    {
+        this.idTipoComprobante = idTipoComprobante;
+        this.nombre = nombre;
+    }
 }

@@ -9,5 +9,19 @@ package limiclean.Clases;
  * @author valer
  */
 public class DetalleVenta {
+    private int idDetalleVenta;
+    private int cantidad;
+    private double precioUnitario;
+    private double subTotal;
+    private Venta venta;
+    private Producto producto;
     
+    public DetalleVenta(int idDetalleVenta, int cantidad,
+            Venta venta, Producto producto)
+    {
+        this.idDetalleVenta = idDetalleVenta;
+        this.cantidad = cantidad;
+        this.venta = venta;
+        this.producto = producto;
+    }
 }

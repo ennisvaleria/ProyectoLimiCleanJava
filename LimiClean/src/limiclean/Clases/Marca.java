@@ -9,5 +9,13 @@ package limiclean.Clases;
  * @author valer
  */
 public class Marca {
+    private int idMarca;
+    private String nombMarca;
+    
+    public Marca(int idMarca, String nombMarca)
+    {
+        this.idMarca = idMarca;
+        this.nombMarca = nombMarca;
+    }
     
 }

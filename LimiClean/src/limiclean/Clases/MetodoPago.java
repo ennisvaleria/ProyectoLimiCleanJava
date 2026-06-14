@@ -9,5 +9,13 @@ package limiclean.Clases;
  * @author valer
  */
 public class MetodoPago {
+    private int idMetodoPago;
+    private String nombPago;
+    
+    public MetodoPago(int idMetodoPago, String nombPago)
+    {
+        this.idMetodoPago = idMetodoPago;
+        this.nombPago = nombPago;
+    }
     
 }

@@ -9,5 +9,12 @@ package limiclean.Clases;
  * @author valer
  */
 public class detalleComprobante {
+    private OrdenLavado ordenLavado;
+    private Venta venta;
+    private ComprobantePago comprobantePago;
     
+    public detalleComprobante(OrdenLavado ordenLavado, Venta venta, ComprobantePago comprobantePago)
+    {
+        
+    }
 }
