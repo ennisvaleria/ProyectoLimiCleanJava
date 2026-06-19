@@ -6,6 +6,7 @@ package Interfaces;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
 /**
  *
@@ -104,6 +105,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnServicios.setText("Compra");
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
 
         javax.swing.GroupLayout PanelMenuLayout = new javax.swing.GroupLayout(PanelMenu);
         PanelMenu.setLayout(PanelMenuLayout);
@@ -175,6 +177,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         panelContenido.revalidate();
         panelContenido.repaint();        
     }//GEN-LAST:event_btnOrdenesMouseClicked
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
