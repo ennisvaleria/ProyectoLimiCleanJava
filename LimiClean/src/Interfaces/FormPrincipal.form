@@ -27,7 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelSuperior" pref="600" max="32767" attributes="0"/>
+          <Component id="panelSuperior" pref="674" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Component id="PanelMenu" min="-2" pref="143" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -41,7 +41,7 @@
               <Component id="panelSuperior" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="PanelMenu" pref="610" max="32767" attributes="0"/>
+                  <Component id="PanelMenu" pref="450" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="panelContenido" min="-2" max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="499" max="32767" attributes="0"/>
+                  <EmptySpace pref="573" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,8 +113,8 @@
               <Component id="btnOrdenes" max="32767" attributes="0"/>
               <Component id="btnCompras" pref="143" max="32767" attributes="0"/>
               <Component id="btnServicios" alignment="1" max="32767" attributes="0"/>
-              <Component id="btnSalir" alignment="0" max="32767" attributes="0"/>
               <Component id="btnVentas" alignment="0" max="32767" attributes="0"/>
+              <Component id="btnSalir" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -125,10 +125,11 @@
                   <Component id="btnVentas" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnServicios" min="-2" pref="57" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnCompras" min="-2" pref="57" max="-2" attributes="0"/>
-                  <EmptySpace pref="250" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSalir" min="-2" pref="57" max="-2" attributes="0"/>
+                  <EmptySpace pref="147" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
