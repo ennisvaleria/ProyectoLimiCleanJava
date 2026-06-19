@@ -31,16 +31,16 @@ public class PanelCJuridico extends javax.swing.JPanel {
         lblCorreo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
-        txtdni = new javax.swing.JTextField();
+        txtruc = new javax.swing.JTextField();
         lblTelefono1 = new javax.swing.JLabel();
         lblNombre1 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
-        txtdni1 = new javax.swing.JTextField();
+        txtestado = new javax.swing.JTextField();
         lblTelefono2 = new javax.swing.JLabel();
         lblTelefono3 = new javax.swing.JLabel();
-        txtdni2 = new javax.swing.JTextField();
+        txtRazonSocial = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(640, 201));
 
@@ -77,7 +77,7 @@ public class PanelCJuridico extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblTelefono2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(69, 69, 69)
                                 .addComponent(lblTelefono3))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -91,11 +91,11 @@ public class PanelCJuridico extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblTelefono1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtdni2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblCorreo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -116,14 +116,14 @@ public class PanelCJuridico extends javax.swing.JPanel {
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTelefono)
                         .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefono1))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefono2)
                     .addComponent(lblTelefono3)
-                    .addComponent(txtdni2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,6 +145,19 @@ public class PanelCJuridico extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public String[] datosNatural(){
+         String[] datos = new String[6];
+
+        datos[0] = txtNombre.getText();
+        datos[1] = txtruc.getText();
+        datos[2] = txtTelefono.getText();
+        datos[3] = txtRazonSocial.getText();
+        datos[4] = txtCorreo.getText();
+        datos[5] = txtDireccion.getText();
+        datos[6] = txtestado.getText();
+
+        return datos;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -158,9 +171,9 @@ public class PanelCJuridico extends javax.swing.JPanel {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRazonSocial;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtdni;
-    private javax.swing.JTextField txtdni1;
-    private javax.swing.JTextField txtdni2;
+    private javax.swing.JTextField txtestado;
+    private javax.swing.JTextField txtruc;
     // End of variables declaration//GEN-END:variables
 }

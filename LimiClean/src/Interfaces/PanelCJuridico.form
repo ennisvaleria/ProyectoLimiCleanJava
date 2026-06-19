@@ -44,7 +44,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="lblTelefono2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtdni1" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="txtestado" min="-2" pref="129" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                   <Component id="lblTelefono3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -59,14 +59,14 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="lblTelefono1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtdni" min="-2" pref="143" max="-2" attributes="0"/>
+                                  <Component id="txtruc" min="-2" pref="143" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="txtdni2" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
+                              <Component id="txtRazonSocial" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblCorreo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -94,15 +94,15 @@
                           <Component id="lblTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtdni" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtruc" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTelefono1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtdni1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtestado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTelefono2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTelefono3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtdni2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRazonSocial" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -137,7 +137,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTelefono">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtdni">
+        <Component class="javax.swing.JTextField" name="txtruc">
         </Component>
         <Component class="javax.swing.JLabel" name="lblTelefono1">
           <Properties>
@@ -167,7 +167,7 @@
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtdni1">
+        <Component class="javax.swing.JTextField" name="txtestado">
         </Component>
         <Component class="javax.swing.JLabel" name="lblTelefono2">
           <Properties>
@@ -185,7 +185,7 @@
             <Property name="text" type="java.lang.String" value="Razon Social:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtdni2">
+        <Component class="javax.swing.JTextField" name="txtRazonSocial">
         </Component>
       </SubComponents>
     </Container>

@@ -13,15 +13,24 @@ public class PanelCNatural extends javax.swing.JPanel {
     /**
      * Creates new form PanelCNatural
      */
+    
     public PanelCNatural() {
         initComponents();
-        String NombreNatural=txtNombre.toString();
-        String ApellidosNatural=txtApellidos.toString();
-        String Telefono=txtTelefono.toString();
-        String Dni=txtdni.toString();
-        String Correo=txtCorreo.toString();
-        String Dirección=txtDireccion.toString();
+        
+        
     
+    }
+    public String[] datosNatural(){
+         String[] datos = new String[6];
+
+        datos[0] = txtNombre.getText();
+        datos[1] = txtApellidos.getText();
+        datos[2] = txtTelefono.getText();
+        datos[3] = txtdni.getText();
+        datos[4] = txtCorreo.getText();
+        datos[5] = txtDireccion.getText();
+
+        return datos;
     }
 
     /**

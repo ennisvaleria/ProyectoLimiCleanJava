@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Interfaces;
+
+import java.sql.Timestamp;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.ConexionBD;
+
 /**
  *
  * @author user
@@ -13,9 +20,20 @@ public class PanelOrdenes extends javax.swing.JPanel {
      * Creates new form PanelOrdenes
      */
     private FormPrincipal principal;
-    public PanelOrdenes(FormPrincipal principal) {
+    public PanelOrdenes(FormPrincipal principal)  {
         initComponents();
         this.principal = principal;
+        try {
+            List<Object[]> datos = Funciones_BD.listarOrdenes(
+                    ConexionBD.obtenerConexion()
+            );
+
+            cargarTabla(datos, tableOrdenes);
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar órdenes: " + e.getMessage());
+        }
+ 
     }
 
     /**
@@ -28,13 +46,13 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableOrdenes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnNuevaOrden = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -45,7 +63,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableOrdenes);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Ordenes");
@@ -102,14 +120,57 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
         principal.mostrarPanel(new PanelNuevaOrden(principal));
     }//GEN-LAST:event_btnNuevaOrdenMouseClicked
+public void cargarTabla(List<Object[]> datos, javax.swing.JTable tabla) {
 
+    DefaultTableModel modelo = new DefaultTableModel();
+
+    modelo.addColumn("ID");
+    modelo.addColumn("Fecha Orden");
+    modelo.addColumn("Costo");
+    modelo.addColumn("Entrega Est.");
+    modelo.addColumn("Descuento");
+    modelo.addColumn("Entrega Real");
+    modelo.addColumn("Notas");
+    modelo.addColumn("Estado");
+    modelo.addColumn("Cliente");
+
+    for (Object[] fila : datos) {
+
+        int id = (int) fila[0];
+        Timestamp fecha = (Timestamp) fila[1];
+        double costo = (double) fila[2];
+        Timestamp entregaEst = (Timestamp) fila[3];
+
+        Double desc = fila[4] != null ? ((Number) fila[4]).doubleValue() : null;
+
+        Timestamp entregaReal = (Timestamp) fila[5];
+
+        String notas = (String) fila[6];
+        char estado = ((String) fila[7]).charAt(0);
+        int idCliente = (int) fila[8];
+
+        modelo.addRow(new Object[]{
+            id,
+            fecha,
+            costo,
+            entregaEst,
+            desc,
+            entregaReal,
+            notas,
+            estado,
+            idCliente
+        });
+    }
+
+    tabla.setModel(modelo);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevaOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableOrdenes;
     // End of variables declaration//GEN-END:variables
 }
