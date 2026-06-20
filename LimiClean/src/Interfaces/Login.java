@@ -34,9 +34,10 @@ public class Login extends javax.swing.JFrame {
         lblusuario = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
         lblcontra = new javax.swing.JLabel();
-        txtcontra = new javax.swing.JTextField();
+        passContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login LimiClean");
 
         btnIngresar.setText("Ingresar");
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -51,23 +52,21 @@ public class Login extends javax.swing.JFrame {
         lblcontra.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         lblcontra.setText("Contraseña");
 
-        txtcontra.setToolTipText("*");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblusuario)
                     .addComponent(lblcontra)
-                    .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtusuario, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(btnIngresar)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                        .addComponent(btnIngresar))
+                    .addComponent(passContra))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,7 +78,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblcontra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnIngresar)
                 .addContainerGap(57, Short.MAX_VALUE))
@@ -90,7 +89,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
         String usuarioingresado = txtusuario.getText().trim();
-        String passwordIngresada = txtcontra.getText().trim();
+        String passwordIngresada = passContra.getText().trim();
 
          String passwordBD="";
         try {
@@ -148,7 +147,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel lblcontra;
     private javax.swing.JLabel lblusuario;
-    private javax.swing.JTextField txtcontra;
+    private javax.swing.JPasswordField passContra;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
