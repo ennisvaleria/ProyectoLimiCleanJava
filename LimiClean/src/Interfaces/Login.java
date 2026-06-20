@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaces;
-
+import javax.swing.JOptionPane;
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.ConexionBD;
 /**
  *
  * @author user
@@ -37,12 +39,19 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIngresarMouseClicked(evt);
+            }
+        });
 
         lblusuario.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         lblusuario.setText("Usuario");
 
         lblcontra.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         lblcontra.setText("Contraseña");
+
+        txtcontra.setToolTipText("*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,7 +67,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(btnIngresar)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,11 +82,42 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnIngresar)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
+        String usuarioingresado = txtusuario.getText().trim();
+        String passwordIngresada = txtcontra.getText().trim();
+
+         String passwordBD="";
+        try {
+            
+            passwordBD = Funciones_BD.validacion_login(ConexionBD.obtenerConexion(), usuarioingresado);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Login.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        if (passwordBD != null && !passwordBD.isEmpty()) {
+
+            if (passwordIngresada.equals(passwordBD)) {
+
+                JOptionPane.showMessageDialog(null, "✔ LOGIN CORRECTO");
+
+                new FormPrincipal().setVisible(true);
+                this.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "❌ CONTRASEÑA INCORRECTA");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "❌ USUARIO NO ENCONTRADO");
+        }
+         
+    }//GEN-LAST:event_btnIngresarMouseClicked
 
     /**
      * @param args the command line arguments

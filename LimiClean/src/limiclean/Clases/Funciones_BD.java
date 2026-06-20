@@ -22,6 +22,28 @@ import javax.swing.JOptionPane;
  */
 public class Funciones_BD {
     
+    public static String validacion_login(Connection conexion, String usuario) {
+
+        String sql = "SELECT password FROM usuario WHERE email = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setString(1, usuario);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("password");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error al validar login: " + e.getMessage());
+        }
+
+        return null;
+    }
+
 public static int guardar_cliente_natural(Connection conexion, String[] datos) {
 
     try {
@@ -122,7 +144,7 @@ public static int guardar_cliente_juridico(Connection conexion, String[] datos) 
 
         String estado = datos[6];
 
-        // INSERT CLIENTE
+        
         String sqlCliente =
             "INSERT INTO cliente (Nombre, Direccion, Correo, Telefono) VALUES (?, ?, ?, ?)";
 
@@ -150,7 +172,7 @@ public static int guardar_cliente_juridico(Connection conexion, String[] datos) 
             throw new SQLException("No se generó ID de Cliente");
         }
 
-        // INSERT JURIDICO
+        
         String sqlJuridico =
             "INSERT INTO cJuridico (idCliente, ruc, estado, razonSocial) VALUES (?, ?, ?, ?)";
 
@@ -182,54 +204,6 @@ public static int guardar_cliente_juridico(Connection conexion, String[] datos) 
 
     return -1;
 }
-/*public static boolean guardarOrdenLavado(
-            Connection conexion,
-            Timestamp fechOrdenLavado,
-            double costLavado,
-            Timestamp fechEntregaEstimada,
-            double descOrdenLavado,
-            Timestamp fechEntregaReal,
-            String notasOrdenLavado,
-            char estadoPago,
-            int idCliente
-    ) {
-
-        String sql = "INSERT INTO ordenLavado " +
-                "(fechOrdenLavado, costLavado, fechEntregaEstimada, descOrdenLavado, " +
-                "fechEntregaReal, notasOrdenLavado, estadoPago, idCliente) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-
-            ps.setTimestamp(1, fechOrdenLavado);
-            ps.setDouble(2, costLavado);
-            ps.setTimestamp(3, fechEntregaEstimada);
-
-            // descuento (puede ser NULL si quieres)
-            ps.setDouble(4, descOrdenLavado);
-
-            // fecha entrega real (puede ser null)
-            if (fechEntregaReal == null) {
-                ps.setNull(5, java.sql.Types.TIMESTAMP);
-            } else {
-                ps.setTimestamp(5, fechEntregaReal);
-            }
-
-            ps.setString(6, notasOrdenLavado);
-            ps.setString(7, String.valueOf(estadoPago));
-            ps.setInt(8, idCliente);
-
-            ps.executeUpdate();
-
-            return true;
-
-        } catch (SQLException e) {
-            System.out.println("Error al guardar orden de lavado: " + e.getMessage());
-            return false;
-        }
-    }*/
-
-
 public static boolean guardarOrdenLavado(
         Connection conexion,
         Timestamp fechOrdenLavado,
@@ -392,40 +366,149 @@ public static String[] obtenerTipoLavado(
 }
 public static List<Object[]> listarOrdenes(Connection conexion) {
 
-        List<Object[]> lista = new ArrayList<>();
+    List<Object[]> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM ordenLavado";
+    String sql = """
+        SELECT 
+            ol.idOrdenLavado,
+            cn.DNI,
+            cj.ruc,
+            c.nombCliente,
+            ol.notasOrdenLavado,
+            ol.fechOrdenLavado,
+            ol.fechEntregaEstimada,
+            ol.costLavado,
+            ol.descOrdenLavado,
+            ol.estadoPago
+        FROM ordenLavado ol
+        INNER JOIN Cliente c
+            ON ol.idCliente = c.idCliente
+        LEFT JOIN cNatural cn
+            ON c.idCliente = cn.idCliente
+        LEFT JOIN cJuridico cj
+            ON c.idCliente = cj.idCliente
+        """;
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+    try (PreparedStatement ps = conexion.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+
+            Object[] fila = new Object[10];
+
+            fila[0] = rs.getInt("idOrdenLavado");
+            fila[1] = rs.getString("DNI");
+            fila[2] = rs.getString("ruc");
+            fila[3] = rs.getString("nombCliente");
+            fila[4] = rs.getString("notasOrdenLavado");
+            fila[5] = rs.getTimestamp("fechOrdenLavado");
+            fila[6] = rs.getTimestamp("fechEntregaEstimada");
+            fila[7] = rs.getDouble("costLavado");
+            fila[8] = rs.getObject("descOrdenLavado");
+            fila[9] = rs.getString("estadoPago");
+
+            lista.add(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al listar órdenes: " + e.getMessage()
+        );
+    }
+
+    return lista;
+}
+public static List<Object[]> BuscarDni(Connection conexion, String documento) {
+
+    List<Object[]> lista = new ArrayList<>();
+
+    String sql;
+
+    //  decidir si es DNI o RUC
+    if (documento.length() <= 8) {
+
+        sql = """
+            SELECT 
+                ol.idOrdenLavado,
+                cn.DNI,
+                cj.ruc,
+                c.nombCliente,
+                ol.notasOrdenLavado,
+                ol.fechOrdenLavado,
+                ol.fechEntregaEstimada,
+                ol.costLavado,
+                ol.descOrdenLavado,
+                ol.estadoPago
+            FROM ordenLavado ol
+            INNER JOIN Cliente c
+                ON ol.idCliente = c.idCliente
+            LEFT JOIN cNatural cn
+                ON c.idCliente = cn.idCliente
+            LEFT JOIN cJuridico cj
+                ON c.idCliente = cj.idCliente
+            WHERE cn.DNI = ?
+        """;
+
+    } else {
+
+        sql = """
+            SELECT 
+                ol.idOrdenLavado,
+                cn.DNI,
+                cj.ruc,
+                c.nombCliente,
+                ol.notasOrdenLavado,
+                ol.fechOrdenLavado,
+                ol.fechEntregaEstimada,
+                ol.costLavado,
+                ol.descOrdenLavado,
+                ol.estadoPago
+            FROM ordenLavado ol
+            INNER JOIN Cliente c
+                ON ol.idCliente = c.idCliente
+            LEFT JOIN cNatural cn
+                ON c.idCliente = cn.idCliente
+            LEFT JOIN cJuridico cj
+                ON c.idCliente = cj.idCliente
+            WHERE cj.ruc = ?
+        """;
+    }
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, documento);
+
+        try (ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
 
-                Object[] fila = new Object[9];
+                Object[] fila = new Object[10];
 
                 fila[0] = rs.getInt("idOrdenLavado");
-                fila[1] = rs.getTimestamp("fechOrdenLavado");
-                fila[2] = rs.getDouble("costLavado");
-                fila[3] = rs.getTimestamp("fechEntregaEstimada");
-
-                // null safe
-                fila[4] = rs.getObject("descOrdenLavado");
-                fila[5] = rs.getTimestamp("fechEntregaReal");
-
-                fila[6] = rs.getString("notasOrdenLavado");
-                fila[7] = rs.getString("estadoPago");
-                fila[8] = rs.getInt("idCliente");
+                fila[1] = rs.getString("DNI");
+                fila[2] = rs.getString("ruc");
+                fila[3] = rs.getString("nombCliente");
+                fila[4] = rs.getString("notasOrdenLavado");
+                fila[5] = rs.getTimestamp("fechOrdenLavado");
+                fila[6] = rs.getTimestamp("fechEntregaEstimada");
+                fila[7] = rs.getDouble("costLavado");
+                fila[8] = rs.getObject("descOrdenLavado");
+                fila[9] = rs.getString("estadoPago");
 
                 lista.add(fila);
             }
-
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
         }
 
-        return lista;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al buscar órdenes: " + e.getMessage()
+        );
     }
 
+    return lista;
+}
 public static boolean guardarCalzado(
             Connection conexion,
             String nombCalzado,

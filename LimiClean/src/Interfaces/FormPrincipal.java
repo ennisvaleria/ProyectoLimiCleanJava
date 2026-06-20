@@ -180,7 +180,9 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        
+        new Login().setVisible(true);
+                this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

@@ -495,11 +495,11 @@ public class PanelNuevaOrden extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnNuevaOrden)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(PanelPrincipal);
@@ -512,7 +512,7 @@ public class PanelNuevaOrden extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -539,7 +539,7 @@ public class PanelNuevaOrden extends javax.swing.JPanel {
 
     private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
                
-                String[] datos = panelCN.datosNatural();
+               String[] datos = panelCN.datosNatural();
         String texto = cmbtipocliente.getSelectedItem().toString();
         int idcliente=-1;
         if (texto.equals("Natural")) {
@@ -556,18 +556,42 @@ public class PanelNuevaOrden extends javax.swing.JPanel {
             }
         }
         if(idcliente==-1){
-  
+        JOptionPane.showMessageDialog(null,"No se pudo registrar el usuario");
+        return;
+        }
+               
         
         char estadoPago = RBpendiente.isSelected() ? 'P' : 'C';
-        Timestamp fechOrdenLavado = new Timestamp(System.currentTimeMillis());
+       Timestamp fechOrdenLavado = new Timestamp(System.currentTimeMillis());
 
-        Timestamp fechEntregaEstimada = Timestamp.valueOf(txtFechaRecojo.getText().trim());
+// FECHA ENTREGA ESTIMADA
+Timestamp fechEntregaEstimada = null;
+Timestamp fechEntregaReal = null;
 
-        Timestamp fechEntregaReal = null;
+try {
+    String fechaTexto = txtFechaRecojo.getText().trim();
 
-        if (!txtFechaEntrega.getText().trim().isEmpty()) {
-            fechEntregaReal = Timestamp.valueOf(txtFechaEntrega.getText().trim());
-        }
+    fechEntregaEstimada = Timestamp.valueOf(fechaTexto + " 00:00:00");
+
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null,
+            " Fecha de entrega estimada inválida.\nFormato correcto: yyyy-MM-dd");
+    return;
+}
+
+// FECHA ENTREGA REAL (OPCIONAL)
+try {
+    String fechaEntrega = txtFechaEntrega.getText().trim();
+
+    if (!fechaEntrega.isEmpty()) {
+        fechEntregaReal = Timestamp.valueOf(fechaEntrega + " 00:00:00");
+    }
+
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null,
+            " Fecha de entrega real inválida.\nFormato correcto: yyyy-MM-dd");
+    return;
+}
 
         try {
             Funciones_BD.guardarOrdenLavado(
@@ -581,11 +605,22 @@ public class PanelNuevaOrden extends javax.swing.JPanel {
                     estadoPago,
                     idcliente
             );
+            Limpiar();
+            
         } catch (ClassNotFoundException ex) {
             System.getLogger(PanelNuevaOrden.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }}
+        }
     }//GEN-LAST:event_btnNuevaOrdenMouseClicked
-
+    public void Limpiar(){
+        txtNotas.setText("");
+        txtnombrecalzado.setText("");
+        txtdescripcioncalzado.setText("");
+        txtprecioref.setText("");
+        txtDescuento.setText("");
+        txtCosto.setText("");
+        RBpagado.setSelected(false);
+        RBpendiente.setSelected(false);
+    }
     private void cmbTipoLavadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoLavadoActionPerformed
       if (cmbTipoLavado.getSelectedItem() == null) {
         return;

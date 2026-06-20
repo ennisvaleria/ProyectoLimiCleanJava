@@ -22,7 +22,7 @@ public class ConexionBD {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conexion = DriverManager.getConnection(url,user,pass);
-            System.out.println("Conexion exitosa");
+            
             
         }catch(SQLException e){
             e.printStackTrace();

@@ -6,7 +6,9 @@ package Interfaces;
 
 import java.sql.Timestamp;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
 
@@ -48,9 +50,10 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOrdenes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtfiltrarDni = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnNuevaOrden = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         tableOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,16 +80,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
             }
         });
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
                 .addContainerGap())
@@ -99,6 +103,14 @@ public class PanelOrdenes extends javax.swing.JPanel {
                         .addGap(193, 193, 193)
                         .addComponent(btnNuevaOrden)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtfiltrarDni, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscar)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,70 +119,110 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(txtfiltrarDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNuevaOrden)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
         principal.mostrarPanel(new PanelNuevaOrden(principal));
     }//GEN-LAST:event_btnNuevaOrdenMouseClicked
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        if (txtfiltrarDni.getText().isEmpty()) {
+
+    try {
+        List<Object[]> datos = Funciones_BD.listarOrdenes(
+                ConexionBD.obtenerConexion()
+        );
+
+        cargarTabla(datos, tableOrdenes);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,
+                "Error al cargar órdenes: " + e.getMessage());
+    }
+
+} else {
+
+    try {
+
+        List<Object[]> datos_filtro =
+                Funciones_BD.BuscarDni(
+                        ConexionBD.obtenerConexion(),
+                        txtfiltrarDni.getText().trim()
+                );
+
+        cargarTabla(datos_filtro, tableOrdenes); // 🔥 FALTABA ESTO
+
+    } catch (ClassNotFoundException ex) {
+        JOptionPane.showMessageDialog(null,
+                "Error de conexión: " + ex.getMessage());
+    }
+        }
+    }//GEN-LAST:event_btnBuscarMouseClicked
 public void cargarTabla(List<Object[]> datos, javax.swing.JTable tabla) {
 
     DefaultTableModel modelo = new DefaultTableModel();
 
     modelo.addColumn("ID");
-    modelo.addColumn("Fecha Orden");
-    modelo.addColumn("Costo");
-    modelo.addColumn("Entrega Est.");
-    modelo.addColumn("Descuento");
-    modelo.addColumn("Entrega Real");
-    modelo.addColumn("Notas");
-    modelo.addColumn("Estado");
+    modelo.addColumn("DNI");
+    modelo.addColumn("RUC");
     modelo.addColumn("Cliente");
+    modelo.addColumn("Notas");
+    modelo.addColumn("Fecha Orden");
+    modelo.addColumn("Entrega Est.");
+    modelo.addColumn("Costo");
+    modelo.addColumn("Descuento");
+    modelo.addColumn("Estado");
+for (Object[] fila : datos) {
 
-    for (Object[] fila : datos) {
+    int id = (int) fila[0];
+    String dni = (String) fila[1];
+    String ruc = (String) fila[2];
+    String cliente = (String) fila[3];
+    String notas = (String) fila[4];
+    Timestamp fechaOrden = (Timestamp) fila[5];
+    Timestamp entregaEst = (Timestamp) fila[6];
+    double costo = ((Number) fila[7]).doubleValue();
+    Double descuento = fila[8] != null
+            ? ((Number) fila[8]).doubleValue()
+            : null;
+    String estado = (String) fila[9];
+    if(estado.contentEquals("P"))
+    estado="Pagado";
+    else
+        estado="Cancelado";
+    modelo.addRow(new Object[]{
+        id,
+        dni,
+        ruc,
+        cliente,
+        notas,
+        fechaOrden,
+        entregaEst,
+        costo,
+        descuento,
+        estado
+    });
+}
 
-        int id = (int) fila[0];
-        Timestamp fecha = (Timestamp) fila[1];
-        double costo = (double) fila[2];
-        Timestamp entregaEst = (Timestamp) fila[3];
-
-        Double desc = fila[4] != null ? ((Number) fila[4]).doubleValue() : null;
-
-        Timestamp entregaReal = (Timestamp) fila[5];
-
-        String notas = (String) fila[6];
-        char estado = ((String) fila[7]).charAt(0);
-        int idCliente = (int) fila[8];
-
-        modelo.addRow(new Object[]{
-            id,
-            fecha,
-            costo,
-            entregaEst,
-            desc,
-            entregaReal,
-            notas,
-            estado,
-            idCliente
-        });
-    }
-
-    tabla.setModel(modelo);
+tabla.setModel(modelo);
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevaOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tableOrdenes;
+    private javax.swing.JTextField txtfiltrarDni;
     // End of variables declaration//GEN-END:variables
 }
