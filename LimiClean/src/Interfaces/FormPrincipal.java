@@ -45,24 +45,36 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         panelSuperior = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        panelContenido = new javax.swing.JPanel();
         PanelMenu = new javax.swing.JPanel();
         btnOrdenes = new javax.swing.JButton();
         btnCompras = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         btnServicios = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        panelContenido = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnServicios1 = new javax.swing.JButton();
+        btnServicios2 = new javax.swing.JButton();
+        btnServicios3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        btnServicios4 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        btnServicios5 = new javax.swing.JButton();
+        label1 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LimiClean");
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(1200, 1000));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelSuperior.setBackground(new java.awt.Color(102, 153, 255));
+        panelSuperior.setBackground(new java.awt.Color(24, 95, 165));
         panelSuperior.setToolTipText("");
         panelSuperior.setPreferredSize(new java.awt.Dimension(120, 60));
 
-        jLabel1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel1.setText("LimiClean");
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("LimiClean - Sistema de gestión");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -74,85 +86,130 @@ public class FormPrincipal extends javax.swing.JFrame {
         panelSuperiorLayout.setHorizontalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuperiorLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(167, 167, 167)
                 .addComponent(jLabel1)
-                .addContainerGap(573, Short.MAX_VALUE))
+                .addContainerGap(662, Short.MAX_VALUE))
         );
         panelSuperiorLayout.setVerticalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuperiorLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        PanelMenu.setBackground(new java.awt.Color(153, 153, 153));
-        PanelMenu.setPreferredSize(new java.awt.Dimension(220, 640));
+        getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 1050, 69));
 
-        btnOrdenes.setText("Ordenes");
+        panelContenido.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 910, -1, -1));
+
+        PanelMenu.setBackground(new java.awt.Color(38, 38, 36));
+        PanelMenu.setPreferredSize(new java.awt.Dimension(220, 640));
+        PanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnOrdenes.setBackground(new java.awt.Color(38, 38, 36));
+        btnOrdenes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnOrdenes.setForeground(new java.awt.Color(255, 255, 255));
+        btnOrdenes.setText("Órdenes de lavado");
+        btnOrdenes.setActionCommand("Ordenes de ");
+        btnOrdenes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnOrdenes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnOrdenesMouseClicked(evt);
             }
         });
         btnOrdenes.addActionListener(this::btnOrdenesActionPerformed);
+        PanelMenu.add(btnOrdenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 164, 209, 45));
 
-        btnCompras.setText("Registro Usuario");
+        btnCompras.setBackground(new java.awt.Color(38, 38, 36));
+        btnCompras.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCompras.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompras.setText("Trabajador");
+        btnCompras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 334, 206, 44));
 
+        btnVentas.setBackground(new java.awt.Color(38, 38, 36));
+        btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVentas.setForeground(new java.awt.Color(255, 255, 255));
         btnVentas.setText("Ventas");
+        btnVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 215, 209, 41));
 
-        btnServicios.setText("Compra");
+        btnServicios.setBackground(new java.awt.Color(38, 38, 36));
+        btnServicios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnServicios.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicios.setText("Órdenes de compra");
+        btnServicios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelMenu.add(btnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 502, 206, 36));
 
-        btnSalir.setText("Salir");
+        btnSalir.setBackground(new java.awt.Color(38, 38, 36));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(238, 136, 132));
+        btnSalir.setText("Cerrar sesión");
+        btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 210, 37));
 
-        javax.swing.GroupLayout PanelMenuLayout = new javax.swing.GroupLayout(PanelMenu);
-        PanelMenu.setLayout(PanelMenuLayout);
-        PanelMenuLayout.setHorizontalGroup(
-            PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnOrdenes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-            .addComponent(btnServicios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        PanelMenuLayout.setVerticalGroup(
-            PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMenuLayout.createSequentialGroup()
-                .addComponent(btnOrdenes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
-        );
+        jLabel2.setForeground(new java.awt.Color(136, 134, 127));
+        jLabel2.setText("OPERACIONES");
+        PanelMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 142, 87, -1));
 
-        panelContenido.setLayout(new java.awt.BorderLayout());
+        jLabel3.setForeground(new java.awt.Color(136, 134, 127));
+        jLabel3.setText("REGISTROS");
+        PanelMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 262, 87, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        btnServicios1.setBackground(new java.awt.Color(38, 38, 36));
+        btnServicios1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnServicios1.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicios1.setText("Proveedores");
+        btnServicios1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnServicios1.addActionListener(this::btnServicios1ActionPerformed);
+        PanelMenu.add(btnServicios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 429, 206, 39));
+
+        btnServicios2.setBackground(new java.awt.Color(39, 39, 37));
+        btnServicios2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnServicios2.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicios2.setText("Clientes");
+        btnServicios2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnServicios2.addActionListener(this::btnServicios2ActionPerformed);
+        PanelMenu.add(btnServicios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 284, 206, 44));
+
+        btnServicios3.setBackground(new java.awt.Color(38, 38, 36));
+        btnServicios3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnServicios3.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicios3.setText("Reportes");
+        btnServicios3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnServicios3.addActionListener(this::btnServicios3ActionPerformed);
+        PanelMenu.add(btnServicios3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 611, 206, 39));
+
+        jLabel4.setForeground(new java.awt.Color(136, 134, 127));
+        jLabel4.setText("REPORTES");
+        PanelMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 589, 87, -1));
+
+        btnServicios4.setBackground(new java.awt.Color(38, 38, 36));
+        btnServicios4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnServicios4.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicios4.setText("Productos");
+        btnServicios4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnServicios4.addActionListener(this::btnServicios4ActionPerformed);
+        PanelMenu.add(btnServicios4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 384, 206, 39));
+
+        jLabel5.setForeground(new java.awt.Color(136, 134, 127));
+        jLabel5.setText("COMPRAS");
+        PanelMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 87, -1));
+
+        btnServicios5.setBackground(new java.awt.Color(38, 38, 36));
+        btnServicios5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnServicios5.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicios5.setText("Insumos");
+        btnServicios5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnServicios5.addActionListener(this::btnServicios5ActionPerformed);
+        PanelMenu.add(btnServicios5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 544, 206, 39));
+
+        label1.setForeground(new java.awt.Color(136, 134, 127));
+        label1.setText("__________________________________________");
+        PanelMenu.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, -1));
+
+        getContentPane().add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 74, 236, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -176,6 +233,26 @@ public class FormPrincipal extends javax.swing.JFrame {
         panelContenido.repaint();        
     }//GEN-LAST:event_btnOrdenesMouseClicked
 
+    private void btnServicios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnServicios1ActionPerformed
+
+    private void btnServicios2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnServicios2ActionPerformed
+
+    private void btnServicios3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnServicios3ActionPerformed
+
+    private void btnServicios4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnServicios4ActionPerformed
+
+    private void btnServicios5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnServicios5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,8 +268,18 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnOrdenes;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnServicios;
+    private javax.swing.JButton btnServicios1;
+    private javax.swing.JButton btnServicios2;
+    private javax.swing.JButton btnServicios3;
+    private javax.swing.JButton btnServicios4;
+    private javax.swing.JButton btnServicios5;
     private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private java.awt.Label label1;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelSuperior;
     // End of variables declaration//GEN-END:variables
