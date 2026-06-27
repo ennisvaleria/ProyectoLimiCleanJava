@@ -55,6 +55,9 @@ public class FormPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnServicios5 = new javax.swing.JButton();
         label1 = new java.awt.Label();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LimiClean");
@@ -140,6 +143,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnSalir.setForeground(new java.awt.Color(238, 136, 132));
         btnSalir.setText("Cerrar sesión");
         btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
         PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 210, 37));
 
         jLabel2.setForeground(new java.awt.Color(136, 134, 127));
@@ -202,6 +206,18 @@ public class FormPrincipal extends javax.swing.JFrame {
         label1.setText("__________________________________________");
         PanelMenu.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, -1));
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("NOMBRE ADMINISTRADOR");
+        PanelMenu.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("ROL");
+        PanelMenu.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("FOTO");
+        PanelMenu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
         getContentPane().add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 74, 236, 830));
 
         pack();
@@ -246,6 +262,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnServicios5ActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,6 +292,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private java.awt.Label label1;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelSuperior;
