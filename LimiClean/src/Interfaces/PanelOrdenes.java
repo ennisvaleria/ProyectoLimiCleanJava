@@ -56,6 +56,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 btnNuevaOrdenMouseClicked(evt);
             }
         });
+        btnNuevaOrden.addActionListener(this::btnNuevaOrdenActionPerformed);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -213,7 +214,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
-        principal.mostrarPanel(new PanelNuevaOrden(principal));
+
     }//GEN-LAST:event_btnNuevaOrdenMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -221,6 +222,11 @@ public class PanelOrdenes extends javax.swing.JPanel {
         frm.setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed
+        FrmNuevaOrden frm = new FrmNuevaOrden();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

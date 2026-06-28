@@ -13,8 +13,11 @@ public class PanelVentas extends javax.swing.JPanel {
     /**
      * Creates new form PanelVentas
      */
-    public PanelVentas() {
+    private FormPrincipal principal;
+    public PanelVentas(FormPrincipal principal) {
         initComponents();
+        this.principal = principal;
+        
     }
 
     /**
@@ -153,6 +156,7 @@ public class PanelVentas extends javax.swing.JPanel {
 
         jButton1.setText("+ Nueva venta");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -236,6 +240,11 @@ public class PanelVentas extends javax.swing.JPanel {
         FormDetalleVenta frm = new FormDetalleVenta();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FrmNuevaVenta frm = new FrmNuevaVenta ();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

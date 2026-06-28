@@ -97,7 +97,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 1050, 69));
 
         panelContenido.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 74, 810, 830));
+        getContentPane().add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 810, 830));
 
         PanelMenu.setBackground(new java.awt.Color(38, 38, 36));
         PanelMenu.setPreferredSize(new java.awt.Dimension(220, 640));
@@ -122,6 +122,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnCompras.setForeground(new java.awt.Color(255, 255, 255));
         btnCompras.setText("Empleados");
         btnCompras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCompras.addActionListener(this::btnComprasActionPerformed);
         PanelMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 200, 44));
 
         btnVentas.setBackground(new java.awt.Color(38, 38, 36));
@@ -129,6 +130,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnVentas.setForeground(new java.awt.Color(255, 255, 255));
         btnVentas.setText("Ventas");
         btnVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVentas.addActionListener(this::btnVentasActionPerformed);
         PanelMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 215, 200, 41));
 
         btnServicios.setBackground(new java.awt.Color(38, 38, 36));
@@ -224,11 +226,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrdenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenesActionPerformed
-            panelContenido.setLayout(new BorderLayout());
-        panelContenido.removeAll();
-        panelContenido.add(new PanelOrdenes(this),BorderLayout.CENTER);
-        panelContenido.revalidate();
-        panelContenido.repaint();
+            mostrarPanel(new PanelOrdenes(this));
     }//GEN-LAST:event_btnOrdenesActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -236,10 +234,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void btnOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenesMouseClicked
-        panelContenido.removeAll();
-        panelContenido.add(new PanelOrdenes(this),BorderLayout.CENTER);
-        panelContenido.revalidate();
-        panelContenido.repaint();        
+
+        panelContenido.add(new PanelOrdenes(this));      
     }//GEN-LAST:event_btnOrdenesMouseClicked
 
     private void btnServicios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios1ActionPerformed
@@ -265,6 +261,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        mostrarPanel(new PanelVentas(this));
+    }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
+        mostrarPanel(new PanelEmpleados(this));
+    }//GEN-LAST:event_btnComprasActionPerformed
 
     /**
      * @param args the command line arguments
