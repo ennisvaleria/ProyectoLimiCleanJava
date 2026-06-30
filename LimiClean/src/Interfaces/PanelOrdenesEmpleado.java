@@ -3,17 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Interfaces;
+
 /**
  *
- * @author user
+ * @author valer
  */
-public class PanelOrdenes extends javax.swing.JPanel {
+public class PanelOrdenesEmpleado extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelOrdenes
+     * Creates new form PanelOrdenesEmpleado
      */
-    private FormPrincipal principal;
-    public PanelOrdenes(FormPrincipal principal) {
+    private FrmPrincipalEmpleado principal;
+    public PanelOrdenesEmpleado(FrmPrincipalEmpleado principal) {
         initComponents();
         this.principal = principal;
     }
@@ -27,9 +28,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        btnNuevaOrden = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -41,28 +40,20 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnNuevaOrden = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Órdenes de lavado");
-        jLabel1.setToolTipText("");
-
-        btnNuevaOrden.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNuevaOrden.setText("+ Nueva Orden");
-        btnNuevaOrden.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnNuevaOrdenMouseClicked(evt);
-            }
-        });
-        btnNuevaOrden.addActionListener(this::btnNuevaOrdenActionPerformed);
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton4.setText("Ver");
+        jButton4.addActionListener(this::jButton4ActionPerformed);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("DNI o RUC..");
+        jTextField1.setText("Nombre o DNI/RUC..");
 
         jLabel2.setText("Buscar cliente");
 
@@ -144,6 +135,19 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        btnNuevaOrden.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnNuevaOrden.setText("+ Nueva Orden");
+        btnNuevaOrden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevaOrdenMouseClicked(evt);
+            }
+        });
+        btnNuevaOrden.addActionListener(this::btnNuevaOrdenActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("Órdenes de lavado");
+        jLabel1.setToolTipText("");
+
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -176,10 +180,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Ver");
-        jButton4.addActionListener(this::jButton4ActionPerformed);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,7 +195,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                             .addComponent(btnNuevaOrden))
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,19 +210,19 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jButton4)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
-
-    }//GEN-LAST:event_btnNuevaOrdenMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         FrmDetalleOrden frm = new FrmDetalleOrden();
         frm.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
+
+    }//GEN-LAST:event_btnNuevaOrdenMouseClicked
 
     private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed
         FrmNuevaOrden frm = new FrmNuevaOrden();
@@ -244,7 +244,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtFechaRecojo;

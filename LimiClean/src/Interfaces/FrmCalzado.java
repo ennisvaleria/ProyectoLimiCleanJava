@@ -17,6 +17,7 @@ public class FrmCalzado extends javax.swing.JFrame {
      */
     public FrmCalzado() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -47,6 +48,7 @@ public class FrmCalzado extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Datos calzado");
@@ -67,9 +69,9 @@ public class FrmCalzado extends javax.swing.JFrame {
 
         jLabel5.setText("Agregar Marca");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cuero", "Mixto", "Lona", "Sintético", "Gamuza", "Tela", "nobuk" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cuero", "Mixto", "Lona", "Sintético", "Gamuza", "Tela", "Nobuk" }));
 
-        jLabel6.setText("Materiales");
+        jLabel6.setText("Material");
 
         jLabel7.setText("Agregar Material");
 

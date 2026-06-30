@@ -5,6 +5,9 @@
 
 package Interfaces;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author valer
@@ -16,7 +19,16 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     /** Creates new form FrmPrincipalEmpleado */
     public FrmPrincipalEmpleado() {
         initComponents();
+        setLocationRelativeTo(null);
+        panelContenido.setLayout(new BorderLayout());
     }
+    
+        public void mostrarPanel(JPanel panel){
+       panelContenido.removeAll();
+        panelContenido.add(panel, BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+        }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -39,8 +51,10 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        panelContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         panelSuperior.setBackground(new java.awt.Color(51, 153, 0));
         panelSuperior.setToolTipText("");
@@ -95,6 +109,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         btnVentas.setForeground(new java.awt.Color(255, 255, 255));
         btnVentas.setText("Ventas");
         btnVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVentas.addActionListener(this::btnVentasActionPerformed);
         PanelMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 200, 41));
 
         btnSalir.setBackground(new java.awt.Color(38, 38, 36));
@@ -102,6 +117,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         btnSalir.setForeground(new java.awt.Color(238, 136, 132));
         btnSalir.setText("Cerrar sesión");
         btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSalir.addActionListener(this::btnSalirActionPerformed);
         PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 780, 210, 37));
 
         jLabel3.setForeground(new java.awt.Color(136, 134, 127));
@@ -132,25 +148,41 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         jLabel5.setText("FOTO");
         PanelMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
+        panelContenido.setLayout(panelContenidoLayout);
+        panelContenidoLayout.setHorizontalGroup(
+            panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelContenidoLayout.setVerticalGroup(
+            panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 822, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -166,12 +198,25 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrdenesMouseClicked
 
     private void btnOrdenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenesActionPerformed
-       
+       mostrarPanel(new PanelOrdenesEmpleado(this));
     }//GEN-LAST:event_btnOrdenesActionPerformed
 
     private void btnServicios2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicios2ActionPerformed
         // TODO add your handling code here:
+        mostrarPanel(new PanelClientesEmpleado(this));
     }//GEN-LAST:event_btnServicios2ActionPerformed
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        // TODO add your handling code here:
+        mostrarPanel(new PanelVentasEmpleado(this));
+    }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Login frm = new Login();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,6 +255,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private java.awt.Label label1;
+    private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelSuperior;
     // End of variables declaration//GEN-END:variables
 

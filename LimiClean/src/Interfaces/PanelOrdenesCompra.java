@@ -48,7 +48,7 @@ public class PanelOrdenesCompra extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setText("Nombre o DNI/RUC");
+        jTextField1.setText("DNI o RUC...");
 
         jLabel2.setText("Buscar proveedor");
 

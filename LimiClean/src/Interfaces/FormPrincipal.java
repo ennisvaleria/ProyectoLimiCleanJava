@@ -20,6 +20,7 @@ public class FormPrincipal extends javax.swing.JFrame {
      */
     public FormPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
 
@@ -58,6 +59,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnInsumos2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         panelSuperior.setBackground(new java.awt.Color(24, 95, 165));
         panelSuperior.setToolTipText("");
@@ -91,13 +94,13 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LimiClean");
-        setPreferredSize(new java.awt.Dimension(1200, 1000));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelContenido.setLayout(new java.awt.BorderLayout());
         getContentPane().add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 810, 830));
 
-        PanelMenu.setBackground(new java.awt.Color(38, 38, 36));
+        PanelMenu.setBackground(new java.awt.Color(0, 0, 0));
         PanelMenu.setPreferredSize(new java.awt.Dimension(220, 640));
         PanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,7 +124,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnEmpleados.setText("Empleados");
         btnEmpleados.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEmpleados.addActionListener(this::btnEmpleadosActionPerformed);
-        PanelMenu.add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 200, 44));
+        PanelMenu.add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 200, 44));
 
         btnVentas.setBackground(new java.awt.Color(38, 38, 36));
         btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -137,7 +140,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnOrdenesCompra.setText("Órdenes de compra");
         btnOrdenesCompra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnOrdenesCompra.addActionListener(this::btnOrdenesCompraActionPerformed);
-        PanelMenu.add(btnOrdenesCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 200, 36));
+        PanelMenu.add(btnOrdenesCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 200, 40));
 
         btnSalir.setBackground(new java.awt.Color(38, 38, 36));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -145,7 +148,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnSalir.setText("Cerrar sesión");
         btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalir.addActionListener(this::btnSalirActionPerformed);
-        PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 780, 210, 37));
+        PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1020, 210, 37));
 
         jLabel2.setForeground(new java.awt.Color(136, 134, 127));
         jLabel2.setText("OPERACIONES");
@@ -161,7 +164,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnProveedores.setText("Proveedores");
         btnProveedores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnProveedores.addActionListener(this::btnProveedoresActionPerformed);
-        PanelMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 429, 200, 39));
+        PanelMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 200, 39));
 
         btnClientes.setBackground(new java.awt.Color(39, 39, 37));
         btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -169,7 +172,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnClientes.setText("Clientes");
         btnClientes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnClientes.addActionListener(this::btnClientesActionPerformed);
-        PanelMenu.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 200, 44));
+        PanelMenu.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 200, 44));
 
         btnReportes.setBackground(new java.awt.Color(38, 38, 36));
         btnReportes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -177,11 +180,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnReportes.setText("Reportes");
         btnReportes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnReportes.addActionListener(this::btnReportesActionPerformed);
-        PanelMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 200, 39));
+        PanelMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 200, 39));
 
         jLabel4.setForeground(new java.awt.Color(136, 134, 127));
         jLabel4.setText("REPORTES");
-        PanelMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 87, -1));
+        PanelMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 87, -1));
 
         btnProductos.setBackground(new java.awt.Color(38, 38, 36));
         btnProductos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -189,11 +192,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnProductos.setText("Productos");
         btnProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnProductos.addActionListener(this::btnProductosActionPerformed);
-        PanelMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 384, 200, 39));
+        PanelMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 200, 39));
 
         jLabel5.setForeground(new java.awt.Color(136, 134, 127));
         jLabel5.setText("COMPRAS");
-        PanelMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 87, -1));
+        PanelMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 87, -1));
 
         btnTipos.setBackground(new java.awt.Color(38, 38, 36));
         btnTipos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -201,7 +204,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnTipos.setText("Tipos");
         btnTipos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnTipos.addActionListener(this::btnTiposActionPerformed);
-        PanelMenu.add(btnTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 200, 39));
+        PanelMenu.add(btnTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 200, 39));
 
         label1.setForeground(new java.awt.Color(136, 134, 127));
         label1.setText("__________________________________________");
@@ -225,9 +228,34 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnInsumos2.setText("Insumos");
         btnInsumos2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnInsumos2.addActionListener(this::btnInsumos2ActionPerformed);
-        PanelMenu.add(btnInsumos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 200, 39));
+        PanelMenu.add(btnInsumos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 200, 39));
 
-        getContentPane().add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 74, 236, 830));
+        getContentPane().add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 74, 236, 1060));
+
+        jPanel1.setBackground(new java.awt.Color(0, 27, 139));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("LiMiClean");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addContainerGap(827, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel9)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -254,7 +282,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+       mostrarPanel(new PanelReportes(this));
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
@@ -317,6 +345,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelSuperior;

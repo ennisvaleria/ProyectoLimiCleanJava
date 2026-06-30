@@ -16,6 +16,7 @@ public class FrmDetalleCliente extends javax.swing.JFrame {
     /** Creates new form FrmDetalleCliente */
     public FrmDetalleCliente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
@@ -55,6 +56,7 @@ public class FrmDetalleCliente extends javax.swing.JFrame {
         btnEditarEstado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Detalle del cliente");
@@ -96,6 +98,7 @@ public class FrmDetalleCliente extends javax.swing.JFrame {
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
+        cmbEstado.addActionListener(this::cmbEstadoActionPerformed);
 
         jLabel10.setText("Estado");
 
@@ -241,7 +244,7 @@ public class FrmDetalleCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -280,6 +283,10 @@ public class FrmDetalleCliente extends javax.swing.JFrame {
         cmbEstado.setEnabled(false);
         }
     }//GEN-LAST:event_btnEditarEstadoActionPerformed
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     /**
      * @param args the command line arguments

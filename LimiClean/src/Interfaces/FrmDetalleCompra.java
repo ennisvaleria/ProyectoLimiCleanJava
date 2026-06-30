@@ -16,6 +16,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     /** Creates new form FrmDetalleCompra */
     public FrmDetalleCompra() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
@@ -48,6 +49,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jTextField1.setEditable(false);
 

@@ -39,6 +39,7 @@ public class PanelTipos extends javax.swing.JPanel {
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setText("Lavado");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,6 +72,12 @@ public class PanelTipos extends javax.swing.JPanel {
         FrmCalzado frm = new FrmCalzado();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        FrmTipoLavado frm = new FrmTipoLavado();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
