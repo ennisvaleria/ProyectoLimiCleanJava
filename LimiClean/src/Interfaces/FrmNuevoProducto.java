@@ -71,6 +71,8 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
 
         jLabel6.setText("Precio (S/)");
 
+        jTextField5.setEditable(false);
+
         jLabel7.setText("Stock");
 
         jLabel8.setText("Descripción");

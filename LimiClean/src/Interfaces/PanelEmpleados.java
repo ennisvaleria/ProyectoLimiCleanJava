@@ -51,11 +51,11 @@ public class PanelEmpleados extends javax.swing.JPanel {
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         jTextField1.setText("Nombre o Usuario...");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Administrador", "Empleado", " " }));
 
         jLabel2.setText("Rol");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
 
         jLabel3.setText("Estado");
 

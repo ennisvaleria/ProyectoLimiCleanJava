@@ -50,11 +50,11 @@ public class PanelClientes extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Nombre o DNI/RUC...");
+        jTextField1.setText("DNI o RUC...");
 
         jLabel2.setText("Buscar ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Natural", "Juridico" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Natural", "Juridico" }));
 
         jLabel3.setText("Tipo");
 

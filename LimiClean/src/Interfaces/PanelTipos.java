@@ -13,8 +13,10 @@ public class PanelTipos extends javax.swing.JPanel {
     /**
      * Creates new form PanelTipoLavado
      */
-    public PanelTipos() {
+    private FormPrincipal principal;
+    public PanelTipos(FormPrincipal principal) {
         initComponents();
+        this.principal = principal;
     }
 
     /**
@@ -34,6 +36,7 @@ public class PanelTipos extends javax.swing.JPanel {
         jLabel1.setText("Tipos");
 
         jButton1.setText("Calzado");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setText("Lavado");
 
@@ -63,6 +66,11 @@ public class PanelTipos extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FrmCalzado frm = new FrmCalzado();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

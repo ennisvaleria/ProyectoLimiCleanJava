@@ -30,7 +30,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField1" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Component id="txtRazonSocial" min="-2" pref="144" max="-2" attributes="0"/>
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="txtRazonSocial" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="jTextField3" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jTextField5" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
@@ -96,7 +96,7 @@
         <Property name="text" type="java.lang.String" value="DATOS DE PROVEEDOR JURIDICO"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtRazonSocial">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>

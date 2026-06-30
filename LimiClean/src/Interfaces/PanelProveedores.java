@@ -47,7 +47,7 @@ public class PanelProveedores extends javax.swing.JPanel {
         jLabel1.setText("Buscar");
 
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Nombre o DNI/RUC...");
+        jTextField1.setText("DNI o RUC...");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Natural", "Juridico", " " }));
 
