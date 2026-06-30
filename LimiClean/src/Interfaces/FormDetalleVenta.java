@@ -41,11 +41,11 @@ public class FormDetalleVenta extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -63,16 +63,23 @@ public class FormDetalleVenta extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha emisión");
 
+        jTextField1.setEditable(false);
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         jTextField1.setText("dd/mm/aaaa");
 
         jLabel4.setText("Cliente: (Tabla Venta FK)");
 
+        jTextField2.setEditable(false);
+
         jLabel13.setText("______________________________________________________________________________________________________________");
 
         jLabel5.setText("Comprobante");
 
+        jTextField3.setEditable(false);
+
         jLabel6.setText("Método de Pago");
+
+        jTextField4.setEditable(false);
 
         jLabel7.setText("Estado (EstadoPago: Tabla Venta)");
 
@@ -83,6 +90,9 @@ public class FormDetalleVenta extends javax.swing.JFrame {
         jLabel20.setText("______________________________________________________________________________________________________________");
 
         jLabel21.setText("______________________________________________________________________________________________________________");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Cancelado" }));
+        jComboBox1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,18 +123,17 @@ public class FormDetalleVenta extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel21)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -159,8 +168,8 @@ public class FormDetalleVenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel21)
                 .addGap(0, 35, Short.MAX_VALUE))
         );
@@ -252,7 +261,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -295,6 +304,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
@@ -318,6 +328,5 @@ public class FormDetalleVenta extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

@@ -58,11 +58,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LimiClean");
-        setPreferredSize(new java.awt.Dimension(1200, 1000));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         panelSuperior.setBackground(new java.awt.Color(24, 95, 165));
         panelSuperior.setToolTipText("");
         panelSuperior.setPreferredSize(new java.awt.Dimension(120, 60));
@@ -93,7 +88,10 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 1050, 69));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LimiClean");
+        setPreferredSize(new java.awt.Dimension(1200, 1000));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelContenido.setLayout(new java.awt.BorderLayout());
         getContentPane().add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 810, 830));
@@ -137,6 +135,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnOrdenesCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnOrdenesCompra.setText("Órdenes de compra");
         btnOrdenesCompra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnOrdenesCompra.addActionListener(this::btnOrdenesCompraActionPerformed);
         PanelMenu.add(btnOrdenesCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 502, 200, 36));
 
         btnSalir.setBackground(new java.awt.Color(38, 38, 36));
@@ -255,6 +254,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void btnInsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsumosActionPerformed
         // TODO add your handling code here:
+        mostrarPanel(new PanelInsumo(this));
     }//GEN-LAST:event_btnInsumosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -268,6 +268,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
         mostrarPanel(new PanelEmpleados(this));
     }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    private void btnOrdenesCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenesCompraActionPerformed
+        mostrarPanel(new PanelOrdenesCompra(this));
+    }//GEN-LAST:event_btnOrdenesCompraActionPerformed
 
     /**
      * @param args the command line arguments

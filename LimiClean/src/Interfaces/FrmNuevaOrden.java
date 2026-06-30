@@ -92,11 +92,10 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
         jLabel50 = new javax.swing.JLabel();
         Costo12 = new javax.swing.JLabel();
         txtDescuento25 = new javax.swing.JTextField();
-        RBpagado12 = new javax.swing.JRadioButton();
         jLabel51 = new javax.swing.JLabel();
-        RBpendiente12 = new javax.swing.JRadioButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,6 +196,7 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Notas");
 
+        txtFechaEntrega1.setEditable(false);
         txtFechaEntrega1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -374,8 +374,10 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
 
         jLabel15.setText("Tiempo estimado");
 
+        txtiempoestimado.setEditable(false);
         txtiempoestimado.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        txtPrecioBase1.setEditable(false);
         txtPrecioBase1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel17.setText("Descripción");
@@ -513,12 +515,8 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
 
         txtDescuento25.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        RBpagado12.setText("Pagado");
-
         jLabel51.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel51.setText("Estado pago");
-
-        RBpendiente12.setText("Pendiente");
 
         jButton25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton25.setText("Cancelar");
@@ -530,6 +528,9 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
         jButton26.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton26.addActionListener(this::jButton26ActionPerformed);
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Cancelado" }));
+        jComboBox2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
@@ -537,17 +538,16 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel50)
+                    .addComponent(txtDescuento24, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabel50)
-                        .addGap(71, 71, 71)
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel51))
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(txtDescuento24, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RBpendiente12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RBpagado12)))
-                .addGap(18, 18, 18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(txtDescuento25, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -571,11 +571,10 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescuento24, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RBpendiente12)
-                    .addComponent(RBpagado12)
                     .addComponent(txtDescuento25, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -587,11 +586,10 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PanelCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -664,78 +662,17 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Costo;
-    private javax.swing.JLabel Costo1;
-    private javax.swing.JLabel Costo10;
-    private javax.swing.JLabel Costo11;
     private javax.swing.JLabel Costo12;
-    private javax.swing.JLabel Costo2;
-    private javax.swing.JLabel Costo3;
-    private javax.swing.JLabel Costo4;
-    private javax.swing.JLabel Costo5;
-    private javax.swing.JLabel Costo6;
-    private javax.swing.JLabel Costo7;
-    private javax.swing.JLabel Costo8;
-    private javax.swing.JLabel Costo9;
     private javax.swing.JPanel PanelCliente;
     private javax.swing.JPanel PanelContenedorC;
-    private javax.swing.JRadioButton RBpagado;
-    private javax.swing.JRadioButton RBpagado1;
-    private javax.swing.JRadioButton RBpagado10;
-    private javax.swing.JRadioButton RBpagado11;
-    private javax.swing.JRadioButton RBpagado12;
-    private javax.swing.JRadioButton RBpagado2;
-    private javax.swing.JRadioButton RBpagado3;
-    private javax.swing.JRadioButton RBpagado4;
-    private javax.swing.JRadioButton RBpagado5;
-    private javax.swing.JRadioButton RBpagado6;
-    private javax.swing.JRadioButton RBpagado7;
-    private javax.swing.JRadioButton RBpagado8;
-    private javax.swing.JRadioButton RBpagado9;
-    private javax.swing.JRadioButton RBpendiente;
-    private javax.swing.JRadioButton RBpendiente1;
-    private javax.swing.JRadioButton RBpendiente10;
-    private javax.swing.JRadioButton RBpendiente11;
-    private javax.swing.JRadioButton RBpendiente12;
-    private javax.swing.JRadioButton RBpendiente2;
-    private javax.swing.JRadioButton RBpendiente3;
-    private javax.swing.JRadioButton RBpendiente4;
-    private javax.swing.JRadioButton RBpendiente5;
-    private javax.swing.JRadioButton RBpendiente6;
-    private javax.swing.JRadioButton RBpendiente7;
-    private javax.swing.JRadioButton RBpendiente8;
-    private javax.swing.JRadioButton RBpendiente9;
     private javax.swing.JComboBox<String> cmbMarca;
     private javax.swing.JComboBox<String> cmbTipoCliente;
     private javax.swing.JComboBox<String> cmbTipoMaterial;
     private javax.swing.JComboBox<String> cmbTipocalzado;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -745,8 +682,6 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -756,30 +691,8 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -788,49 +701,13 @@ public class FrmNuevaOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtDescuento;
-    private javax.swing.JTextField txtDescuento1;
-    private javax.swing.JTextField txtDescuento10;
-    private javax.swing.JTextField txtDescuento11;
-    private javax.swing.JTextField txtDescuento12;
-    private javax.swing.JTextField txtDescuento13;
-    private javax.swing.JTextField txtDescuento14;
-    private javax.swing.JTextField txtDescuento15;
-    private javax.swing.JTextField txtDescuento16;
-    private javax.swing.JTextField txtDescuento17;
-    private javax.swing.JTextField txtDescuento18;
-    private javax.swing.JTextField txtDescuento19;
-    private javax.swing.JTextField txtDescuento2;
-    private javax.swing.JTextField txtDescuento20;
-    private javax.swing.JTextField txtDescuento21;
-    private javax.swing.JTextField txtDescuento22;
-    private javax.swing.JTextField txtDescuento23;
     private javax.swing.JTextField txtDescuento24;
     private javax.swing.JTextField txtDescuento25;
-    private javax.swing.JTextField txtDescuento3;
-    private javax.swing.JTextField txtDescuento4;
-    private javax.swing.JTextField txtDescuento5;
-    private javax.swing.JTextField txtDescuento6;
-    private javax.swing.JTextField txtDescuento7;
-    private javax.swing.JTextField txtDescuento8;
-    private javax.swing.JTextField txtDescuento9;
     private javax.swing.JTextField txtFechaEntrega;
     private javax.swing.JTextField txtFechaEntrega1;
     private javax.swing.JTextField txtFechaRecojo;

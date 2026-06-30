@@ -13,8 +13,8 @@ public class PanelGuardarEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form PanelbotonGuardarEmpleado
      */
-    private FrmEditNuevoEmpleado principal;
-    public PanelGuardarEmpleado(FrmEditNuevoEmpleado principal) {
+    private FrmNuevoEmpleado principal;
+    public PanelGuardarEmpleado(FrmNuevoEmpleado principal) {
         initComponents();
         this.principal = principal;
     }

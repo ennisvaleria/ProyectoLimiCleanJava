@@ -5,42 +5,18 @@
 
 package Interfaces;
 
-import java.awt.BorderLayout;
-
 /**
  *
  * @author valer
  */
-public class FrmEditNuevoEmpleado extends javax.swing.JFrame {
+public class FrmNuevoEmpleado extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmEditNuevoEmpleado.class.getName());
-    public static final int modo_nuevo = 1;
-    public static final int modo_editar = 2;
-    
-    private int modo;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmNuevoEmpleado.class.getName());
 
+   
     /** Creates new form FrmEditEmpleado */
-    public FrmEditNuevoEmpleado(int modo) {
+    public FrmNuevoEmpleado() {
         initComponents();
-                this.modo = modo;
-        PanelContenedor.removeAll();
-        PanelContenedor.setLayout(new BorderLayout());
-        mostrarPanel();
-        
-    }
-    
-    private void mostrarPanel()
-    {
-        PanelContenedor.removeAll();
-
-        if (modo == modo_nuevo) {
-        PanelContenedor.add(new PanelGuardarEmpleado(this), BorderLayout.CENTER);
-        } else if (modo == modo_editar) {
-        PanelContenedor.add(new PanelEditarEmpleado(this), BorderLayout.CENTER);
-        }
-
-        PanelContenedor.revalidate();
-        PanelContenedor.repaint();
     }
 
     /** This method is called from within the constructor to
@@ -71,6 +47,7 @@ public class FrmEditNuevoEmpleado extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         PanelContenedor = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,29 +181,38 @@ public class FrmEditNuevoEmpleado extends javax.swing.JFrame {
             .addGap(0, 33, Short.MAX_VALUE)
         );
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("Nuevo Empleado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addComponent(PanelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -254,7 +240,7 @@ public class FrmEditNuevoEmpleado extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmEditNuevoEmpleado(FrmEditNuevoEmpleado.modo_nuevo).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmNuevoEmpleado().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -267,6 +253,7 @@ public class FrmEditNuevoEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
