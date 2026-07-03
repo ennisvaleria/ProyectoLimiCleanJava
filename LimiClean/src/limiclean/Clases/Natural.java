@@ -9,8 +9,8 @@ package limiclean.Clases;
  * @author valer
  */
 public class Natural extends Cliente {
-    private final String dni;
-    private String apellido;
+    public final String dni;
+    public String apellido;
     
     public Natural(int idCliente, String nombre, String direccion, String correo, String telefono,
             String dni, String apellido)

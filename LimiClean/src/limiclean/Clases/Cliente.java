@@ -9,11 +9,11 @@ package limiclean.Clases;
  * @author valer
  */
 public abstract class Cliente {
-    private int idCliente;
-    private String nombre;
-    private String direccion;
-    private String correo;
-    private String telefono;
+    public int idCliente;
+    public String nombre;
+    public String direccion;
+    public String correo;
+    public String telefono;
     
     public Cliente(int idCliente, String nombre, String direccion, String correo, String telefono)
     {

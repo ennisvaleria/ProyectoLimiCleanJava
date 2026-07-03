@@ -32,7 +32,7 @@ public class PanelCNatural extends javax.swing.JPanel {
         lblNombre1 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtNombre1 = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
@@ -59,7 +59,7 @@ public class PanelCNatural extends javax.swing.JPanel {
 
         txtNombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtNombre1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtApellido.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblNombre.setText("Nombre");
@@ -101,7 +101,7 @@ public class PanelCNatural extends javax.swing.JPanel {
                             .addGroup(PanelNaturalLayout.createSequentialGroup()
                                 .addGroup(PanelNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblApellido)
-                                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(PanelNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTelefono1)
@@ -120,7 +120,7 @@ public class PanelCNatural extends javax.swing.JPanel {
                 .addGap(4, 4, 4)
                 .addGroup(PanelNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelNaturalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -161,11 +161,11 @@ public class PanelCNatural extends javax.swing.JPanel {
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTelefono1;
-    private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtdni;
+    public javax.swing.JTextField txtApellido;
+    public javax.swing.JTextField txtCorreo;
+    public javax.swing.JTextField txtDireccion;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtTelefono;
+    public javax.swing.JTextField txtdni;
     // End of variables declaration//GEN-END:variables
 }

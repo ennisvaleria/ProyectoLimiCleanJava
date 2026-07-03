@@ -31,16 +31,16 @@ public class PanelCJuridico extends javax.swing.JPanel {
         lblCorreo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
-        txtdni = new javax.swing.JTextField();
+        txtRuc = new javax.swing.JTextField();
         lblTelefono1 = new javax.swing.JLabel();
         lblNombre1 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
-        txtdni1 = new javax.swing.JTextField();
         lblTelefono2 = new javax.swing.JLabel();
         lblTelefono3 = new javax.swing.JLabel();
-        txtdni2 = new javax.swing.JTextField();
+        txtRazonSocial = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
+        cmboxestado = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(640, 201));
 
@@ -56,9 +56,9 @@ public class PanelCJuridico extends javax.swing.JPanel {
         txtTelefono.setText("9 dígitos");
         txtTelefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtdni.setForeground(new java.awt.Color(102, 102, 102));
-        txtdni.setText("11 dígitos");
-        txtdni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtRuc.setForeground(new java.awt.Color(102, 102, 102));
+        txtRuc.setText("11 dígitos");
+        txtRuc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblTelefono1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblTelefono1.setText("RUC");
@@ -68,15 +68,13 @@ public class PanelCJuridico extends javax.swing.JPanel {
 
         txtDireccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtdni1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         lblTelefono2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblTelefono2.setText("Estado");
 
         lblTelefono3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblTelefono3.setText("Razon Social");
 
-        txtdni2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtRazonSocial.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtNombre.setForeground(new java.awt.Color(102, 102, 102));
         txtNombre.setText("Nombre del contacto");
@@ -85,24 +83,27 @@ public class PanelCJuridico extends javax.swing.JPanel {
         lblNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblNombre.setText("Contacto");
 
+        cmboxestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        cmboxestado.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCorreo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtdni2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTelefono3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTelefono1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,10 +115,10 @@ public class PanelCJuridico extends javax.swing.JPanel {
                             .addComponent(lblNombre1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTelefono2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblTelefono2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtdni1)))
+                                .addGap(6, 6, 6)
+                                .addComponent(cmboxestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblTelefono)
                         .addGap(103, 103, 103)
@@ -134,8 +135,8 @@ public class PanelCJuridico extends javax.swing.JPanel {
                     .addComponent(lblNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdni2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,8 +153,8 @@ public class PanelCJuridico extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(cmboxestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -173,6 +174,7 @@ public class PanelCJuridico extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> cmboxestado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblNombre;
@@ -181,12 +183,11 @@ public class PanelCJuridico extends javax.swing.JPanel {
     private javax.swing.JLabel lblTelefono1;
     private javax.swing.JLabel lblTelefono2;
     private javax.swing.JLabel lblTelefono3;
-    private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtdni;
-    private javax.swing.JTextField txtdni1;
-    private javax.swing.JTextField txtdni2;
+    public javax.swing.JTextField txtCorreo;
+    public javax.swing.JTextField txtDireccion;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtRazonSocial;
+    public javax.swing.JTextField txtRuc;
+    public javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

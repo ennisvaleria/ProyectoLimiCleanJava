@@ -9,13 +9,15 @@ package limiclean.Clases;
  * @author valer
  */
 public class Juridico extends Cliente{
-     private final String ruc;
-    private String razonSocial;
+     public final String ruc;
+    public String razonSocial;
+    public String Estado;
     
-    public Juridico(int idCliente, String nombre, String direccion, String correo, String telefono, String ruc, String razonSocial)
+    public Juridico(int idCliente, String nombre, String direccion, String correo, String telefono, String ruc, String razonSocial,String Estado)
     {
         super(idCliente, nombre, direccion, correo, telefono);
         this.ruc = ruc;
         this.razonSocial = razonSocial;
+        this.Estado= Estado;
     }
 }
