@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Interfaces;
+
+import javax.swing.JOptionPane;
+import limiclean.Clases.FuncionesLimiclean;
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.ConexionBD;
+
 /**
  *
  * @author user
@@ -16,6 +22,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
     public PanelOrdenes(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
+        Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTOrdenesLavados);
+        
     }
 
     /**
@@ -37,15 +45,15 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtFechaRecojo = new javax.swing.JTextField();
         txtFechaRecojo1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cmbestado = new javax.swing.JComboBox<>();
+        btnFiltrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTOrdenesLavados = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Órdenes de lavado");
@@ -75,10 +83,15 @@ public class PanelOrdenes extends javax.swing.JPanel {
         txtFechaRecojo1.setText("dd/mm/aaaa");
         txtFechaRecojo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pendiente", "Cancelado" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cmbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pendiente", "Cancelado" }));
+        cmbestado.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setText("Filtrar");
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Limpiar");
 
@@ -102,9 +115,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbestado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
+                                .addComponent(btnFiltrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2))
                             .addComponent(jLabel5)))
@@ -139,8 +152,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFechaRecojo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbestado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -149,7 +162,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jButton4.setText("Ver");
         jButton4.addActionListener(this::jButton4ActionPerformed);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTOrdenesLavados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -160,7 +173,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTOrdenesLavados);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -229,7 +242,32 @@ public class PanelOrdenes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevaOrdenMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FrmDetalleOrden frm = new FrmDetalleOrden();
+         int fila = JTOrdenesLavados.getSelectedRow();
+
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this,
+                        "Seleccione una fila primero.",
+                        "Aviso",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            
+            int codigo = Integer.parseInt(JTOrdenesLavados.getValueAt(fila, 0).toString());
+            String[] datos=Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(),codigo);
+            
+            String cliente=datos[1];
+            String fechaOrdenLavado=datos[2];
+            String FechaEntregaEstimada=datos[3];
+            String DescuentOrden=datos[4];
+            String CostoLavado=datos[5];
+            String EstadoOrden=datos[6];
+            String EstadoPago=datos[7];
+            String FechaInicio=datos[8];
+            String FechaFin=datos[9];
+
+        FrmDetalleOrden frm = new FrmDetalleOrden(cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin);
+        
         frm.setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -239,13 +277,32 @@ public class PanelOrdenes extends javax.swing.JPanel {
         frm.setVisible(true);
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
+    private void btnFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseClicked
+        String estado=cmbestado.getSelectedItem().toString();
+        String input="";
+        
+        if(estado.contentEquals("Pendiente")){
+            input="P";
+        }else if(estado.contentEquals("Cancelado")){
+            input="C";
+        }else{
+            Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTOrdenesLavados);
+            return;
+        }
+        
+           
+                   
+        Funciones_BD.Filtro_ordenes_lavado(ConexionBD.obtenerConexion(), JTOrdenesLavados,input);
+    }//GEN-LAST:event_btnFiltrarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTOrdenesLavados;
+    private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnNuevaOrden;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cmbestado;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -256,7 +313,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtFechaRecojo;
     private javax.swing.JTextField txtFechaRecojo1;

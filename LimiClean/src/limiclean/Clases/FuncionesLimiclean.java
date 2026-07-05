@@ -39,5 +39,9 @@ public static void borrar_mensaje_defecto(JTextField txt, String placeholder) {
         }
     });
 }
+public static void text_color(JTextField text,String dato){
+    text.setText(dato.toString());
+    text.setForeground(Color.black);
+}
 
 }

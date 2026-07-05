@@ -5,6 +5,10 @@
 
 package Interfaces;
 
+import limiclean.Clases.ConexionBD;
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.Proveedor;
+
 /**
  *
  * @author valer
@@ -16,6 +20,7 @@ public class PanelProveedores extends javax.swing.JPanel {
     public PanelProveedores(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
+        Funciones_BD.cargarProveedores_Filtro(ConexionBD.obtenerConexion(), JTProveedores,"");
     }
 
     /** This method is called from within the constructor to
@@ -29,7 +34,7 @@ public class PanelProveedores extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtProveedor = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -40,14 +45,14 @@ public class PanelProveedores extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTProveedores = new javax.swing.JTable();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setText("Buscar");
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("DNI o RUC...");
+        txtProveedor.setForeground(new java.awt.Color(102, 102, 102));
+        txtProveedor.setText("DNI o RUC...");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Natural", "Juridico", " " }));
 
@@ -58,6 +63,7 @@ public class PanelProveedores extends javax.swing.JPanel {
         jLabel3.setText("Estado");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(this::btnFiltrarActionPerformed);
 
         btnLimpiar.setText("Limpiar");
 
@@ -68,7 +74,7 @@ public class PanelProveedores extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +101,7 @@ public class PanelProveedores extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,7 +117,7 @@ public class PanelProveedores extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -122,7 +128,7 @@ public class PanelProveedores extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTProveedores);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,8 +185,14 @@ public class PanelProveedores extends javax.swing.JPanel {
         frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        String Documento=txtProveedor.getText().toString();
+        Funciones_BD.cargarProveedores_Filtro(ConexionBD.obtenerConexion(), JTProveedores,Documento);
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTProveedores;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton jButton1;
@@ -193,8 +205,7 @@ public class PanelProveedores extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
 
 }

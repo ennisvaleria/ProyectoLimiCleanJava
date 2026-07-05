@@ -4,6 +4,10 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import limiclean.Clases.ConexionBD;
+import limiclean.Clases.Funciones_BD;
+
 /**
  *
  * @author valer
@@ -44,7 +48,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTableEmpleados = new javax.swing.JTable();
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setText("Ver");
@@ -150,7 +154,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -161,7 +165,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTableEmpleados);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -215,7 +219,32 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FrmDetalleOrden frm = new FrmDetalleOrden();
+        int fila = JTableEmpleados.getSelectedRow();
+
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this,
+                        "Seleccione una fila primero.",
+                        "Aviso",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            
+            int codigo = Integer.parseInt(JTableEmpleados.getValueAt(fila, 0).toString());
+            String[] datos=Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(),codigo);
+            
+            String cliente=datos[1];
+            String fechaOrdenLavado=datos[2];
+            String FechaEntregaEstimada=datos[3];
+            String DescuentOrden=datos[4];
+            String CostoLavado=datos[5];
+            String EstadoOrden=datos[6];
+            String EstadoPago=datos[7];
+            String FechaInicio=datos[8];
+            String FechaFin=datos[9];
+
+        FrmDetalleOrden frm = new FrmDetalleOrden(cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin);
+        
         frm.setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -231,6 +260,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTableEmpleados;
     private javax.swing.JButton btnNuevaOrden;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -244,7 +274,6 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtFechaRecojo;
     private javax.swing.JTextField txtFechaRecojo1;

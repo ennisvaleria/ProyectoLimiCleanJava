@@ -4,6 +4,9 @@
  */
 package Interfaces;
 
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.ConexionBD;
+
 /**
  *
  * @author valer
@@ -15,9 +18,19 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
     /**
      * Creates new form FrmNuevoInsumo
      */
+    private int xMouse, yMouse;
     public FrmNuevoInsumo() {
         initComponents();
         setLocationRelativeTo(null);
+        Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxCategoria, "categoriaInsumo","nombCategoriaInsumo" );
+        String ultimoCodigo = Funciones_BD.obtenerUltimoValor(ConexionBD.obtenerConexion(),"Insumo","codInsumo","idInsumo");
+           //explicar
+           
+        String prefijo = ultimoCodigo.substring(0, 3);
+        int numero = Integer.parseInt(ultimoCodigo.substring(3));
+
+        txtCodigo.setText(prefijo + String.format("%03d", numero + 1)
+        );
     }
 
     /**
@@ -32,30 +45,38 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        cmboxCategoria = new javax.swing.JComboBox<>();
+        btnagregarcategoria = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmboxUnidad = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtCategoria = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescuento = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -63,33 +84,30 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre");
 
+        txtCodigo.setEditable(false);
+
         jLabel4.setText("Código");
 
         jLabel5.setText("Categoría");
 
         jLabel6.setText("Nueva categoría");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Limpieza ", "Químicos", "Herramientas", "Accesorios" }));
-
-        jButton2.setText("+ Agregar");
+        btnagregarcategoria.setText("+ Agregar");
+        btnagregarcategoria.addActionListener(this::btnagregarcategoriaActionPerformed);
 
         jLabel7.setText("STOCK Y UNIDAD");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidad", "Litro", "Mililitro", "Kilogramo", "Gramo", "Caja", " ", " " }));
+        cmboxUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidad", "Litro", "Mililitro", "Kilogramo", "Gramo", "Caja", " ", " " }));
 
         jLabel8.setText("Unidad de medida");
-
-        jTextField4.setEditable(false);
-
-        jLabel9.setText("Stock inicial");
 
         jLabel10.setText("Stock mínimo");
 
         jLabel11.setText("Descripcion");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDescuento.setColumns(20);
+        txtDescuento.setRows(5);
+        jScrollPane1.setViewportView(txtDescuento);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,30 +124,26 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, 183, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)
+                                    .addComponent(cmboxCategoria, 0, 183, Short.MAX_VALUE)
+                                    .addComponent(txtNombre)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTextField3))
+                                    .addComponent(txtCategoria))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnagregarcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmboxUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel10)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -144,29 +158,27 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(txtNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmboxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnagregarcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jTextField4)
-                    .addComponent(jComboBox2))
+                    .addComponent(txtStock, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(cmboxUnidad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -178,6 +190,7 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
         jLabel1.setText("Nuevo Insumo");
 
         jButton3.setText("Guardar insumo");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
         jButton4.setText("Cancelar");
         jButton4.setToolTipText("");
@@ -223,6 +236,38 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        setLocation(
+        evt.getXOnScreen() - xMouse,
+        evt.getYOnScreen() - yMouse);
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+       xMouse = evt.getX();
+        yMouse = evt.getY();  // TODO add your handling code here:
+    }//GEN-LAST:event_formMousePressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String nombre=txtNombre.getText().toString();
+        String descuento=txtDescuento.getText().toString();
+        String unidadMedida=cmboxUnidad.getSelectedItem().toString();
+        int Stock = Integer.parseInt(txtStock.getText().toString());
+        String codInsumo=txtCodigo.getText().toString();
+        String nombCategoria=cmboxCategoria.getSelectedItem().toString();
+        boolean insert = Funciones_BD.insertarInsumo(ConexionBD.obtenerConexion(), nombre, descuento, unidadMedida, Stock, codInsumo,nombCategoria);    
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnagregarcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarcategoriaActionPerformed
+        String valor=txtCategoria.getText().toString();
+        boolean Insert=Funciones_BD.insertarDato(ConexionBD.obtenerConexion(),"categoriaInsumo", "nombCategoriaInsumo",valor);
+        if(Insert)
+                    Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxCategoria, "categoriaInsumo","nombCategoriaInsumo" );
+
+            
+            
+        
+    }//GEN-LAST:event_btnagregarcategoriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,11 +294,11 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnagregarcategoria;
+    private javax.swing.JComboBox<String> cmboxCategoria;
+    private javax.swing.JComboBox<String> cmboxUnidad;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -264,14 +309,12 @@ public class FrmNuevoInsumo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextArea txtDescuento;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

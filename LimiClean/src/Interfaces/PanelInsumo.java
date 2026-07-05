@@ -4,6 +4,9 @@
  */
 package Interfaces;
 
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.ConexionBD;
+
 /**
  *
  * @author valer
@@ -17,6 +20,8 @@ public class PanelInsumo extends javax.swing.JPanel {
     public PanelInsumo(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
+        Funciones_BD.cargarInsumos(ConexionBD.obtenerConexion(), JTinsumos);
+        
     }
 
     /**
@@ -41,7 +46,7 @@ public class PanelInsumo extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTinsumos = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -113,7 +118,7 @@ public class PanelInsumo extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTinsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -124,7 +129,7 @@ public class PanelInsumo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTinsumos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,6 +198,7 @@ public class PanelInsumo extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTinsumos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -206,7 +212,6 @@ public class PanelInsumo extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

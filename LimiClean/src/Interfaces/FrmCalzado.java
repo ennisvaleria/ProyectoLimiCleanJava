@@ -4,6 +4,9 @@
  */
 package Interfaces;
 
+import limiclean.Clases.Funciones_BD;
+import limiclean.Clases.ConexionBD;
+
 /**
  *
  * @author valer
@@ -18,6 +21,9 @@ public class FrmCalzado extends javax.swing.JFrame {
     public FrmCalzado() {
         initComponents();
         setLocationRelativeTo(null);
+        Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxTipoCalzado,"tipoCalzado","nombTipoCalzado");
+        Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxTipoMarca, "Marca","nombMarca");
+        Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxMaterial, "Material","nombMaterial");
     }
 
     /**
@@ -30,21 +36,21 @@ public class FrmCalzado extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmboxTipoCalzado = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTipoCalzado = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAñadirCalzado = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        cmboxTipoMarca = new javax.swing.JComboBox<>();
+        txtMarca = new javax.swing.JTextField();
+        btnAgregarMarca = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmboxMaterial = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtMaterial = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnAgregarMaterial = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,29 +59,30 @@ public class FrmCalzado extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Datos calzado");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zapatilla", "Zapato", "Bota", "Sandalia" }));
-
         jLabel2.setText("Tipos");
 
         jLabel3.setText("Agregar Tipo calzado");
 
-        jButton1.setText("Añadir");
+        btnAñadirCalzado.setText("Añadir");
+        btnAñadirCalzado.addActionListener(this::btnAñadirCalzadoActionPerformed);
 
         jLabel4.setText("Marcas");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nike", "Adidas", "Converse", "Timberland", "Bata", "Under Armour", "Onitsuka Tiger", "Jordan", " " }));
-
-        jButton2.setText("Añadir");
+        btnAgregarMarca.setText("Añadir");
+        btnAgregarMarca.addActionListener(this::btnAgregarMarcaActionPerformed);
 
         jLabel5.setText("Agregar Marca");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cuero", "Mixto", "Lona", "Sintético", "Gamuza", "Tela", "Nobuk" }));
 
         jLabel6.setText("Material");
 
         jLabel7.setText("Agregar Material");
 
-        jButton3.setText("Añadir");
+        btnAgregarMaterial.setText("Añadir");
+        btnAgregarMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMaterialMouseClicked(evt);
+            }
+        });
 
         jButton4.setText("Cerrar");
         jButton4.addActionListener(this::jButton4ActionPerformed);
@@ -91,38 +98,38 @@ public class FrmCalzado extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmboxTipoCalzado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTipoCalzado, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(btnAñadirCalzado, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmboxTipoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btnAgregarMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmboxMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAgregarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
@@ -138,27 +145,27 @@ public class FrmCalzado extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBox1))
+                        .addComponent(txtTipoCalzado, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                        .addComponent(btnAñadirCalzado, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmboxTipoCalzado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jComboBox2))
+                    .addComponent(btnAgregarMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(txtMarca)
+                    .addComponent(cmboxTipoMarca))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jTextField3)
-                    .addComponent(jComboBox3))
+                    .addComponent(btnAgregarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(txtMaterial)
+                    .addComponent(cmboxMaterial))
                 .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -171,6 +178,34 @@ public class FrmCalzado extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnAgregarMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMaterialMouseClicked
+        String valor=txtMaterial.getText().trim();
+        
+        boolean Insert=Funciones_BD.insertarDato(ConexionBD.obtenerConexion(),"Material", "nombMaterial",valor);
+        if(Insert)
+            Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxMaterial, "Material","nombMaterial");
+            
+    }//GEN-LAST:event_btnAgregarMaterialMouseClicked
+
+    private void btnAgregarMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMarcaActionPerformed
+        String valor=txtMarca.getText().trim();
+        
+         boolean Insert=Funciones_BD.insertarDato(ConexionBD.obtenerConexion(),"Marca", "nombMarca",valor);
+        if(Insert)
+            Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxTipoMarca, "Marca","nombMarca");
+        
+            
+            
+    }//GEN-LAST:event_btnAgregarMarcaActionPerformed
+
+    private void btnAñadirCalzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCalzadoActionPerformed
+        String valor=txtTipoCalzado.getText().trim();
+        
+         boolean Insert=Funciones_BD.insertarDato(ConexionBD.obtenerConexion(),"tipoCalzado", "nombTipoCalzado",valor);
+         if(Insert)
+            Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxTipoCalzado,"tipoCalzado","nombTipoCalzado");
+    }//GEN-LAST:event_btnAñadirCalzadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,13 +233,13 @@ public class FrmCalzado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAgregarMarca;
+    private javax.swing.JButton btnAgregarMaterial;
+    private javax.swing.JButton btnAñadirCalzado;
+    private javax.swing.JComboBox<String> cmboxMaterial;
+    private javax.swing.JComboBox<String> cmboxTipoCalzado;
+    private javax.swing.JComboBox<String> cmboxTipoMarca;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -212,8 +247,8 @@ public class FrmCalzado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtMaterial;
+    private javax.swing.JTextField txtTipoCalzado;
     // End of variables declaration//GEN-END:variables
 }
