@@ -41,16 +41,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnNuevaOrden = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDNIORUC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtFechaRecojo = new javax.swing.JTextField();
-        txtFechaRecojo1 = new javax.swing.JTextField();
-        cmbestado = new javax.swing.JComboBox<>();
         btnFiltrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTOrdenesLavados = new javax.swing.JTable();
@@ -70,92 +63,42 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("DNI o RUC..");
+        txtDNIORUC.setForeground(new java.awt.Color(102, 102, 102));
+        txtDNIORUC.setText("DNI o RUC..");
 
         jLabel2.setText("Buscar cliente");
 
-        txtFechaRecojo.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechaRecojo.setText("dd/mm/aaaa");
-        txtFechaRecojo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtFechaRecojo1.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechaRecojo1.setText("dd/mm/aaaa");
-        txtFechaRecojo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        cmbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pendiente", "Cancelado" }));
-        cmbestado.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        btnFiltrar.setText("Filtrar");
+        btnFiltrar.setText("Buscar");
         btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFiltrarMouseClicked(evt);
             }
         });
 
-        jButton2.setText("Limpiar");
-
-        jLabel3.setText("Desde");
-
-        jLabel4.setText("Hasta");
-
-        jLabel5.setText("Estado pago");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaRecojo1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cmbestado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnFiltrar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtFechaRecojo))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addComponent(txtDNIORUC, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFechaRecojo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaRecojo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbestado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(txtDNIORUC, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -255,7 +198,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             
             int codigo = Integer.parseInt(JTOrdenesLavados.getValueAt(fila, 0).toString());
             String[] datos=Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(),codigo);
-            
+            int idordenLavado=Integer.parseInt(datos[0]);
             String cliente=datos[1];
             String fechaOrdenLavado=datos[2];
             String FechaEntregaEstimada=datos[3];
@@ -265,8 +208,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
             String EstadoPago=datos[7];
             String FechaInicio=datos[8];
             String FechaFin=datos[9];
+            String notas=datos[10];
 
-        FrmDetalleOrden frm = new FrmDetalleOrden(cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin);
+        FrmDetalleOrden frm = new FrmDetalleOrden(idordenLavado,cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin,notas);
         
         frm.setVisible(true);
         
@@ -278,21 +222,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
     private void btnFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseClicked
-        String estado=cmbestado.getSelectedItem().toString();
-        String input="";
-        
-        if(estado.contentEquals("Pendiente")){
-            input="P";
-        }else if(estado.contentEquals("Cancelado")){
-            input="C";
-        }else{
-            Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTOrdenesLavados);
-            return;
-        }
-        
-           
-                   
-        Funciones_BD.Filtro_ordenes_lavado(ConexionBD.obtenerConexion(), JTOrdenesLavados,input);
+         String dato=txtDNIORUC.getText().toString();
+        Funciones_BD.Filtro_ordenes_lavado(ConexionBD.obtenerConexion(), JTOrdenesLavados,dato);
     }//GEN-LAST:event_btnFiltrarMouseClicked
 
 
@@ -300,21 +231,14 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JTable JTOrdenesLavados;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnNuevaOrden;
-    private javax.swing.JComboBox<String> cmbestado;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtFechaRecojo;
-    private javax.swing.JTextField txtFechaRecojo1;
+    private javax.swing.JTextField txtDNIORUC;
     // End of variables declaration//GEN-END:variables
 }

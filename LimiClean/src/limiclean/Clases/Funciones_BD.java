@@ -21,7 +21,225 @@ import javax.swing.table.DefaultTableModel;
  * @author user
  */
 public class Funciones_BD {
-    
+   //Funciones Genericas
+public static int obtenerId(
+        Connection conexion,
+        String columnaId,
+        String tabla,
+        String columnaCondicion,
+        String valor
+) {
+
+    String sql = "SELECT " + columnaId +
+                 " FROM " + tabla +
+                 " WHERE " + columnaCondicion + " = ?";
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setString(1, valor);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(columnaId);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return -1;
+}
+   public static int insertarGenerico(
+        Connection conexion,
+        String tabla,
+        String columnas,
+        String valores,
+        Object... params
+) {
+
+    String sql = "INSERT INTO " + tabla +
+                 " (" + columnas + ") VALUES (" + valores + ")";
+
+    try (PreparedStatement ps = conexion.prepareStatement(
+            sql,
+            Statement.RETURN_GENERATED_KEYS)) {
+
+        for (int i = 0; i < params.length; i++) {
+            ps.setObject(i + 1, params[i]);
+        }
+
+        int filas = ps.executeUpdate();
+
+        if (filas > 0) {
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                return rs.getInt(1); // ID generado
+            }
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al insertar: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+
+    return -1;
+
+}
+   public static String obtenerUltimoValorBoletaoFactura(
+        Connection conexion,
+        String columnaRetorno,
+        String tabla,
+        String columnaWhere,
+        Object valorWhere,
+        String columnaOrden
+) {
+
+    String sql =
+            "SELECT " + columnaRetorno +
+            " FROM " + tabla +
+            " WHERE " + columnaWhere + " = ?" +
+            " ORDER BY " + columnaOrden + " DESC LIMIT 1";
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setObject(1, valorWhere);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getString(columnaRetorno);
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al obtener último valor: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+
+    return "";
+}
+   public static String obtenerUltimoValor(
+        Connection conexion,
+        String tabla,
+        String columna,
+        String columnaOrden
+) {
+
+    String sql =
+        "SELECT " + columna +
+        " FROM " + tabla +
+        " ORDER BY " + columnaOrden + " DESC " +
+        "LIMIT 1";
+
+    try {
+
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getString(columna);
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al obtener el último valor: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+
+    return null;
+}
+//Fin Generico
+public static int insertarProveedor(
+        Connection conexion,
+        String nombre,
+        String direccion,
+        String telefono,
+        String correo
+) {
+
+    String sql =
+        "INSERT INTO Proveedor " +
+        "(nomProveedor, direcProveedor, telefProveedor, corrProveedor) " +
+        "VALUES (?, ?, ?, ?)";
+
+    try (PreparedStatement ps = conexion.prepareStatement(
+            sql,
+            Statement.RETURN_GENERATED_KEYS)) {
+
+        ps.setString(1, nombre);
+        ps.setString(2, direccion);
+        ps.setString(3, telefono);
+        ps.setString(4, correo);
+
+        int filas = ps.executeUpdate();
+
+        if (filas > 0) {
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al registrar proveedor: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+
+    return -1;
+}
+public static boolean guardar_proveedor_natural(
+        Connection conexion,
+        int idProveedor,
+        Natural n
+) {
+
+    String sql =
+        "INSERT INTO pNatural (idProveedor, DNI, apellido) " +
+        "VALUES (?, ?, ?)";
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setInt(1, idProveedor);
+        ps.setString(2, n.dni);
+        ps.setString(3, n.apellido);
+
+        return ps.executeUpdate() > 0;
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al guardar proveedor natural: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+
+    return false;
+}
 public static int guardar_cliente_natural(Connection conexion, Natural n) {
     int idCliente = 0;
     String sqlCliente =
@@ -379,34 +597,6 @@ public static boolean insertarPagoCompra(
     return false;
 }
 
-public static int obtenerId(
-        Connection conexion,
-        String columnaId,
-        String tabla,
-        String columnaCondicion,
-        String valor
-) {
-
-    String sql = "SELECT " + columnaId +
-                 " FROM " + tabla +
-                 " WHERE " + columnaCondicion + " = ?";
-
-    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-
-        ps.setString(1, valor);
-
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            return rs.getInt(columnaId);
-        }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-
-    return -1;
-}
 public static int guardarOrdenCompra(
         Connection conexion,
         java.sql.Date fechOrden,
@@ -708,68 +898,6 @@ public static void cargarDetalleVentas(
         e.printStackTrace();
     }
 }
-public static void cargarDetalleLavado(
-        Connection conexion,
-        JTable dgvDetalleLavado
-) {
-
-    String sql =
-        "SELECT " +
-        "ca.nombCalzado AS 'Nombre Calzado', " +
-        "ca.precReferencia AS 'Precio Ref.', " +
-        "tc.nombTipoCalzado AS 'Tipo Calzado', " +
-        "m.nombMarca AS Marca, " +
-        "ma.nombMaterial AS Material " +
-        "FROM detalleLavado dl " +
-        "INNER JOIN ordenLavado ol " +
-        "ON dl.idOrdenLavado = ol.idOrdenLavado " +
-        "INNER JOIN Cliente c " +
-        "ON ol.idCliente = c.idCliente " +
-        "INNER JOIN Calzado ca " +
-        "ON dl.idCalzado = ca.idCalzado " +
-        "INNER JOIN Marca m " +
-        "ON ca.idMarca = m.idMarca " +
-        "INNER JOIN tipoCalzado tc " +
-        "ON ca.idTipoCalzado = tc.idTipoCalzado " +
-        "INNER JOIN Material ma " +
-        "ON ca.idMaterial = ma.idMaterial";
-
-    try {
-
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
-        DefaultTableModel modelo = new DefaultTableModel();
-
-        modelo.addColumn("Nombre Calzado");
-        modelo.addColumn("Precio Ref.");
-        modelo.addColumn("Tipo Calzado");
-        modelo.addColumn("Marca");
-        modelo.addColumn("Material");
-
-        while (rs.next()) {
-
-            modelo.addRow(new Object[]{
-                rs.getString("Nombre Calzado"),
-                rs.getDouble("Precio Ref."),
-                rs.getString("Tipo Calzado"),
-                rs.getString("Marca"),
-                rs.getString("Material")
-            });
-        }
-
-        dgvDetalleLavado.setModel(modelo);
-
-    } catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(
-                null,
-                "Error al cargar detalle de lavado: " + e.getMessage()
-        );
-
-        e.printStackTrace();
-    }
-}
 public static int guardar_cliente_juridico(Connection conexion, Juridico j) {
     int idCliente = 0;
     String sqlCliente =
@@ -941,6 +1069,52 @@ public static boolean insertarDato(
         return false;
     }
 }
+public static void agregarDetalleProducto(
+        Connection conexion,
+        JTable tabla,
+        int idProducto,
+        int cantidad
+) {
+
+    String sql =
+        "SELECT " +
+        "p.idProducto, " +
+        "p.nombProducto AS Nombre, " +
+        "p.codProducto AS Codigo, " +
+        "p.precProducto AS Precio " +
+        "FROM Producto p " +
+        "WHERE p.idProducto = ?";
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setInt(1, idProducto);
+
+        ResultSet rs = ps.executeQuery();
+
+        DefaultTableModel modelo =
+                (DefaultTableModel) tabla.getModel();
+
+        while (rs.next()) {
+
+            modelo.addRow(new Object[]{
+                rs.getInt("idProducto"),
+                rs.getString("Nombre"),
+                rs.getString("Codigo"),
+                rs.getDouble("Precio"),
+                cantidad
+            });
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al agregar producto: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+}
 public static String[] obtenerDatosCalzado(
         Connection conexion,
         String nombreCalzado
@@ -1090,7 +1264,8 @@ public static String[] buscarOrdenLavado(Connection Conexion ,int idOrdenLavado)
                 o.estadoOrden,
                 o.estadoPago,
                 dt.fechInicio,
-                dt.fechFinalizacion
+                dt.fechFinalizacion,
+                o.notasOrdenLavado 
             FROM ordenLavado o
             INNER JOIN Cliente c
                 ON o.idCliente = c.idCliente
@@ -1115,7 +1290,8 @@ public static String[] buscarOrdenLavado(Connection Conexion ,int idOrdenLavado)
                 rs.getString("estadoOrden"),
                 rs.getString("estadoPago"),
                 rs.getString("fechInicio"),
-                rs.getString("fechFinalizacion")
+                rs.getString("fechFinalizacion"),
+                rs.getString("notasOrdenLavado")
             };
         }
 
@@ -1124,6 +1300,147 @@ public static String[] buscarOrdenLavado(Connection Conexion ,int idOrdenLavado)
     }
 
     return datos;
+}
+public static int insertarEmpleado(
+        Connection conexion,
+        String rol,
+        String nombre,
+        String apellido,
+        String usuario,
+        String contrasena,
+        String correo,
+        String direccion,
+        String telefono
+) {
+
+    String sql =
+        "INSERT INTO Empleado (" +
+        "rol, " +
+        "nombEmpleado, " +
+        "apellidoEmpleado, " +
+        "usuario, " +
+        "contrasena, " +
+        "correoEmpleado, " +
+        "direccionEmpleado, " +
+        "telefonoEmpleado" +
+        ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    try (
+        PreparedStatement ps = conexion.prepareStatement(
+            sql,
+            Statement.RETURN_GENERATED_KEYS
+        )
+    ) {
+
+        ps.setString(1, rol);
+        ps.setString(2, nombre);
+        ps.setString(3, apellido);
+        ps.setString(4, usuario);
+        ps.setString(5, contrasena);
+        ps.setString(6, correo);
+        ps.setString(7, direccion);
+        ps.setString(8, telefono);
+
+        int filas = ps.executeUpdate();
+
+        if (filas > 0) {
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                return rs.getInt(1); // idEmpleado generado
+            }
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Error al registrar empleado: " + e.getMessage()
+        );
+
+        e.printStackTrace();
+    }
+
+    return -1;
+}
+public static boolean actualizarCampo(
+        Connection conexion,
+        String tabla,
+        String columnaActualizar,
+        Object nuevoValor,
+        String columnaWhere,
+        Object valorWhere
+) {
+
+    String sql = "UPDATE " + tabla +
+                 " SET " + columnaActualizar + " = ?" +
+                 " WHERE " + columnaWhere + " = ?";
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        ps.setObject(1, nuevoValor);
+        ps.setObject(2, valorWhere);
+
+        return ps.executeUpdate() > 0;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
+public static void cargarCalzadoLavado(
+        Connection conexion,
+        JTable dgvDetalleLavado,
+        int idOrdenLavado
+) {
+    String sql = "SELECT " +
+        "ca.nombCalzado AS 'Nombre Calzado', " +
+        "ca.precReferencia AS 'Precio Ref.', " +
+        "tc.nombTipoCalzado AS 'Tipo Calzado', " +
+        "m.nombMarca AS Marca, " +
+        "ma.nombMaterial AS Material " +
+        "FROM detalleLavado dl " +
+        "INNER JOIN ordenLavado ol ON dl.idOrdenLavado = ol.idOrdenLavado " +
+        "INNER JOIN Cliente c ON ol.idCliente = c.idCliente " +
+        "INNER JOIN Calzado ca ON dl.idCalzado = ca.idCalzado " +
+        "INNER JOIN Marca m ON ca.idMarca = m.idMarca " +
+        "INNER JOIN tipoCalzado tc ON ca.idTipoCalzado = tc.idTipoCalzado " +
+        "INNER JOIN Material ma ON ca.idMaterial = ma.idMaterial " +
+        "WHERE dl.idOrdenLavado = ?"; // <-- filtro agregado
+
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setInt(1, idOrdenLavado);
+        ResultSet rs = ps.executeQuery();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre Calzado");
+        modelo.addColumn("Precio Ref.");
+        modelo.addColumn("Tipo Calzado");
+        modelo.addColumn("Marca");
+        modelo.addColumn("Material");
+
+        while (rs.next()) {
+            modelo.addRow(new Object[]{
+                rs.getString("Nombre Calzado"),
+                rs.getDouble("Precio Ref."),
+                rs.getString("Tipo Calzado"),
+                rs.getString("Marca"),
+                rs.getString("Material")
+            });
+        }
+
+        dgvDetalleLavado.setModel(modelo);
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(
+            null,
+            "Error al cargar detalle de lavado: " + e.getMessage()
+        );
+        e.printStackTrace();
+    }
 }
 public static void cargarOrdenes(
         Connection conexion,
@@ -1444,30 +1761,45 @@ public static void cargarProveedores_Filtro(
 
 public static void cargarProductos(
         Connection conexion,
-        JTable tabla
+        JTable tabla,
+        String texto
 ) {
 
-    
-       String sql =
-    "SELECT " +
-    "p.nombProducto AS Nombre, " +
-    "p.codProducto AS Codigo, " +
-    "p.precProducto AS Precio, " +
-    "SUM(dc.cantCompra) AS Stock, " +
-    "p.descProducto AS Descripcion " +
-    "FROM detalleCompra dc " +
-    "INNER JOIN Producto p " +
-    "ON dc.idProducto = p.idProducto " +
-    "GROUP BY " +
-    "p.idProducto, " +
-    "p.nombProducto, " +
-    "p.codProducto, " +
-    "p.precProducto, " +
-    "p.descProducto";
+    String sql =
+        "SELECT " +
+        "p.nombProducto AS Nombre, " +
+        "p.codProducto AS Codigo, " +
+        "p.precProducto AS Precio, " +
+        "SUM(dc.cantCompra) AS Stock, " +
+        "p.descProducto AS Descripcion " +
+        "FROM detalleCompra dc " +
+        "INNER JOIN Producto p " +
+        "ON dc.idProducto = p.idProducto ";
+
+    boolean filtrar = texto != null && !texto.trim().isEmpty();
+
+    if (filtrar) {
+        sql += "WHERE p.nombProducto LIKE ? OR p.codProducto LIKE ? ";
+    }
+
+    sql +=
+        "GROUP BY " +
+        "p.idProducto, " +
+        "p.nombProducto, " +
+        "p.codProducto, " +
+        "p.precProducto, " +
+        "p.descProducto";
 
     try {
 
         PreparedStatement ps = conexion.prepareStatement(sql);
+
+        if (filtrar) {
+            String like = "%" + texto + "%";
+            ps.setString(1, like);
+            ps.setString(2, like);
+        }
+
         ResultSet rs = ps.executeQuery();
 
         DefaultTableModel modelo = new DefaultTableModel();
@@ -1501,40 +1833,7 @@ public static void cargarProductos(
         e.printStackTrace();
     }
 }
-public static String obtenerUltimoValor(
-        Connection conexion,
-        String tabla,
-        String columna,
-        String columnaOrden
-) {
 
-    String sql =
-        "SELECT " + columna +
-        " FROM " + tabla +
-        " ORDER BY " + columnaOrden + " DESC " +
-        "LIMIT 1";
-
-    try {
-
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            return rs.getString(columna);
-        }
-
-    } catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(
-                null,
-                "Error al obtener el último valor: " + e.getMessage()
-        );
-
-        e.printStackTrace();
-    }
-
-    return null;
-}
 public static void cargarClientesJuridicos(
         Connection conexion,
         JTable dgvClientes
@@ -1653,7 +1952,21 @@ public static void buscarCliente(
 
     String sql = "";
 
-    if (documento.length() == 8) {
+    if (documento.trim().isEmpty()) {
+
+        sql =
+            "SELECT " +
+            "c.idCliente, " +
+            "c.nombCliente AS nombre, " +
+            "COALESCE(cn.apellido, cj.razonSocial) AS cliente, " +
+            "COALESCE(cn.DNI, cj.RUC) AS documento, " +
+            "c.direcCliente AS direccion, " +
+            "c.telefCliente AS telefono " +
+            "FROM Cliente c " +
+            "LEFT JOIN cNatural cn ON c.idCliente = cn.idCliente " +
+            "LEFT JOIN cJuridico cj ON c.idCliente = cj.idCliente";
+
+    } else if (documento.length() == 8) {
 
         sql =
             "SELECT " +
@@ -1675,14 +1988,14 @@ public static void buscarCliente(
             "c.idCliente, " +
             "c.nombCliente AS contacto, " +
             "j.razonSocial, " +
-            "j.ruc, " +
+            "j.RUC, " +
             "c.direcCliente AS direccion, " +
             "c.telefCliente AS telefono, " +
             "j.estado " +
             "FROM Cliente c " +
             "INNER JOIN cJuridico j " +
             "ON c.idCliente = j.idCliente " +
-            "WHERE j.ruc = ?";
+            "WHERE j.RUC = ?";
 
     } else {
 
@@ -1696,13 +2009,37 @@ public static void buscarCliente(
     try {
 
         PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setString(1, documento);
+
+        if (!documento.trim().isEmpty()) {
+            ps.setString(1, documento);
+        }
 
         ResultSet rs = ps.executeQuery();
 
         DefaultTableModel modelo = new DefaultTableModel();
 
-        if (documento.length() == 8) {
+        if (documento.trim().isEmpty()) {
+
+            modelo.addColumn("ID");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Cliente");
+            modelo.addColumn("Documento");
+            modelo.addColumn("Dirección");
+            modelo.addColumn("Teléfono");
+
+            while (rs.next()) {
+
+                modelo.addRow(new Object[]{
+                    rs.getInt("idCliente"),
+                    rs.getString("nombre"),
+                    rs.getString("cliente"),
+                    rs.getString("documento"),
+                    rs.getString("direccion"),
+                    rs.getString("telefono")
+                });
+            }
+
+        } else if (documento.length() == 8) {
 
             modelo.addColumn("ID");
             modelo.addColumn("Nombre");
@@ -1739,7 +2076,7 @@ public static void buscarCliente(
                     rs.getInt("idCliente"),
                     rs.getString("contacto"),
                     rs.getString("razonSocial"),
-                    rs.getString("ruc"),
+                    rs.getString("RUC"),
                     rs.getString("direccion"),
                     rs.getString("telefono"),
                     rs.getString("estado")
@@ -1759,7 +2096,6 @@ public static void buscarCliente(
         e.printStackTrace();
     }
 }
-
 public static String[] buscarPorDNI(Connection conexion, String dni) {
 
     String[] datos = null;
@@ -1847,7 +2183,8 @@ public static String[] buscarPorRUC(Connection conexion, String ruc) {
 }
 public static void Filtro_ordenes_lavado(
         Connection conexion,
-            JTable dgvOrdenes,String estado
+        JTable dgvOrdenes,
+        String estado
 ) {
 
     String sql =
@@ -1861,14 +2198,20 @@ public static void Filtro_ordenes_lavado(
         "o.estadoPago " +
         "FROM ordenLavado o " +
         "INNER JOIN Cliente c " +
-        "ON o.idCliente = c.idCliente "+
-        "where o.estadoPago = ?";
+        "ON o.idCliente = c.idCliente ";
 
-    
+    boolean filtrar = estado != null && !estado.trim().isEmpty();
 
-      try(PreparedStatement ps = conexion.prepareStatement(sql)){
-        ps.setString(1 ,estado);
-        
+    if (filtrar) {
+        sql += "WHERE o.idOrdenLavado LIKE ?";
+    }
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+        if (filtrar) {
+            ps.setString(1, "%" + estado + "%");
+        }
+
         ResultSet rs = ps.executeQuery();
 
         DefaultTableModel modelo = new DefaultTableModel();
@@ -1883,7 +2226,7 @@ public static void Filtro_ordenes_lavado(
 
         while (rs.next()) {
 
-            modelo.addRow(new Object[] {
+            modelo.addRow(new Object[]{
                 rs.getInt("idOrdenLavado"),
                 rs.getString("fechOrdenLavado"),
                 rs.getString("cliente"),
@@ -1906,7 +2249,6 @@ public static void Filtro_ordenes_lavado(
         e.printStackTrace();
     }
 }
-
 public static String listarClientes_bd(Connection conexion) {
 
     StringBuilder sb = new StringBuilder();

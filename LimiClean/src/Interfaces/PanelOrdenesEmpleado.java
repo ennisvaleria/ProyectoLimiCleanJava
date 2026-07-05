@@ -232,7 +232,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
             
             int codigo = Integer.parseInt(JTableEmpleados.getValueAt(fila, 0).toString());
             String[] datos=Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(),codigo);
-            
+            int idOrdenLavado=Integer.parseInt(datos[0]);
             String cliente=datos[1];
             String fechaOrdenLavado=datos[2];
             String FechaEntregaEstimada=datos[3];
@@ -242,8 +242,9 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
             String EstadoPago=datos[7];
             String FechaInicio=datos[8];
             String FechaFin=datos[9];
+            String notas=datos[10];
 
-        FrmDetalleOrden frm = new FrmDetalleOrden(cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin);
+        FrmDetalleOrden frm = new FrmDetalleOrden(idOrdenLavado,cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin,notas);
         
         frm.setVisible(true);
 

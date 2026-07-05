@@ -37,8 +37,6 @@ public class PanelClientes extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         txtdnioruc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        cmboxTipo = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,11 +56,6 @@ public class PanelClientes extends javax.swing.JPanel {
 
         jLabel2.setText("Buscar ");
 
-        cmboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Natural", "Juridico" }));
-        cmboxTipo.addActionListener(this::cmboxTipoActionPerformed);
-
-        jLabel3.setText("Tipo");
-
         jButton1.setText("Buscar");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(this::jButton1ActionPerformed);
@@ -81,24 +74,17 @@ public class PanelClientes extends javax.swing.JPanel {
                         .addComponent(txtdnioruc, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(cmboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72))))
+                        .addGap(175, 175, 175))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdnioruc, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -154,22 +140,12 @@ public class PanelClientes extends javax.swing.JPanel {
     Funciones_BD.buscarCliente(ConexionBD.obtenerConexion(),txtdnioruc.getText(), JTclientes);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void cmboxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipoActionPerformed
-        if(cmboxTipo.getSelectedItem().equals("Natural")){
-            Funciones_BD.cargarClientesNaturales(ConexionBD.obtenerConexion(), JTclientes);}
-        else{
-            Funciones_BD.cargarClientesJuridicos(ConexionBD.obtenerConexion(), JTclientes);
-        } 
-    }//GEN-LAST:event_cmboxTipoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTclientes;
-    private javax.swing.JComboBox<String> cmboxTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
