@@ -727,6 +727,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         modelo.addColumn("Cantidad");
 
         JTProductos.setModel(modelo);
+              
        Funciones_BD.agregarDetalleProducto(ConexionBD.obtenerConexion(), JTProductos,idProducto,cantidad);
     }//GEN-LAST:event_btnAgregarActionPerformed
 

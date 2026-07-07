@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -836,7 +837,7 @@ public static void cargarDetalleVentas(
         "p.codProducto AS Codigo, " +
         "d.cantVenta AS Cantidad, " +
         "p.precProducto AS Precio, " +
-        "d.cantVenta * p.precProducto AS Total, " +
+        "(d.cantVenta * p.precProducto) AS Total, " +
         "COALESCE(cn.apellido, cj.razonSocial) AS Cliente, " +
         "COALESCE(cn.DNI, cj.RUC) AS Documento, " +
         "v.estadoPago AS EstadoPago " +
@@ -876,6 +877,10 @@ public static void cargarDetalleVentas(
         modelo.addColumn("EstadoPago");
 
         while (rs.next()) {
+           /* System.out.println(rs.getInt("Cantidad")+
+                rs.getDouble("Precio")+rs.getDouble("Total"));*/
+           System.out.println("Precio crudo: " + rs.getObject("Precio"));
+    System.out.println("Total crudo: " + rs.getObject("Total"));
 
             modelo.addRow(new Object[]{
                 rs.getInt("N°"),
@@ -955,10 +960,10 @@ public static int guardar_cliente_juridico(Connection conexion, Juridico j) {
     }
     return idCliente;
 }
-public static void cargarInsumos(
-        Connection conexion,
-        JTable dgvInsumos
-) {
+
+public static ArrayList<Object[]> obtenerInsumos(Connection conexion) {
+
+    ArrayList<Object[]> lista = new ArrayList<>();
 
     String sql =
         "SELECT " +
@@ -970,29 +975,17 @@ public static void cargarInsumos(
         "i.stockMin, " +
         "i.descInsumo " +
         "FROM detalleCompra d " +
-        "INNER JOIN Insumo i " +
-        "ON d.idInsumo = i.idInsumo " +
-        "INNER JOIN categoriaInsumo c " +
-        "ON i.idCategoriaInsumo = c.idCategoriaInsumo";
+        "INNER JOIN Insumo i ON d.idInsumo = i.idInsumo " +
+        "INNER JOIN categoriaInsumo c ON i.idCategoriaInsumo = c.idCategoriaInsumo";
 
     try {
 
         PreparedStatement ps = conexion.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
-        DefaultTableModel modelo = new DefaultTableModel();
-
-        modelo.addColumn("Código");
-        modelo.addColumn("Insumo");
-        modelo.addColumn("Categoría");
-        modelo.addColumn("Unidad");
-        modelo.addColumn("Stock");
-        modelo.addColumn("Stock Mínimo");
-        modelo.addColumn("Descripción");
-
         while (rs.next()) {
 
-            modelo.addRow(new Object[]{
+            lista.add(new Object[]{
                 rs.getString("codInsumo"),
                 rs.getString("nombInsumo"),
                 rs.getString("nombCategoriaInsumo"),
@@ -1003,17 +996,11 @@ public static void cargarInsumos(
             });
         }
 
-        dgvInsumos.setModel(modelo);
-
     } catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(
-                null,
-                "Error al cargar insumos: " + e.getMessage()
-        );
-
         e.printStackTrace();
     }
+
+    return lista;
 }
 public static void cargar_combo(
         Connection conexion,

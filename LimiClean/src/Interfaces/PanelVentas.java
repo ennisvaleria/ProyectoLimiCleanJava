@@ -198,6 +198,7 @@ public class PanelVentas extends javax.swing.JPanel {
 
     private void btnFiltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltarActionPerformed
         String Documento=txtDniORuc.getText().toString();
+        
         Funciones_BD.cargarDetalleVentas(ConexionBD.obtenerConexion(), JTventas,Documento);
     }//GEN-LAST:event_btnFiltarActionPerformed
 

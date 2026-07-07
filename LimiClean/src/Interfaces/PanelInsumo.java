@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
 
@@ -17,10 +19,28 @@ public class PanelInsumo extends javax.swing.JPanel {
      * Creates new form PanelInsumo
      */
     private FormPrincipal principal;
+    ArrayList<Object[]> ListaInsumo;
+    DefaultTableModel modelo ;
     public PanelInsumo(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
-        Funciones_BD.cargarInsumos(ConexionBD.obtenerConexion(), JTinsumos);
+        ListaInsumo= Funciones_BD.obtenerInsumos(ConexionBD.obtenerConexion());
+          modelo = new DefaultTableModel();
+
+        modelo.addColumn("Código");
+        modelo.addColumn("Insumo");
+        modelo.addColumn("Categoría");
+        modelo.addColumn("Unidad");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock Mínimo");
+        modelo.addColumn("Descripción");
+        
+        for (Object[] fila : ListaInsumo) {
+            modelo.addRow(fila);
+        }
+
+        JTinsumos.setModel(modelo);
+
         
     }
 
@@ -36,12 +56,9 @@ public class PanelInsumo extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmboxStock = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -54,19 +71,15 @@ public class PanelInsumo extends javax.swing.JPanel {
         jLabel2.setText("Buscar");
 
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Nombre o código...");
+        jTextField1.setText("Codigo ");
+        jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Limpieza", "Químicos", "Herramientas", "Accesorios" }));
-
-        jLabel3.setText("Categoría");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Disponible", "Bajo mínimo", "Agotado" }));
+        cmboxStock.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Disponible", "Bajo mínimo", "Agotado" }));
 
         jLabel4.setText("Stock");
 
-        jButton2.setText("Filtrar");
-
-        jButton3.setText("Limpiar");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,20 +90,14 @@ public class PanelInsumo extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(cmboxStock, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,17 +105,14 @@ public class PanelInsumo extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(jComboBox2)
-                    .addComponent(jComboBox1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmboxStock, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                     .addComponent(jTextField1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Insumos");
@@ -196,18 +200,56 @@ public class PanelInsumo extends javax.swing.JPanel {
         frm.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+         modelo.setRowCount(0);
+
+    String filtro = cmboxStock.getSelectedItem().toString();
+
+    for (Object[] insumo : ListaInsumo) {
+
+        int stock = (int) insumo[4];
+        int stockMin = (int) insumo[5];
+
+        switch (filtro) {
+
+            case "Todos":
+                modelo.addRow(insumo);
+                break;
+
+            case "Disponible":
+                if (stock > 0) {
+                    modelo.addRow(insumo);
+                }
+                break;
+
+            case "Agotado":
+                if (stock == 0) {
+                    modelo.addRow(insumo);
+                }
+                break;
+
+            case "Bajo mínimo":
+                if (stock <=stockMin ) {
+                    modelo.addRow(insumo);
+                }
+                break;
+        }
+      }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTinsumos;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cmboxStock;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -41,7 +41,6 @@ public class PanelClientes extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTclientes = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,18 +122,7 @@ public class PanelClientes extends javax.swing.JPanel {
         );
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 138, 596, -1));
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Ver");
-        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 590, 88, 33));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        FrmDetalleCliente frm = new FrmDetalleCliente();
-        frm.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     Funciones_BD.buscarCliente(ConexionBD.obtenerConexion(),txtdnioruc.getText(), JTclientes);
@@ -143,7 +131,6 @@ public class PanelClientes extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTclientes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
