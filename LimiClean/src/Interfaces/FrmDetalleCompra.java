@@ -5,6 +5,8 @@
 
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author valer
@@ -17,6 +19,10 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     public FrmDetalleCompra() {
         initComponents();
         setLocationRelativeTo(null);
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Entrega_Esperada, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Fecha_Orden, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechRecepcion, "dd/mm/aaaa");
+        
     }
 
     /** This method is called from within the constructor to
@@ -32,9 +38,9 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JT_Fecha_Orden = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        JT_Entrega_Esperada = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtFechRecepcion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -60,15 +66,15 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha orden");
 
-        jTextField2.setEditable(false);
-        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField2.setText("dd/mm/aaaa\n");
+        JT_Fecha_Orden.setEditable(false);
+        JT_Fecha_Orden.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Fecha_Orden.setText("dd/mm/aaaa\n");
 
         jLabel4.setText("Entrega esperada");
 
-        jTextField3.setEditable(false);
-        jTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField3.setText("dd/mm/aaaa");
+        JT_Entrega_Esperada.setEditable(false);
+        JT_Entrega_Esperada.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Entrega_Esperada.setText("dd/mm/aaaa");
 
         jLabel5.setText("Fecha recepción");
 
@@ -146,7 +152,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel2)
                                         .addComponent(jTextField1)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+                                        .addComponent(JT_Entrega_Esperada, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                                     .addComponent(cmbEstadoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
                                 .addGap(34, 34, 34)
@@ -156,7 +162,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(txtFechRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(JT_Fecha_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,7 +184,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JT_Entrega_Esperada, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,7 +192,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(3, 3, 3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JT_Fecha_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,6 +255,8 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JT_Entrega_Esperada;
+    private javax.swing.JTextField JT_Fecha_Orden;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JComboBox<String> cmbEstadoOrden;
     private javax.swing.JComboBox<String> cmbEstadoPago;
@@ -265,8 +273,6 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField txtFechRecepcion;
     // End of variables declaration//GEN-END:variables
 

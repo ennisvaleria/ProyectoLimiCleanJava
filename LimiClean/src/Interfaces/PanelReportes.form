@@ -103,9 +103,9 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jTextField1" min="-2" pref="153" max="-2" attributes="0"/>
+                          <Component id="JT_Fecha" min="-2" pref="153" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="153" max="-2" attributes="0"/>
+                          <Component id="JT_Fecha1" min="-2" pref="153" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
@@ -129,8 +129,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="JT_Fecha" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="JT_Fecha1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="67" max="32767" attributes="0"/>
@@ -144,7 +144,7 @@
             <Property name="text" type="java.lang.String" value="Desde"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="JT_Fecha">
           <Properties>
             <Property name="text" type="java.lang.String" value="dd/mm/aaaa"/>
           </Properties>
@@ -154,7 +154,7 @@
             <Property name="text" type="java.lang.String" value="Hasta"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="JT_Fecha1">
           <Properties>
             <Property name="text" type="java.lang.String" value="dd/mm/aaaa"/>
           </Properties>

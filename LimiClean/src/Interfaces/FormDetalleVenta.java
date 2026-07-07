@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author valer
@@ -18,6 +20,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
     public FormDetalleVenta() {
         initComponents();
         setLocationRelativeTo(null);
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Fecha_Emision, "dd/mm/aaaa");
     }
 
     /**
@@ -33,7 +36,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JT_Fecha_Emision = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -61,9 +64,9 @@ public class FormDetalleVenta extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha emisión");
 
-        jTextField1.setEditable(false);
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("dd/mm/aaaa");
+        JT_Fecha_Emision.setEditable(false);
+        JT_Fecha_Emision.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Fecha_Emision.setText("dd/mm/aaaa");
 
         jLabel4.setText("Cliente: (Tabla Venta FK)");
 
@@ -103,7 +106,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(JT_Fecha_Emision, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(603, 603, 603))
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +131,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JT_Fecha_Emision, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,6 +290,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JT_Fecha_Emision;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -305,7 +309,6 @@ public class FormDetalleVenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

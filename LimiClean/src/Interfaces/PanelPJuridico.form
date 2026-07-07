@@ -36,7 +36,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="JT_Ruc" min="-2" pref="170" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -70,7 +70,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtRazonSocial" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="jTextField3" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="JT_Ruc" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jTextField5" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -92,7 +92,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="JT_Ruc">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="66" type="rgb"/>

@@ -82,8 +82,8 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField3" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="JT_Entrega_Estimada" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="JT_Fecha_Orden" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField1" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
@@ -127,11 +127,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="JT_Fecha_Orden" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="JT_Entrega_Estimada" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -193,7 +193,7 @@
             <Property name="text" type="java.lang.String" value="Fecha Orden"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="JT_Fecha_Orden">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -207,7 +207,7 @@
             <Property name="text" type="java.lang.String" value="Entrega Estimada"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="JT_Entrega_Estimada">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -297,7 +297,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtFechFinalizacion" max="32767" attributes="0"/>
+                          <Component id="txtFechaFinalizacion" max="32767" attributes="0"/>
                           <Component id="txtFechInicio" alignment="1" pref="148" max="32767" attributes="0"/>
                           <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -318,7 +318,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtFechFinalizacion" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFechaFinalizacion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="39" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -349,7 +349,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha finalizaci&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFechFinalizacion">
+            <Component class="javax.swing.JTextField" name="txtFechaFinalizacion">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

@@ -55,6 +55,11 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         FuncionesLimiclean.borrar_mensaje_defecto(txtnombrecalzado3, "Ejm:Bueno, Regular...");
         FuncionesLimiclean.borrar_mensaje_defecto(txtestadosalida, "Al finalizar...");
         
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Buscar_Cliente, "DNI o RUC");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtnombrecalzado1, "Observaciones del calzado...");
+        
+        
+        
     
     }
     public void mostrarPanel(JPanel panel){
@@ -80,7 +85,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         PanelCliente = new javax.swing.JPanel();
         PanelContenedorC = new javax.swing.JPanel();
         cmbTipoCliente = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        JT_Buscar_Cliente = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -165,10 +170,10 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         cmbTipoCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cmbTipoCliente.addActionListener(this::cmbTipoClienteActionPerformed);
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("DNI o RUC...");
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JT_Buscar_Cliente.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Buscar_Cliente.setText("DNI o RUC...");
+        JT_Buscar_Cliente.setToolTipText("");
+        JT_Buscar_Cliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel21.setText("DATOS DEL CLIENTE");
@@ -196,7 +201,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                     .addGroup(PanelClienteLayout.createSequentialGroup()
                         .addGroup(PanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelClienteLayout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JT_Buscar_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel21)
@@ -219,7 +224,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JT_Buscar_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
@@ -565,7 +570,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel23)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -668,7 +673,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         );
         panelcontenedorLayout.setVerticalGroup(
             panelcontenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1155, Short.MAX_VALUE)
+            .addGap(0, 1185, Short.MAX_VALUE)
             .addGroup(panelcontenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelcontenedorLayout.createSequentialGroup()
                     .addGap(3, 3, 3)
@@ -982,6 +987,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Costo12;
+    private javax.swing.JTextField JT_Buscar_Cliente;
     private javax.swing.JPanel PanelCliente;
     private javax.swing.JPanel PanelContenedorC;
     private javax.swing.JButton btncancel;
@@ -1029,7 +1035,6 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel panelcontenedor;
     private javax.swing.JTextArea txtDescripcion;

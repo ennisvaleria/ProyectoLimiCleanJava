@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author valer
@@ -18,6 +20,10 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
     public FrmDetalleOrden() {
         initComponents();
         setLocationRelativeTo(null);
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Fecha_Orden, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Entrega_Estimada, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechInicio, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaFinalizacion, "dd/mm/aaaa");
     }
 
     /**
@@ -35,9 +41,9 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JT_Fecha_Orden = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        JT_Entrega_Estimada = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -52,7 +58,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtFechInicio = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtFechFinalizacion = new javax.swing.JTextField();
+        txtFechaFinalizacion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -77,15 +83,15 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
 
         jLabel4.setText("Fecha Orden");
 
-        jTextField2.setEditable(false);
-        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField2.setText("dd/mm/aaaa");
+        JT_Fecha_Orden.setEditable(false);
+        JT_Fecha_Orden.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Fecha_Orden.setText("dd/mm/aaaa");
 
         jLabel5.setText("Entrega Estimada");
 
-        jTextField3.setEditable(false);
-        jTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField3.setText("dd/mm/aaaa");
+        JT_Entrega_Estimada.setEditable(false);
+        JT_Entrega_Estimada.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Entrega_Estimada.setText("dd/mm/aaaa");
 
         jLabel6.setText("Descuento");
 
@@ -119,9 +125,9 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
 
         jLabel14.setText("Fecha finalización");
 
-        txtFechFinalizacion.setEditable(false);
-        txtFechFinalizacion.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechFinalizacion.setText("dd/mm/aaaa");
+        txtFechaFinalizacion.setEditable(false);
+        txtFechaFinalizacion.setForeground(new java.awt.Color(102, 102, 102));
+        txtFechaFinalizacion.setText("dd/mm/aaaa");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -130,7 +136,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtFechFinalizacion)
+                    .addComponent(txtFechaFinalizacion)
                     .addComponent(txtFechInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +154,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFechFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFechaFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 39, Short.MAX_VALUE))
         );
 
@@ -169,8 +175,8 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JT_Entrega_Estimada, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JT_Fecha_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,11 +212,11 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JT_Fecha_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JT_Entrega_Estimada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -339,7 +345,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         cmbEstadoOrden.setEnabled(true);
         cmbEstadoPago.setEnabled(true);
         txtFechInicio.setEditable(true);
-        txtFechFinalizacion.setEditable(true);
+        txtFechaFinalizacion.setEditable(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -368,6 +374,8 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JT_Entrega_Estimada;
+    private javax.swing.JTextField JT_Fecha_Orden;
     private javax.swing.JComboBox<String> cmbEstadoOrden;
     private javax.swing.JComboBox<String> cmbEstadoPago;
     private javax.swing.JButton jButton1;
@@ -394,12 +402,10 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField txtFechFinalizacion;
     private javax.swing.JTextField txtFechInicio;
+    private javax.swing.JTextField txtFechaFinalizacion;
     private javax.swing.JTextField txtNotas;
     // End of variables declaration//GEN-END:variables
 }

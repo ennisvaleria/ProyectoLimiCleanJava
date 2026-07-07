@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Interfaces;
+
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author user
@@ -16,6 +19,10 @@ public class PanelOrdenes extends javax.swing.JPanel {
     public PanelOrdenes(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
+        
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Buscar_Cliente, "DNI o RUC...");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo1, "dd/mm/aaaa");
     }
 
     /**
@@ -33,7 +40,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnNuevaOrden = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        JT_Buscar_Cliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtFechaRecojo = new javax.swing.JTextField();
         txtFechaRecojo1 = new javax.swing.JTextField();
@@ -62,8 +69,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("DNI o RUC..");
+        JT_Buscar_Cliente.setForeground(new java.awt.Color(102, 102, 102));
+        JT_Buscar_Cliente.setText("DNI o RUC..");
 
         jLabel2.setText("Buscar cliente");
 
@@ -111,7 +118,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JT_Buscar_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -129,7 +136,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JT_Buscar_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFechaRecojo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
@@ -241,6 +248,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JT_Buscar_Cliente;
     private javax.swing.JButton btnNuevaOrden;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -257,7 +265,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtFechaRecojo;
     private javax.swing.JTextField txtFechaRecojo1;
     // End of variables declaration//GEN-END:variables

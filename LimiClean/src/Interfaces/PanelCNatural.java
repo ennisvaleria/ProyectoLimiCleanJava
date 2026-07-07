@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author user
@@ -15,6 +17,11 @@ public class PanelCNatural extends javax.swing.JPanel {
      */
     public PanelCNatural() {
         initComponents();
+        
+        FuncionesLimiclean.borrar_mensaje_defecto(txtdni, "8 dígitos");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtTelefono, "9 dígitos");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtCorreo, "correo@gmail.com");
+        
     }
 
     /**

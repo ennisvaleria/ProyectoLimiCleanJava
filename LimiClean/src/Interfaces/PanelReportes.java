@@ -7,6 +7,7 @@ package Interfaces;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import limiclean.Clases.FuncionesLimiclean;
 
 /**
  *
@@ -20,6 +21,9 @@ public class PanelReportes extends javax.swing.JPanel {
         initComponents();
         this.principal = principal;
         panelContenedor.setLayout(new BorderLayout());
+        
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Fecha, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(JT_Fecha1, "dd/mm/aaaa");
     }
     public void mostrarPanel(JPanel panel){
        panelContenedor.removeAll();
@@ -40,9 +44,9 @@ public class PanelReportes extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JT_Fecha = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JT_Fecha1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -67,11 +71,11 @@ public class PanelReportes extends javax.swing.JPanel {
 
         jLabel2.setText("Desde");
 
-        jTextField1.setText("dd/mm/aaaa");
+        JT_Fecha.setText("dd/mm/aaaa");
 
         jLabel3.setText("Hasta");
 
-        jTextField2.setText("dd/mm/aaaa");
+        JT_Fecha1.setText("dd/mm/aaaa");
 
         jButton1.setText("Generar Reporte");
 
@@ -83,9 +87,9 @@ public class PanelReportes extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JT_Fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -103,8 +107,8 @@ public class PanelReportes extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JT_Fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
@@ -304,6 +308,8 @@ public class PanelReportes extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JT_Fecha;
+    private javax.swing.JTextField JT_Fecha1;
     private javax.swing.JButton btnOrdenCompra;
     private javax.swing.JButton btnOrdenLavado;
     private javax.swing.JButton btnVentas;
@@ -320,8 +326,6 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
