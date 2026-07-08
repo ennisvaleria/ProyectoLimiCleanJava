@@ -421,6 +421,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         cmbEstadoOrden.setEnabled(true);
         cmbEstadoPago.setEnabled(true);
         txtFechInicio.setEditable(true);
+        txtnotas.setEditable(true);
         txtFechFinalizacion.setEditable(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

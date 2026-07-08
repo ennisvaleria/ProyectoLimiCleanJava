@@ -21,14 +21,14 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
     public FrmNuevoProducto() {
         initComponents();
         setLocationRelativeTo(null);
-        Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxCategoria, "categoriaProducto", "nombCategoriaProducto");
+        Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmbxCategoria, "categoriaProducto", "nombCategoriaProducto");
         String ultimoCodigo = Funciones_BD.obtenerUltimoValor(ConexionBD.obtenerConexion(),"Producto","codProducto","idProducto");
            //explicar
            
-        String prefijo = ultimoCodigo.substring(0, 3);
+        String prefijo = ultimoCodigo.substring(0, 4);
         int numero = Integer.parseInt(ultimoCodigo.substring(4));
 
-        txtcodigoPro.setText(prefijo + String.format("%04d", numero + 1)
+        txtCodigo.setText(prefijo + String.format("%04d", numero + 1)
         );
     }
 
@@ -43,20 +43,20 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        txtcodigoPro = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        cmboxCategoria = new javax.swing.JComboBox<>();
+        cmbxCategoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        txtProducto = new javax.swing.JTextField();
+        txtNuevaCategoria = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnagregarProducto = new javax.swing.JButton();
+        btnagregarCategoria = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnGuardarProducto = new javax.swing.JButton();
@@ -68,7 +68,8 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
-        txtcodigoPro.setActionCommand("<Not Set>");
+        txtCodigo.setEditable(false);
+        txtCodigo.setActionCommand("<Not Set>");
 
         jLabel2.setText("Código");
 
@@ -76,8 +77,8 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
 
         jLabel4.setText("Nueva categoría");
 
-        btnagregarProducto.setText(" Agregar");
-        btnagregarProducto.addActionListener(this::btnagregarProductoActionPerformed);
+        btnagregarCategoria.setText(" Agregar");
+        btnagregarCategoria.addActionListener(this::btnagregarCategoriaActionPerformed);
 
         jLabel5.setText("PRECIO Y STOCK");
 
@@ -85,9 +86,9 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
 
         jLabel8.setText("Descripción");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,11 +102,11 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cmboxCategoria, 0, 145, Short.MAX_VALUE)
-                                        .addComponent(jTextField1)
+                                        .addComponent(cmbxCategoria, 0, 145, Short.MAX_VALUE)
+                                        .addComponent(txtNombre)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel6))
@@ -114,10 +115,10 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNuevaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnagregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtcodigoPro, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnagregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel8))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -130,23 +131,23 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcodigoPro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnagregarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(txtProducto)
-                    .addComponent(cmboxCategoria))
+                    .addComponent(btnagregarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(txtNuevaCategoria)
+                    .addComponent(cmbxCategoria))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(2, 2, 2)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,6 +163,7 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
         btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
         btnGuardarProducto.setText("Guardar producto");
+        btnGuardarProducto.addActionListener(this::btnGuardarProductoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,14 +203,29 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnagregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarProductoActionPerformed
-                String valor=txtProducto.getText().toString();
+    private void btnagregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarCategoriaActionPerformed
+                String valor=txtNuevaCategoria.getText().toString();
         boolean Insert=Funciones_BD.insertarDato(ConexionBD.obtenerConexion(),"categoriaInsumo", "nombCategoriaInsumo",valor);
         if(Insert)
-                    Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxCategoria, "categoriaProducto","nombCategoriaProducto" );
+                    Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmbxCategoria, "categoriaProducto","nombCategoriaProducto" );
 
             
-    }//GEN-LAST:event_btnagregarProductoActionPerformed
+    }//GEN-LAST:event_btnagregarCategoriaActionPerformed
+
+    private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
+        // TODO add your handling code here:
+        String nombProducto = txtNombre.getText().trim();
+        String descProducto = txtDescripcion.getText().trim();
+        String codProducto = txtCodigo.getText().trim();
+        double precProducto = Double.parseDouble(txtPrecio.getText().trim());
+        String nombCategoria = cmbxCategoria.getSelectedItem().toString();
+        
+        boolean insert = Funciones_BD.insertarProducto(ConexionBD.obtenerConexion(), nombProducto, descProducto, codProducto, precProducto, nombCategoria);
+        
+        if (insert) {
+        this.dispose(); 
+    }
+    }//GEN-LAST:event_btnGuardarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,8 +255,8 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardarProducto;
-    private javax.swing.JButton btnagregarProducto;
-    private javax.swing.JComboBox<String> cmboxCategoria;
+    private javax.swing.JButton btnagregarCategoria;
+    private javax.swing.JComboBox<String> cmbxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -250,10 +267,10 @@ public class FrmNuevoProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField txtProducto;
-    private javax.swing.JTextField txtcodigoPro;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNuevaCategoria;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,7 +20,7 @@ public class PanelInsumo extends javax.swing.JPanel {
      */
     private FormPrincipal principal;
     ArrayList<Object[]> ListaInsumo;
-    DefaultTableModel modelo ;
+    DefaultTableModel modelo;
     public PanelInsumo(FormPrincipal principal) {
         initComponents();
         this.principal = principal;

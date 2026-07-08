@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
 
@@ -17,10 +19,25 @@ public class PanelProductos extends javax.swing.JPanel {
      * Creates new form PanelProducto
      */
     private FormPrincipal principal;
+    ArrayList<Object[]> ListaProducto;
+    DefaultTableModel modelo;
     public PanelProductos(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
-        Funciones_BD.cargarProductos(ConexionBD.obtenerConexion(), JTProductos,"");
+        ListaProducto = Funciones_BD.cargarProductos(ConexionBD.obtenerConexion(), "");
+            modelo = new DefaultTableModel();
+            
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Código");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Categoría");
+        for (Object[] fila : ListaProducto) {
+            modelo.addRow(fila);
+        }
+        
+        JTProductos.setModel(modelo);   
     }
 
     /**
@@ -166,7 +183,7 @@ public class PanelProductos extends javax.swing.JPanel {
 
     private void btnbuscarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarproductoActionPerformed
         String dato=jTextField1.getText().toString();
-        Funciones_BD.cargarProductos(ConexionBD.obtenerConexion(), JTProductos,dato);
+        Funciones_BD.cargarProductos(ConexionBD.obtenerConexion(), dato);
     }//GEN-LAST:event_btnbuscarproductoActionPerformed
 
 

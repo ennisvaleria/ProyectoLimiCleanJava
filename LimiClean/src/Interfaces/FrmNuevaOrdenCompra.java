@@ -464,6 +464,7 @@ public class FrmNuevaOrdenCompra extends javax.swing.JFrame {
         } else {
 
             JOptionPane.showMessageDialog(null, "Código inválido: " + codigo);
+            return;
         }
 
         /* ===========================

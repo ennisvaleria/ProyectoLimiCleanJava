@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Interfaces;
+import javax.swing.JOptionPane;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
 
@@ -187,7 +188,15 @@ public class PanelVentas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDniORucActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        FormDetalleVenta frm = new FormDetalleVenta();
+        int fila = JTventas.getSelectedRow();
+         if (fila == -1) {
+        JOptionPane.showMessageDialog(null, "Selecciona una venta de la tabla.");
+        return;
+        }
+        int idVenta = (int) JTventas.getValueAt(fila, 0);
+        FormDetalleVenta frm = new FormDetalleVenta(idVenta, () -> {
+        Funciones_BD.cargarDetalleVentas(ConexionBD.obtenerConexion(), JTventas, "");
+        });
         frm.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaces;
-
-import com.itextpdf.text.pdf.PdfName;
 import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +26,25 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
    private int idcliente;
     public FrmNuevaVenta() {
         initComponents();
+        cmboxProductos.addActionListener(e -> actualizarTotalPreview());
+
+    txtcantidad.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+    @Override
+    public void insertUpdate(javax.swing.event.DocumentEvent e) 
+    { 
+        actualizarTotalPreview(); 
+    }
+    @Override
+    public void removeUpdate(javax.swing.event.DocumentEvent e) 
+    {
+        actualizarTotalPreview(); 
+    }
+    @Override
+    public void changedUpdate(javax.swing.event.DocumentEvent e)
+    {
+        actualizarTotalPreview(); 
+    }
+    });
         setLocationRelativeTo(null);
         
         Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxProductos, "Producto", "nombProducto");
@@ -109,10 +126,8 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         cmboxmetodo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         cmbtipo = new javax.swing.JComboBox<>();
@@ -228,6 +243,8 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Fecha de emisión");
+
+        txtBoletaFactura.setEditable(false);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("N° Comprobante");
@@ -356,15 +373,10 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
-        jTextField6.setEditable(false);
-
-        jTextField4.setEditable(false);
+        txtTotal.setEditable(false);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Total");
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Subtotal");
 
         cmboxmetodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta", "Transferencia", "Yape", "Plin" }));
 
@@ -405,34 +417,31 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmboxmetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(58, 58, 58)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel11)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmboxmetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11))
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmboxmetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -761,6 +770,45 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_cmbtipoActionPerformed
 
+    
+    private double calcularTotalTabla() {
+    double total = 0;
+    DefaultTableModel modelo = (DefaultTableModel) JTProductos.getModel();
+    int colPrecio = 3;
+    int colCantidad = 4;
+
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        try {
+            double precio = Double.parseDouble(modelo.getValueAt(i, colPrecio).toString());
+            double cantidad = Double.parseDouble(modelo.getValueAt(i, colCantidad).toString());
+            total += precio * cantidad;
+        } catch (Exception ex) {
+        }
+    }
+    return total;
+    }
+    private void actualizarTotalPreview() {
+    double totalTabla = calcularTotalTabla();
+    double totalPreview = 0;
+
+    try {
+        String producto = cmboxProductos.getSelectedItem() != null
+                ? cmboxProductos.getSelectedItem().toString()
+                : "";
+        String cantidadTexto = txtcantidad.getText().trim();
+
+        if (!producto.isEmpty() && !cantidadTexto.isEmpty()) {
+            double cantidad = Double.parseDouble(cantidadTexto);
+            double precio = Funciones_BD.obtenerPrecioProducto(ConexionBD.obtenerConexion(), producto);
+            totalPreview = precio * cantidad;
+        }
+        } catch (NumberFormatException ex) {
+        // el usuario todavía está escribiendo, ignoramos
+    }
+
+    double totalFinal = totalTabla + totalPreview;
+    txtTotal.setText(String.format("%.2f", totalFinal));
+}
     /**
      * @param args the command line arguments
      */
@@ -813,17 +861,15 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField txtBoletaFactura;
     private javax.swing.JTextField txtFechaEmision;
+    private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtbuscarcliente;
     private javax.swing.JTextField txtcantidad;
     // End of variables declaration//GEN-END:variables
