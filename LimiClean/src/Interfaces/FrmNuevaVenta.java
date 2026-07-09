@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
@@ -27,6 +28,9 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
     public FrmNuevaVenta() {
         initComponents();
         cmboxProductos.addActionListener(e -> actualizarTotalPreview());
+        JTextField txtFechInicio;
+        FuncionesLimiclean.borrar_mensaje_defecto(txtbuscarcliente, "DNI/RUC");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaEmision, "dd/mm/aaaa");
 
     txtcantidad.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
     @Override

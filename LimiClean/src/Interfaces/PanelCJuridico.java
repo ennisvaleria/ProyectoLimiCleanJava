@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author user
@@ -18,6 +20,9 @@ public class PanelCJuridico extends javax.swing.JPanel {
         agregarPlaceholder(txtRuc, "11 dígitos");
         agregarPlaceholder(txtTelefono, "9 dígitos");
         agregarPlaceholder(txtNombre, "Nombre del contacto");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtRuc, "11 dígitos");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtNombre, "Nombre del contacto");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtTelefono, "9 dígitos");
     }
 
     /**

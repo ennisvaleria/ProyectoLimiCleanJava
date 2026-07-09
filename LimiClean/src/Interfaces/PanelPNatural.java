@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author valer
@@ -17,6 +19,7 @@ public class PanelPNatural extends javax.swing.JPanel {
     public PanelPNatural(FrmNuevoProveedor principal) {
         initComponents();
         this.principal = principal;
+        FuncionesLimiclean.borrar_mensaje_defecto(TxtDni, "8 dígitos");
     }
 
     /**

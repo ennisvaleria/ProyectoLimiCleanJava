@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author valer
@@ -17,6 +19,9 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
     public PanelVentasEmpleado(FrmPrincipalEmpleado principal) {
         initComponents();
         this.principal = principal;
+        FuncionesLimiclean.borrar_mensaje_defecto(txt_Buscar, "Nombre o DNI/RUC...");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo1, "dd/mm/aaaa");
     }
 
     /**
@@ -30,7 +35,7 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Buscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtFechaRecojo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -53,10 +58,10 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Nombre o DNI/RUC...");
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        txt_Buscar.setForeground(new java.awt.Color(102, 102, 102));
+        txt_Buscar.setText("Nombre o DNI/RUC...");
+        txt_Buscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_Buscar.addActionListener(this::txt_BuscarActionPerformed);
 
         jLabel2.setText("Buscar cliente");
 
@@ -98,7 +103,7 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +141,7 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFechaRecojo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,9 +236,9 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_BuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_BuscarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         FormDetalleVenta frm = new FormDetalleVenta();
@@ -263,8 +268,8 @@ public class PanelVentasEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtFechaRecojo;
     private javax.swing.JTextField txtFechaRecojo1;
+    private javax.swing.JTextField txt_Buscar;
     // End of variables declaration//GEN-END:variables
 }

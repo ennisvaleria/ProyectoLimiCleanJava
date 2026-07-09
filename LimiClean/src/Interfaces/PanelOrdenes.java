@@ -5,6 +5,7 @@
 package Interfaces;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import limiclean.Clases.FuncionesLimiclean;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
@@ -23,6 +24,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
         initComponents();
         this.principal = principal;
         Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTOrdenesLavados);
+        JTextField txtdnioruc;
+        FuncionesLimiclean.borrar_mensaje_defecto(txtDNIORUC, "DNI o RUC...");
         
     }
 

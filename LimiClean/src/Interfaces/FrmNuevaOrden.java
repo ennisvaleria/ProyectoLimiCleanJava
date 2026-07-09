@@ -54,6 +54,10 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         Funciones_BD.cargar_combo(ConexionBD.obtenerConexion(), cmboxTipolavado, "tipoLavado", "nombTipo");
         FuncionesLimiclean.borrar_mensaje_defecto(txtnombrecalzado3, "Ejm:Bueno, Regular...");
         FuncionesLimiclean.borrar_mensaje_defecto(txtestadosalida, "Al finalizar...");
+        FuncionesLimiclean.borrar_mensaje_defecto(txt_Buscar, "DNI o RUC...");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtnombrecalzado1, "Observaciones del calzado...");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaEntrega, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo, "dd/mm/aaaa");
         
     
     }
@@ -80,7 +84,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         PanelCliente = new javax.swing.JPanel();
         PanelContenedorC = new javax.swing.JPanel();
         cmbTipoCliente = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Buscar = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -169,10 +173,10 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         cmbTipoCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cmbTipoCliente.addActionListener(this::cmbTipoClienteActionPerformed);
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("DNI o RUC...");
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_Buscar.setForeground(new java.awt.Color(102, 102, 102));
+        txt_Buscar.setText("DNI o RUC...");
+        txt_Buscar.setToolTipText("");
+        txt_Buscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel21.setText("DATOS DEL CLIENTE");
@@ -200,7 +204,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                     .addGroup(PanelClienteLayout.createSequentialGroup()
                         .addGroup(PanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelClienteLayout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel21)
@@ -223,7 +227,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
@@ -1210,7 +1214,6 @@ this.dispose();
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel panelcontenedor;
     private javax.swing.JTextArea txtDescripcion;
@@ -1220,6 +1223,7 @@ this.dispose();
     private javax.swing.JTextField txtNotas;
     private javax.swing.JTextField txtObservacioneLavado;
     private javax.swing.JTextField txtPrecioBase;
+    private javax.swing.JTextField txt_Buscar;
     private javax.swing.JTextField txtcosto;
     private javax.swing.JTextField txtestadosalida;
     private javax.swing.JTextField txtfechaorden;

@@ -6,6 +6,7 @@ package Interfaces;
 
 import javax.swing.JOptionPane;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 import limiclean.Clases.Funciones_BD;
 
 /**
@@ -22,6 +23,7 @@ public class PanelOrdenesCompra extends javax.swing.JPanel {
         initComponents();
         this.principal = principal;
         Funciones_BD.cargarCompras(ConexionBD.obtenerConexion(), JTordenesCompra,"");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtProvedores, "DNI o RUC...");
     }
 
     /**

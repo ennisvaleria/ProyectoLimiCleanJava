@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 
 /**
  *
@@ -38,7 +39,9 @@ public class PanelProductos extends javax.swing.JPanel {
             modelo.addRow(fila);
         }
         
-        JTProductos.setModel(modelo);   
+        JTProductos.setModel(modelo);  
+        
+        FuncionesLimiclean.borrar_mensaje_defecto(txt_Buscar, "Nombre o código...");
     }
 
     /**
@@ -51,7 +54,7 @@ public class PanelProductos extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Buscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnbuscarproducto = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -63,8 +66,8 @@ public class PanelProductos extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Nombre o código...");
+        txt_Buscar.setForeground(new java.awt.Color(102, 102, 102));
+        txt_Buscar.setText("Nombre o código...");
 
         jLabel1.setText("Buscar");
 
@@ -80,7 +83,7 @@ public class PanelProductos extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnbuscarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(337, Short.MAX_VALUE))
@@ -92,7 +95,7 @@ public class PanelProductos extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(btnbuscarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -202,7 +205,7 @@ public class PanelProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     private void btnbuscarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarproductoActionPerformed
-        String dato=jTextField1.getText().toString();
+        String dato=txt_Buscar.getText().toString();
         Funciones_BD.cargarProductos(ConexionBD.obtenerConexion(), dato);
     }//GEN-LAST:event_btnbuscarproductoActionPerformed
 
@@ -217,6 +220,6 @@ public class PanelProductos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_Buscar;
     // End of variables declaration//GEN-END:variables
 }

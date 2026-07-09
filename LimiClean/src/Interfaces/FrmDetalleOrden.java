@@ -6,6 +6,7 @@ package Interfaces;
 import javax.swing.JOptionPane;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 /**
  *
  * @author valer
@@ -66,7 +67,10 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         txtNotas.setText(notas);
         idordenlavado.setText(String.valueOf(idOrdenLavado));
         Funciones_BD.cargarCalzadoLavado(ConexionBD.obtenerConexion(), JTCalzado,idOrdenLavado);
-        
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaOrden, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechInicio, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechFinalizacion, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtEntregaEstimado, "dd/mm/aaaa");
         
                 
     }

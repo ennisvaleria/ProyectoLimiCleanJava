@@ -6,6 +6,7 @@ package Interfaces;
 
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 
 /**
  *
@@ -20,6 +21,7 @@ public class PanelClientes extends javax.swing.JPanel {
     public PanelClientes(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
+        FuncionesLimiclean.borrar_mensaje_defecto(txtdnioruc, "DNI o RUC...");
         
         Funciones_BD.cargarClientesNaturales(ConexionBD.obtenerConexion(), JTclientes);
     }

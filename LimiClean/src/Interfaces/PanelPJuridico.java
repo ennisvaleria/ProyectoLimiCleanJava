@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author valer
@@ -17,6 +19,7 @@ public class PanelPJuridico extends javax.swing.JPanel {
     public PanelPJuridico(FrmNuevoProveedor principal) {
         initComponents();
         this.principal = principal;
+        FuncionesLimiclean.borrar_mensaje_defecto(txtRuc, "11 dígitos");
     }
 
     /**

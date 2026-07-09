@@ -6,6 +6,7 @@
 package Interfaces;
 
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.Proveedor;
 
@@ -21,6 +22,7 @@ public class PanelProveedores extends javax.swing.JPanel {
         initComponents();
         this.principal = principal;
         Funciones_BD.cargarProveedores_Filtro(ConexionBD.obtenerConexion(), JTProveedores,"");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtProveedor, "DNI o RUC...");
     }
 
     /** This method is called from within the constructor to

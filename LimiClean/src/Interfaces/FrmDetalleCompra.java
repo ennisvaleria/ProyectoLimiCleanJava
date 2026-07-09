@@ -7,6 +7,7 @@ package Interfaces;
 
 import javax.swing.JOptionPane;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 import limiclean.Clases.Funciones_BD;
 
 /**
@@ -23,6 +24,9 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     public FrmDetalleCompra() {
         initComponents();
         setLocationRelativeTo(null);
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaOrden, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtEntregaEsperada, "dd/mm/aaaa");
+        FuncionesLimiclean.borrar_mensaje_defecto(txtFechRecepcion, "dd/mm/aaaa");
     }
     public FrmDetalleCompra(int idOrdenCompra, Runnable recarga) {
     initComponents();

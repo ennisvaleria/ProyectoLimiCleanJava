@@ -14,6 +14,7 @@ import javax.print.DocFlavor;
 import javax.swing.JOptionPane;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 import limiclean.Clases.Producto;
 import limiclean.Clases.proveedorJuridio;
 /**
@@ -32,6 +33,7 @@ public class FrmNuevaOrdenCompra extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         Funciones_BD.cargarProveedores(ConexionBD.obtenerConexion(), cmbProveedor);
         Funciones_BD.cargarProductosInsumos(ConexionBD.obtenerConexion(),cmboxProductos);
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
             // Fecha de hoy

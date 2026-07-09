@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import limiclean.Clases.FuncionesLimiclean;
+
 /**
  *
  * @author user
@@ -18,6 +20,9 @@ public class PanelCNatural extends javax.swing.JPanel {
         agregarPlaceholder(txtdni, "8 dígitos");
     agregarPlaceholder(txtTelefono, "9 dígitos");
     agregarPlaceholder(txtCorreo, "correo@gmail.com");
+    FuncionesLimiclean.borrar_mensaje_defecto(txtdni, "8 dígitos");
+    FuncionesLimiclean.borrar_mensaje_defecto(txtTelefono, "9 dígitos");
+    FuncionesLimiclean.borrar_mensaje_defecto(txtCorreo, "correo@gmail.com");
     }
 
     /**
@@ -50,6 +55,7 @@ public class PanelCNatural extends javax.swing.JPanel {
         txtTelefono.setForeground(new java.awt.Color(153, 153, 153));
         txtTelefono.setText("9 dígitos");
         txtTelefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTelefono.addActionListener(this::txtTelefonoActionPerformed);
 
         txtDireccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -154,6 +160,10 @@ public class PanelCNatural extends javax.swing.JPanel {
             .addComponent(PanelNatural, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void agregarPlaceholder(javax.swing.JTextField campo, String placeholder) {
     campo.addFocusListener(new java.awt.event.FocusAdapter() {

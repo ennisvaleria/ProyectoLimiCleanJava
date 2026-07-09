@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
+import limiclean.Clases.FuncionesLimiclean;
 
 /**
  *
@@ -41,7 +42,7 @@ public class PanelInsumo extends javax.swing.JPanel {
 
         JTinsumos.setModel(modelo);
 
-        
+        FuncionesLimiclean.borrar_mensaje_defecto(txt_Codigo_Buscar, "Codigo ");
     }
 
     /**
@@ -55,7 +56,7 @@ public class PanelInsumo extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Codigo_Buscar = new javax.swing.JTextField();
         cmboxStock = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -70,9 +71,9 @@ public class PanelInsumo extends javax.swing.JPanel {
 
         jLabel2.setText("Buscar");
 
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Codigo ");
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        txt_Codigo_Buscar.setForeground(new java.awt.Color(102, 102, 102));
+        txt_Codigo_Buscar.setText("Codigo ");
+        txt_Codigo_Buscar.addActionListener(this::txt_Codigo_BuscarActionPerformed);
 
         cmboxStock.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Disponible", "Bajo mínimo", "Agotado" }));
 
@@ -88,7 +89,7 @@ public class PanelInsumo extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Codigo_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +112,7 @@ public class PanelInsumo extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cmboxStock, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                    .addComponent(jTextField1))
+                    .addComponent(txt_Codigo_Buscar))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -200,12 +201,12 @@ public class PanelInsumo extends javax.swing.JPanel {
         frm.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_Codigo_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Codigo_BuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_Codigo_BuscarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-         String codigo = jTextField1.getText().trim();
+         String codigo = txt_Codigo_Buscar.getText().trim();
     if (codigo.equals("Codigo")) { 
         codigo = "";
     }
@@ -232,6 +233,6 @@ public class PanelInsumo extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_Codigo_Buscar;
     // End of variables declaration//GEN-END:variables
 }
