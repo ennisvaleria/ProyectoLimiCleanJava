@@ -49,7 +49,7 @@ public class PanelVentas extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtDniORuc.setForeground(new java.awt.Color(102, 102, 102));
-        txtDniORuc.setText("Nombre o DNI/RUC...");
+        txtDniORuc.setText("DNI o RUC...");
         txtDniORuc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtDniORuc.addActionListener(this::txtDniORucActionPerformed);
 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -960,30 +961,52 @@ public static int guardar_cliente_juridico(Connection conexion, Juridico j) {
     return idCliente;
 }
 
-public static ArrayList<Object[]> obtenerInsumos(Connection conexion) {
+public static ArrayList<Object[]> obtenerInsumos(Connection conexion, String busqueda, String filtroStock) {
 
     ArrayList<Object[]> lista = new ArrayList<>();
-
     String sql =
         "SELECT " +
         "i.codInsumo, " +
         "i.nombInsumo, " +
         "c.nombCategoriaInsumo, " +
         "i.unidadMedida, " +
-        "d.cantCompra AS stock, " +
+        "COALESCE(SUM(d.cantCompra), 0) AS stock, " +
         "i.stockMin, " +
         "i.descInsumo " +
-        "FROM detalleCompra d " +
-        "INNER JOIN Insumo i ON d.idInsumo = i.idInsumo " +
-        "INNER JOIN categoriaInsumo c ON i.idCategoriaInsumo = c.idCategoriaInsumo";
+        "FROM Insumo i " +
+        "INNER JOIN categoriaInsumo c ON i.idCategoriaInsumo = c.idCategoriaInsumo " +
+        "LEFT JOIN detalleCompra d ON d.idInsumo = i.idInsumo ";
+
+    boolean filtrarBusqueda = busqueda != null && !busqueda.trim().isEmpty();
+    if (filtrarBusqueda) {
+        sql += "WHERE (i.nombInsumo LIKE ? OR i.codInsumo LIKE ?) ";
+    }
+
+    sql += "GROUP BY i.idInsumo, i.codInsumo, i.nombInsumo, c.nombCategoriaInsumo, i.unidadMedida, i.stockMin, i.descInsumo ";
+
+    switch (filtroStock) {
+        case "Disponible":
+            sql += "HAVING stock > 0 ";
+            break;
+        case "Bajo mínimo":
+            sql += "HAVING stock < i.stockMin ";
+            break;
+        case "Agotado":
+            sql += "HAVING stock = 0 ";
+            break;
+        default: // "Todos"
+            break;
+    }
 
     try {
-
         PreparedStatement ps = conexion.prepareStatement(sql);
+        if (filtrarBusqueda) {
+            String like = "%" + busqueda + "%";
+            ps.setString(1, like);
+            ps.setString(2, like);
+        }
         ResultSet rs = ps.executeQuery();
-
         while (rs.next()) {
-
             lista.add(new Object[]{
                 rs.getString("codInsumo"),
                 rs.getString("nombInsumo"),
@@ -994,11 +1017,10 @@ public static ArrayList<Object[]> obtenerInsumos(Connection conexion) {
                 rs.getString("descInsumo")
             });
         }
-
     } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al cargar insumos: " + e.getMessage());
         e.printStackTrace();
     }
-
     return lista;
 }
 public static void cargar_combo(
@@ -2607,8 +2629,270 @@ public static boolean insertarProducto(Connection conexion, String nombProducto,
         e.printStackTrace();
     }
     return 0;
+    }
+    
+    public static boolean existeCliente(Connection conexion, String tabla, String columna, String valor) {
+    String sql = "SELECT COUNT(*) AS total FROM " + tabla + " WHERE " + columna + " = ?";
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, valor);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("total") > 0;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+    }
+    
+    public static int insertarCalzado(
+        Connection conexion,
+        String nombCalzado,
+        String descCalzado,
+        double precReferencia,
+        int idTipoCalzado,
+        int idMaterial,
+        int idMarca
+) {
+    String sql = "INSERT INTO Calzado (" +
+            "nombCalzado, descCalzado, precReferencia, idTipoCalzado, idMaterial, idMarca) " +
+            "VALUES (?, ?, ?, ?, ?, ?)";
+    try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        ps.setString(1, nombCalzado);
+        ps.setString(2, descCalzado);
+        ps.setDouble(3, precReferencia);
+        ps.setInt(4, idTipoCalzado);
+        ps.setInt(5, idMaterial);
+        ps.setInt(6, idMarca);
+        int filas = ps.executeUpdate();
+        if (filas > 0) {
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return -1;
+}
+    
+    public static boolean insertarDetalleLavado(
+        Connection conexion,
+        int idOrdenLavado,
+        int idCalzado,
+        int idTipoLavado,
+        String estadoSalida,
+        String estadoEntrada,
+        String observaciones,
+        String fechInicio,
+        String fechFinalizacion
+) {
+    String sql = "INSERT INTO detalleLavado (" +
+            "idOrdenLavado, idCalzado, idTipoLavado, estadoSalida, estadoEntrada, observaciones, fechInicio, fechFinalizacion) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        ps.setInt(1, idOrdenLavado);
+        ps.setInt(2, idCalzado);
+        ps.setInt(3, idTipoLavado);
+        ps.setString(4, estadoSalida);
+        ps.setString(5, estadoEntrada);
+        ps.setString(6, observaciones);
+        ps.setString(7, fechInicio);
+        if (fechFinalizacion == null || fechFinalizacion.isEmpty()) {
+            ps.setNull(8, java.sql.Types.DATE);
+        } else {
+            ps.setString(8, fechFinalizacion);
+        }
+        int filas = ps.executeUpdate();
+        return filas > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    public static void cargarDetalleCompra(
+        Connection conexion,
+        int idOrdenCompra,
+        JTextField txtProveedor,
+        JTextField txtFechaOrden,
+        JTextField txtEntregaEsperada,
+        JTextField txtFechRecepcion,
+        JComboBox<String> cmbEstadoOrden,
+        JComboBox<String> cmbEstadoPago,
+        JTable tablaProductosEInsumos
+) {
+    //Cabecera de la orden 
+    String sqlCabecera =
+        "SELECT " +
+        "oc.fechOrden AS FechaOrden, " +
+        "oc.fechEntregaEsperada AS EntregaEsperada, " +
+        "oc.fechRecepcion AS FechaRecepcion, " +
+        "oc.estadOrden AS EstadoOrden, " +
+        "COALESCE(prn.apellido, prj.razonSocial) AS Proveedor, " +
+        "pc.estadoPago AS EstadoPago " +
+        "FROM ordenCompra oc " +
+        "INNER JOIN Proveedor pr ON oc.idProveedor = pr.idProveedor " +
+        "LEFT JOIN proveedorNatural prn ON prn.idProveedor = pr.idProveedor " +
+        "LEFT JOIN proveedorJuridico prj ON prj.idProveedor = pr.idProveedor " +
+        "LEFT JOIN pagoCompra pc ON pc.idOrdenCompra = oc.idOrdenCompra " +
+        "WHERE oc.idOrdenCompra = ?";
+
+    //Detalle de productos o insumos
+    String sqlDetalle =
+        "SELECT " +
+        "p.nombProducto AS Nombre, " +
+        "p.codProducto AS Codigo, " +
+        "dc.cantCompra AS Cantidad, " +
+        "dc.precCompra AS Precio " +
+        "FROM detalleCompra dc " +
+        "INNER JOIN Producto p ON dc.idProducto = p.idProducto " +
+        "WHERE dc.idOrdenCompra = ? " +
+        "UNION " +
+        "SELECT " +
+        "i.nombInsumo AS Nombre, " +
+        "i.codInsumo AS Codigo, " +
+        "dc.cantCompra AS Cantidad, " +
+        "dc.precCompra AS Precio " +
+        "FROM detalleCompra dc " +
+        "INNER JOIN Insumo i ON dc.idInsumo = i.idInsumo " +
+        "WHERE dc.idOrdenCompra = ?";
+
+    try {
+        // Cabecera
+        PreparedStatement psCab = conexion.prepareStatement(sqlCabecera);
+        psCab.setInt(1, idOrdenCompra);
+        ResultSet rsCab = psCab.executeQuery();
+        if (rsCab.next()) {
+            txtFechaOrden.setText(rsCab.getDate("FechaOrden").toString());
+            txtEntregaEsperada.setText(rsCab.getDate("EntregaEsperada").toString());
+            java.sql.Date fechRecepcion = rsCab.getDate("FechaRecepcion");
+            txtFechRecepcion.setText(fechRecepcion != null ? fechRecepcion.toString() : "");
+            txtProveedor.setText(rsCab.getString("Proveedor"));
+
+            String estadoOrden = rsCab.getString("EstadoOrden");
+            cmbEstadoOrden.setSelectedItem(
+                "P".equalsIgnoreCase(estadoOrden) ? "Pendiente" : "Entregado"
+            );
+
+            String estadoPago = rsCab.getString("EstadoPago");
+            if (estadoPago != null) {
+                cmbEstadoPago.setSelectedItem(
+                    "P".equalsIgnoreCase(estadoPago) ? "Pendiente " : "Cancelado"
+                );
+            }
+        }
+
+        // Detalle de productos o insumos
+        PreparedStatement psDet = conexion.prepareStatement(sqlDetalle);
+        psDet.setInt(1, idOrdenCompra);
+        psDet.setInt(2, idOrdenCompra);
+        ResultSet rsDet = psDet.executeQuery();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Código");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio");
+        while (rsDet.next()) {
+            modelo.addRow(new Object[]{
+                rsDet.getString("Nombre"),
+                rsDet.getString("Codigo"),
+                rsDet.getDouble("Cantidad"),
+                rsDet.getDouble("Precio")
+            });
+        }
+        tablaProductosEInsumos.setModel(modelo);
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null,
+                "Error al cargar detalle de compra: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    public static String[] validarCredenciales(Connection conexion, String usuario, String contrasena) {
+    String sql = "SELECT idEmpleado, rol, nombEmpleado, apellidoEmpleado FROM Empleado WHERE usuario = ? AND contrasena = ?";
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, usuario);
+        ps.setString(2, contrasena);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new String[] {
+                String.valueOf(rs.getInt("idEmpleado")),
+                rs.getString("rol"),
+                rs.getString("nombEmpleado"),
+                rs.getString("apellidoEmpleado")
+            };
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al validar credenciales: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return null;
+}
+    public static void cargarDetalleProducto(
+        Connection conexion,
+        String codigo,
+        JTextField txtNombre,
+        JTextField txtCodigo,
+        JComboBox<String> cmbCategoria,
+        JTextField txtPrecio,
+        JTextField txtStock,
+        JTextArea txtDescripcion
+) {
+    String sql =
+        "SELECT " +
+        "p.nombProducto AS Nombre, " +
+        "p.codProducto AS Codigo, " +
+        "p.precProducto AS Precio, " +
+        "p.descProducto AS Descripcion, " +
+        "cp.nombCategoriaProducto AS Categoria, " +
+        "COALESCE(SUM(dc.cantCompra), 0) AS Stock " +
+        "FROM Producto p " +
+        "INNER JOIN categoriaProducto cp ON p.idCategoriaProducto = cp.idCategoriaProducto " +
+        "LEFT JOIN detalleCompra dc ON dc.idProducto = p.idProducto " +
+        "WHERE p.codProducto = ? " +
+        "GROUP BY p.idProducto, p.nombProducto, p.codProducto, p.precProducto, p.descProducto, cp.nombCategoriaProducto";
+
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, codigo);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            txtNombre.setText(rs.getString("Nombre"));
+            txtCodigo.setText(rs.getString("Codigo"));
+            txtPrecio.setText(String.valueOf(rs.getDouble("Precio")));
+            txtStock.setText(String.valueOf(rs.getDouble("Stock")));
+            txtDescripcion.setText(rs.getString("Descripcion"));
+            cmbCategoria.setSelectedItem(rs.getString("Categoria"));
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null,
+                "Error al cargar detalle de producto: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    public static boolean actualizarPrecio(
+        Connection conexion,
+        String codigo,
+        double nuevoPrecio
+) {
+    String sql = "UPDATE Producto SET precProducto = ? WHERE codProducto = ?";
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setDouble(1, nuevoPrecio);
+        ps.setString(2, codigo);
+        int filas = ps.executeUpdate();
+        return filas > 0;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar precio: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    }
 }
 }
+
 
 
 

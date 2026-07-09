@@ -15,6 +15,9 @@ public class PanelCJuridico extends javax.swing.JPanel {
      */
     public PanelCJuridico() {
         initComponents();
+        agregarPlaceholder(txtRuc, "11 dígitos");
+        agregarPlaceholder(txtTelefono, "9 dígitos");
+        agregarPlaceholder(txtNombre, "Nombre del contacto");
     }
 
     /**
@@ -171,7 +174,24 @@ public class PanelCJuridico extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private void agregarPlaceholder(javax.swing.JTextField campo, String placeholder) {
+        campo.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (campo.getText().equals(placeholder)) {
+                    campo.setText("");
+                    campo.setForeground(java.awt.Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (campo.getText().isEmpty()) {
+                    campo.setText(placeholder);
+                    campo.setForeground(new java.awt.Color(153, 153, 153));
+                }
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> cmboxestado;

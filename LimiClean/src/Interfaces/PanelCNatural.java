@@ -15,6 +15,9 @@ public class PanelCNatural extends javax.swing.JPanel {
      */
     public PanelCNatural() {
         initComponents();
+        agregarPlaceholder(txtdni, "8 dígitos");
+    agregarPlaceholder(txtTelefono, "9 dígitos");
+    agregarPlaceholder(txtCorreo, "correo@gmail.com");
     }
 
     /**
@@ -152,6 +155,24 @@ public class PanelCNatural extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarPlaceholder(javax.swing.JTextField campo, String placeholder) {
+    campo.addFocusListener(new java.awt.event.FocusAdapter() {
+        @Override
+        public void focusGained(java.awt.event.FocusEvent e) {
+            if (campo.getText().equals(placeholder)) {
+                campo.setText("");
+                campo.setForeground(java.awt.Color.BLACK);
+            }
+        }
+        @Override
+        public void focusLost(java.awt.event.FocusEvent e) {
+            if (campo.getText().isEmpty()) {
+                campo.setText(placeholder);
+                campo.setForeground(new java.awt.Color(153, 153, 153));
+            }
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelNatural;

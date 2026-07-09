@@ -77,6 +77,7 @@ public class FormDetalleVenta extends javax.swing.JFrame {
         jLabel18.setText("______________________________________________________________________________________________________________");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

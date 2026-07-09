@@ -35,8 +35,8 @@
                       <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblcontra" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPasswordField1" min="-2" pref="178" max="-2" attributes="0"/>
-                          <Component id="txtusuario" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="txtContrasena" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="txtUsuario" min="-2" pref="178" max="-2" attributes="0"/>
                           <Component id="lblusuario" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -56,11 +56,11 @@
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="lblusuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtusuario" min="-2" max="-2" attributes="0"/>
+              <Component id="txtUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lblcontra" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPasswordField1" min="-2" max="-2" attributes="0"/>
+              <Component id="txtContrasena" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="btnIngresar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="35" max="32767" attributes="0"/>
@@ -75,6 +75,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblusuario">
       <Properties>
@@ -84,7 +87,7 @@
         <Property name="text" type="java.lang.String" value="Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtusuario">
+    <Component class="javax.swing.JTextField" name="txtUsuario">
     </Component>
     <Component class="javax.swing.JLabel" name="lblcontra">
       <Properties>
@@ -94,7 +97,7 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+    <Component class="javax.swing.JPasswordField" name="txtContrasena">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>

@@ -124,7 +124,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         cmboxProductos = new javax.swing.JComboBox<>();
         txtcantidad = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnRegistrarVenta = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         txtTotal = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -363,10 +363,10 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Registrar venta");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        btnRegistrarVenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegistrarVenta.setText("Registrar venta");
+        btnRegistrarVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRegistrarVenta.addActionListener(this::btnRegistrarVentaActionPerformed);
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton3.setText("Cancelar");
@@ -408,7 +408,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,14 +440,13 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel11))))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel15)
@@ -522,68 +521,74 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbuscarclienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          int idCliente = 0;
+    private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
 
-        String producto = cmboxProductos.getSelectedItem().toString();
-        String valorDni = panelCNatural.txtdni.getText().trim();
-        String valorRuc = panelCJuridico.txtRuc.getText().trim();
-        String valorMPago = cmboxmetodo.getSelectedItem().toString();
-        String cantidad = txtcantidad.getText().trim();
-        String fechaEmision = txtFechaEmision.getText().trim();
-        String tipo=cmbtipo.getSelectedItem().toString();
-        int idtipo=Funciones_BD.obtenerId(ConexionBD.obtenerConexion(),"idTipoComprobante", "tipoComprobante", "nombTipoComprobante", tipo);
-        String estadoPagoBD = switch (cmbestado.getSelectedItem().toString()) {
-            case "Pendiente" -> "P";
-            case "Cancelado" -> "C";
-            default -> "";
-        };
+    int idCliente = 0;
 
-        String tipoCliente = cmbTipoCliente.getSelectedItem().toString();
+    String producto = cmboxProductos.getSelectedItem().toString();
+    String valorDni = panelCNatural.txtdni.getText().trim();
+    String valorRuc = panelCJuridico.txtRuc.getText().trim();
+    String valorMPago = cmboxmetodo.getSelectedItem().toString();
+    String cantidad = txtcantidad.getText().trim();
+    String fechaEmision = txtFechaEmision.getText().trim();
+    String tipo = cmbtipo.getSelectedItem().toString();
+    int idtipo = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idTipoComprobante", "tipoComprobante", "nombTipoComprobante", tipo);
+    String estadoPagoBD = switch (cmbestado.getSelectedItem().toString()) {
+        case "Pendiente" -> "P";
+        case "Cancelado" -> "C";
+        default -> "";
+    };
 
-        /* ---------------- VALIDACIONES ---------------- */
+    String tipoCliente = cmbTipoCliente.getSelectedItem().toString();
 
-        if (producto.isEmpty()
-                || valorMPago.isEmpty()
-                || cantidad.isEmpty()
-                || fechaEmision.isEmpty()
-                || tipoCliente.isEmpty()
-                || estadoPagoBD.isEmpty()) {
+    //VALIDACIONES 
 
-            JOptionPane.showMessageDialog(null, "Complete todos los campos obligatorios");
-            return;
-        }
+    if (producto.isEmpty()
+            || valorMPago.isEmpty()
+            || cantidad.isEmpty()
+            || fechaEmision.isEmpty()
+            || tipoCliente.isEmpty()
+            || estadoPagoBD.isEmpty()) {
 
-        if (tipoCliente.equals("Natural") && valorDni.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese DNI del cliente natural");
-            return;
-        }
+        JOptionPane.showMessageDialog(null, "Complete todos los campos obligatorios");
+        return;
+    }
 
-        if (tipoCliente.equals("Juridico") && valorRuc.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese RUC del cliente jurídico");
-            return;
-        }
+    if (tipoCliente.equals("Natural") && valorDni.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese DNI del cliente natural");
+        return;
+    }
 
-        /* ---------------- OBTENER IDS ---------------- */
+    if (tipoCliente.equals("Juridico") && valorRuc.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese RUC del cliente jurídico");
+        return;
+    }
 
-        int idMetodoPago = Funciones_BD.obtenerId(
-                ConexionBD.obtenerConexion(),
-                "idMetodoPago",
-                "metodoPago",
-                "nombPago",
-                valorMPago
-        );
+    //OBTENER IDS DE PRODUCTO Y MÉTODO DE PAGO 
 
-        int idProducto = Funciones_BD.obtenerId(
-                ConexionBD.obtenerConexion(),
-                "idProducto",
-                "Producto",
-                "nombProducto",
-                producto
-        );
+    int idMetodoPago = Funciones_BD.obtenerId(
+            ConexionBD.obtenerConexion(),
+            "idMetodoPago",
+            "metodoPago",
+            "nombPago",
+            valorMPago
+    );
 
-        if (tipoCliente.equals("Natural")) {
+    int idProducto = Funciones_BD.obtenerId(
+            ConexionBD.obtenerConexion(),
+            "idProducto",
+            "Producto",
+            "nombProducto",
+            producto
+    );
 
+    //CLIENTE: VALIDA DUPLICADO Y OBTIENE O CREA
+
+    if (tipoCliente.equals("Natural")) {
+
+        boolean existe = Funciones_BD.existeCliente(ConexionBD.obtenerConexion(), "cNatural", "DNI", valorDni);
+
+        if (existe) {
             idCliente = Funciones_BD.obtenerId(
                     ConexionBD.obtenerConexion(),
                     "idCliente",
@@ -591,9 +596,52 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
                     "DNI",
                     valorDni
             );
+        } else {
+            String nombre = panelCNatural.txtNombre.getText().trim();
+            String apellido = panelCNatural.txtApellido.getText().trim();
+            String telefono = panelCNatural.txtTelefono.getText().trim();
+            String correo = panelCNatural.txtCorreo.getText().trim();
+            String direccion = panelCNatural.txtDireccion.getText().trim();
 
-        } else if (tipoCliente.equals("Juridico")) {
+            if (nombre.isEmpty() || apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Complete Nombre y Apellido del cliente nuevo");
+                return;
+            }
 
+            int idClienteNuevo = Funciones_BD.insertarGenerico(
+                    ConexionBD.obtenerConexion(),
+                    "Cliente",
+                    "nombCliente, direcCliente, telefCliente, corrCliente",
+                    "?, ?, ?, ?",
+                    nombre, direccion, telefono, correo
+            );
+
+            if (idClienteNuevo == -1) {
+                JOptionPane.showMessageDialog(null, "Error al registrar los datos generales del cliente");
+                return;
+            }
+
+            int idCNatural = Funciones_BD.insertarGenerico(
+                    ConexionBD.obtenerConexion(),
+                    "cNatural",
+                    "idCliente, apellido, DNI",
+                    "?, ?, ?",
+                    idClienteNuevo, apellido, valorDni
+            );
+
+            if (idCNatural == -1) {
+                JOptionPane.showMessageDialog(null, "Error al registrar los datos de cliente natural");
+                return;
+            }
+
+            idCliente = idClienteNuevo;
+        }
+
+    } else if (tipoCliente.equals("Juridico")) {
+
+        boolean existe = Funciones_BD.existeCliente(ConexionBD.obtenerConexion(), "cJuridico", "ruc", valorRuc);
+
+        if (existe) {
             idCliente = Funciones_BD.obtenerId(
                     ConexionBD.obtenerConexion(),
                     "idCliente",
@@ -601,62 +649,104 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
                     "ruc",
                     valorRuc
             );
-        }
+        } else {
+            String nombreContacto = panelCJuridico.txtNombre.getText().trim();
+            String razonSocial = panelCJuridico.txtRazonSocial.getText().trim();
+            String telefono = panelCJuridico.txtTelefono.getText().trim();
+            String correo = panelCJuridico.txtCorreo.getText().trim();
+            String direccion = panelCJuridico.txtDireccion.getText().trim();
+            String estado = panelCJuridico.cmboxestado.getSelectedItem().toString();
 
-        /* ---------------- INSERT VENTA ---------------- */
+            if (razonSocial.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Complete la Razón Social del cliente nuevo");
+                return;
+            }
 
-        int idVenta = Funciones_BD.insertarGenerico(
-                ConexionBD.obtenerConexion(),
-                "Venta",
-                "fechVenta, estadoPago, idCliente, idMetodoPago",
-                "?, ?, ?, ?",
-                fechaEmision,
-                estadoPagoBD,
-                idCliente,
-                idMetodoPago
-        );
-
-        /* ---------------- DETALLE VENTA ---------------- */
-
-        if (idVenta > 0) {
-
-            int idDetalleVenta = Funciones_BD.insertarGenerico(
+            int idClienteNuevo = Funciones_BD.insertarGenerico(
                     ConexionBD.obtenerConexion(),
-                    "detalleVenta",
-                    "idVenta, idProducto, cantVenta",
-                    "?, ?, ?",
-                    idVenta,
-                    idProducto,
-                    cantidad
+                    "Cliente",
+                    "nombCliente, direcCliente, telefCliente, corrCliente",
+                    "?, ?, ?, ?",
+                    nombreContacto, direccion, telefono, correo
             );
 
-            if (idDetalleVenta>0) {
-                int idComprobantePago= Funciones_BD.insertarGenerico(ConexionBD.obtenerConexion()," comprobantePago","fechaEmision,numComprobante,idTipoComprobante","?,?,?",fechaEmision,txtBoletaFactura.getText(),tipo);
-                
-                JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
-                
-                
-
-                /* ---------------- LIMPIEZA ---------------- */
-
-                cmboxProductos.setSelectedIndex(0);
-                cmboxmetodo.setSelectedIndex(0);
-                cmbestado.setSelectedIndex(0);
-                cmbTipoCliente.setSelectedIndex(0);
-
-                txtcantidad.setText("");
-                txtFechaEmision.setText("");
-
-                panelCNatural.txtdni.setText("");
-                panelCJuridico.txtRuc.setText("");
+            if (idClienteNuevo == -1) {
+                JOptionPane.showMessageDialog(null, "Error al registrar los datos generales del cliente");
+                return;
             }
-        
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al registrar la venta");
+            int idCJuridico = Funciones_BD.insertarGenerico(
+                    ConexionBD.obtenerConexion(),
+                    "cJuridico",
+                    "idCliente, ruc, estado, razonSocial",
+                    "?, ?, ?, ?",
+                    idClienteNuevo, valorRuc, estado, razonSocial
+            );
+
+            if (idCJuridico == -1) {
+                JOptionPane.showMessageDialog(null, "Error al registrar los datos de cliente jurídico");
+                return;
+            }
+
+            idCliente = idClienteNuevo;
+        }
+    }
+
+    if (idCliente == -1) {
+        JOptionPane.showMessageDialog(null, "Error al registrar el cliente");
+        return;
+    }
+
+    /* ---------------- INSERT VENTA ---------------- */
+
+    int idVenta = Funciones_BD.insertarGenerico(
+            ConexionBD.obtenerConexion(),
+            "Venta",
+            "fechVenta, estadoPago, idCliente, idMetodoPago",
+            "?, ?, ?, ?",
+            fechaEmision,
+            estadoPagoBD,
+            idCliente,
+            idMetodoPago
+    );
+
+    /* ---------------- DETALLE VENTA ---------------- */
+
+    if (idVenta > 0) {
+
+        int idDetalleVenta = Funciones_BD.insertarGenerico(
+                ConexionBD.obtenerConexion(),
+                "detalleVenta",
+                "idVenta, idProducto, cantVenta",
+                "?, ?, ?",
+                idVenta,
+                idProducto,
+                cantidad
+        );
+
+        if (idDetalleVenta > 0) {
+            int idComprobantePago = Funciones_BD.insertarGenerico(ConexionBD.obtenerConexion(), " comprobantePago", "fechaEmision,numComprobante,idTipoComprobante", "?,?,?", fechaEmision, txtBoletaFactura.getText(), tipo);
+
+            JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
+
+            /* ---------------- LIMPIEZA ---------------- */
+
+            cmboxProductos.setSelectedIndex(0);
+            cmboxmetodo.setSelectedIndex(0);
+            cmbestado.setSelectedIndex(0);
+            cmbTipoCliente.setSelectedIndex(0);
+
+            txtcantidad.setText("");
+            txtFechaEmision.setText("");
+
+            panelCNatural.txtdni.setText("");
+            panelCJuridico.txtRuc.setText("");
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    } else {
+        JOptionPane.showMessageDialog(null, "Error al registrar la venta");
+        }
+    }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
@@ -809,6 +899,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
     double totalFinal = totalTabla + totalPreview;
     txtTotal.setText(String.format("%.2f", totalFinal));
 }
+
     /**
      * @param args the command line arguments
      */
@@ -839,12 +930,12 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
     private javax.swing.JPanel PanelContenedorC;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnRegistrarVenta;
     private javax.swing.JComboBox<String> cmbTipoCliente;
     private javax.swing.JComboBox<String> cmbestado;
     private javax.swing.JComboBox<String> cmboxProductos;
     private javax.swing.JComboBox<String> cmboxmetodo;
     private javax.swing.JComboBox<String> cmbtipo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -874,3 +965,4 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
     private javax.swing.JTextField txtcantidad;
     // End of variables declaration//GEN-END:variables
 }
+

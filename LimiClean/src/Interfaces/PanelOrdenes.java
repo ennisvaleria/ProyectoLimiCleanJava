@@ -210,10 +210,11 @@ public class PanelOrdenes extends javax.swing.JPanel {
             String FechaFin=datos[9];
             String notas=datos[10];
 
-        FrmDetalleOrden frm = new FrmDetalleOrden(idordenLavado,cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin,notas);
-        
-        frm.setVisible(true);
-        
+        FrmDetalleOrden frm = new FrmDetalleOrden(idordenLavado,cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin,notas, () ->  
+        {Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTOrdenesLavados);
+        }
+        );
+        frm.setVisible(true);   
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed

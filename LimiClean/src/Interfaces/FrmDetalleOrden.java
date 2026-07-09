@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaces;
+import javax.swing.JOptionPane;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
 /**
@@ -16,9 +17,11 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
     /**
      * Creates new form FrmDetalleOrden
      */
-    public FrmDetalleOrden(int idOrdenLavado,String cliente, String fechaOrdenLavado, String fechaEntregaEstimada, String descuentoOrden, String costoLavado, String estadoOrden, String estadoPago, String fechaInicio, String fechaFin,String notas) 
+    private Runnable recargar;
+    public FrmDetalleOrden(int idOrdenLavado,String cliente, String fechaOrdenLavado, String fechaEntregaEstimada, String descuentoOrden, String costoLavado, String estadoOrden, String estadoPago, String fechaInicio, String fechaFin,String notas, Runnable recargar) 
     {
         initComponents();
+        this.recargar = recargar;
         idordenlavado.setVisible(false);
         setLocationRelativeTo(null);
         txtCliente.setText(cliente);
@@ -278,9 +281,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDescuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -313,7 +314,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
 
         jLabel11.setText("CALZADOS");
 
-        jButton1.setText("Cerrar y Guardar");
+        jButton1.setText("Cerrar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setText("Actualizar");
@@ -336,20 +337,20 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(15, 15, 15))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel11))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -394,37 +395,62 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String fechaFinal=txtFechFinalizacion.getText().toString();
-        String fechaInicio=txtFechInicio.getText().toString();
+     if (recargar != null) {
+        recargar.run();
+    }
+    this.dispose();     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        if (!cmbEstadoOrden.isEnabled()) {
+        // Primer clic: habilita los campos para editar
+        cmbEstadoOrden.setEnabled(true);
+        cmbEstadoPago.setEnabled(true);
+        txtFechInicio.setEditable(true);
+        txtnotas.setEditable(true);
+        txtFechFinalizacion.setEditable(true);
+        JOptionPane.showMessageDialog(this, "Ahora puede editar los campos. Presione 'Actualizar' de nuevo para guardar los cambios.");
+    } else {
+        // Segundo clic: guarda los cambios en la base de datos
+        String fechaFinal = txtFechFinalizacion.getText().trim();
+        String fechaInicio = txtFechInicio.getText().trim();
+        String notas = txtnotas.getText().trim();
+
         String estadoOrdenBD = switch (cmbEstadoOrden.getSelectedItem().toString()) {
             case "Entregado" -> "E";
             case "Pendiente" -> "P";
             case "Listo" -> "L";
             case "En proceso" -> "R";
-            default -> "";     
+            default -> "";
         };
         String estadoPagoBD = switch (cmbEstadoPago.getSelectedItem().toString()) {
             case "Pendiente" -> "P";
             case "Cancelado" -> "C";
             default -> "";
         };
-        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(),"ordenLavado", "estadoOrden",estadoOrdenBD ,"idOrdenLavado", Integer.parseInt(idordenlavado.getText().toString()));
-        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(),"ordenLavado", "estadoPago",estadoPagoBD ,"idOrdenLavado", Integer.parseInt(idordenlavado.getText().toString()));
-        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "detalleLavado","fechFinalizacion",fechaFinal, "idOrdenLavado", Integer.parseInt(idordenlavado.getText().toString()));
-        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(),"detalleLavado","fechInicio",fechaInicio,"idOrdenLavado", Integer.parseInt(idordenlavado.getText().toString()));
-        this.dispose();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        cmbEstadoOrden.setEnabled(true);
-        cmbEstadoPago.setEnabled(true);
-        txtFechInicio.setEditable(true);
-        txtnotas.setEditable(true);
-        txtFechFinalizacion.setEditable(true);
+        int idOrden = Integer.parseInt(idordenlavado.getText().trim());
+
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenLavado", "estadoOrden", estadoOrdenBD, "idOrdenLavado", idOrden);
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenLavado", "estadoPago", estadoPagoBD, "idOrdenLavado", idOrden);
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenLavado", "notasOrdenLavado", notas, "idOrdenLavado", idOrden);
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "detalleLavado", "fechInicio", fechaInicio, "idOrdenLavado", idOrden);
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "detalleLavado", "fechFinalizacion", fechaFinal, "idOrdenLavado", idOrden);
+
+        JOptionPane.showMessageDialog(this, "Orden actualizada correctamente");
+
+        // Deja los campos bloqueados de nuevo tras guardar
+        cmbEstadoOrden.setEnabled(false);
+        cmbEstadoPago.setEnabled(false);
+        txtFechInicio.setEditable(false);
+        txtnotas.setEditable(false);
+        txtFechFinalizacion.setEditable(false);
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    
     /**
      * @param args the command line arguments
      */

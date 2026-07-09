@@ -220,33 +220,38 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int fila = JTableEmpleados.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this,
+                "Seleccione una fila primero.",
+                "Aviso",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(this,
-                        "Seleccione una fila primero.",
-                        "Aviso",
-                        JOptionPane.WARNING_MESSAGE);
-                return;
+    int codigo = Integer.parseInt(JTableEmpleados.getValueAt(fila, 0).toString());
+    String[] datos = Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(), codigo);
+    int idOrdenLavado = Integer.parseInt(datos[0]);
+    String cliente = datos[1];
+    String fechaOrdenLavado = datos[2];
+    String FechaEntregaEstimada = datos[3];
+    String DescuentOrden = datos[4];
+    String CostoLavado = datos[5];
+    String EstadoOrden = datos[6];
+    String EstadoPago = datos[7];
+    String FechaInicio = datos[8];
+    String FechaFin = datos[9];
+    String notas = datos[10];
+
+    FrmDetalleOrden frm = new FrmDetalleOrden(
+            idOrdenLavado, cliente, fechaOrdenLavado, FechaEntregaEstimada,
+            DescuentOrden, CostoLavado, EstadoOrden, EstadoPago,
+            FechaInicio, FechaFin, notas,
+            () -> {
+                Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTableEmpleados);
             }
-            
-            
-            int codigo = Integer.parseInt(JTableEmpleados.getValueAt(fila, 0).toString());
-            String[] datos=Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(),codigo);
-            int idOrdenLavado=Integer.parseInt(datos[0]);
-            String cliente=datos[1];
-            String fechaOrdenLavado=datos[2];
-            String FechaEntregaEstimada=datos[3];
-            String DescuentOrden=datos[4];
-            String CostoLavado=datos[5];
-            String EstadoOrden=datos[6];
-            String EstadoPago=datos[7];
-            String FechaInicio=datos[8];
-            String FechaFin=datos[9];
-            String notas=datos[10];
+    );
 
-        FrmDetalleOrden frm = new FrmDetalleOrden(idOrdenLavado,cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin,notas);
-        
-        frm.setVisible(true);
+    frm.setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 

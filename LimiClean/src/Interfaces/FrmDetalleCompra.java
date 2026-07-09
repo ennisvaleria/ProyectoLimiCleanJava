@@ -5,6 +5,10 @@
 
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import limiclean.Clases.ConexionBD;
+import limiclean.Clases.Funciones_BD;
+
 /**
  *
  * @author valer
@@ -14,10 +18,29 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmDetalleCompra.class.getName());
 
     /** Creates new form FrmDetalleCompra */
+    private int idOrdenCompra;
+    private Runnable recarga;
     public FrmDetalleCompra() {
         initComponents();
         setLocationRelativeTo(null);
     }
+    public FrmDetalleCompra(int idOrdenCompra, Runnable recarga) {
+    initComponents();
+    setLocationRelativeTo(null);
+    this.idOrdenCompra = idOrdenCompra;
+    this.recarga = this.recarga;
+    Funciones_BD.cargarDetalleCompra(
+        ConexionBD.obtenerConexion(),
+        idOrdenCompra,
+        txtProveedor,
+        txtFechaOrden,
+        txtEntregaEsperada,
+        txtFechRecepcion,
+        cmbEstadoOrden,
+        cmbEstadoPago,
+        tablaProductosEInsumos
+    );
+}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -28,13 +51,13 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        txtProveedor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtFechaOrden = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtEntregaEsperada = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtFechRecepcion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -43,15 +66,15 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
         cmbEstadoPago = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProductosEInsumos = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnActualizarOrden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jTextField1.setEditable(false);
+        txtProveedor.setEditable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Detalle Compra");
@@ -60,15 +83,15 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha orden");
 
-        jTextField2.setEditable(false);
-        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField2.setText("dd/mm/aaaa\n");
+        txtFechaOrden.setEditable(false);
+        txtFechaOrden.setForeground(new java.awt.Color(102, 102, 102));
+        txtFechaOrden.setText("dd/mm/aaaa\n");
 
         jLabel4.setText("Entrega esperada");
 
-        jTextField3.setEditable(false);
-        jTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField3.setText("dd/mm/aaaa");
+        txtEntregaEsperada.setEditable(false);
+        txtEntregaEsperada.setForeground(new java.awt.Color(102, 102, 102));
+        txtEntregaEsperada.setText("dd/mm/aaaa");
 
         jLabel5.setText("Fecha recepción");
 
@@ -88,7 +111,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductosEInsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -99,7 +122,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaProductosEInsumos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,8 +146,8 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
         btnCerrar.setText("Cerrar");
         btnCerrar.addActionListener(this::btnCerrarActionPerformed);
 
-        jButton1.setText("Actualizar orden");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        btnActualizarOrden.setText("Actualizar orden");
+        btnActualizarOrden.addActionListener(this::btnActualizarOrdenActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,8 +168,8 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel2)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+                                        .addComponent(txtProveedor)
+                                        .addComponent(txtEntregaEsperada, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
                                     .addComponent(cmbEstadoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
                                 .addGap(34, 34, 34)
@@ -156,12 +179,12 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(txtFechRecepcion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnActualizarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -174,11 +197,11 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(3, 3, 3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEntregaEsperada, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,7 +209,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(3, 3, 3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,7 +226,7 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -213,15 +236,38 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
+        if (recarga != null) {
+        recarga.run();
+        }
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnActualizarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarOrdenActionPerformed
         // TODO add your handling code here:
+         if (!cmbEstadoOrden.isEnabled()) {
+        // Primer clic: habilita los campos para editar
         txtFechRecepcion.setEditable(true);
         cmbEstadoOrden.setEnabled(true);
         cmbEstadoPago.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Ahora puede editar los campos. Presione 'Actualizar orden' de nuevo para guardar los cambios.");
+    } else {
+        // Segundo clic: guarda los cambios en la base de datos
+        String fechRecepcion = txtFechRecepcion.getText().trim();
+
+        String estadoOrdenBD = cmbEstadoOrden.getSelectedItem().toString().equals("Entregado") ? "E" : "P";
+        String estadoPagoBD = cmbEstadoPago.getSelectedItem().toString().trim().equals("Cancelado") ? "C" : "P";
+
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenCompra", "estadOrden", estadoOrdenBD, "idOrdenCompra", idOrdenCompra);
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenCompra", "fechRecepcion", fechRecepcion, "idOrdenCompra", idOrdenCompra);
+        Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "pagoCompra", "estadoPago", estadoPagoBD, "idOrdenCompra", idOrdenCompra);
+
+        JOptionPane.showMessageDialog(this, "Orden actualizada correctamente");
+
+        txtFechRecepcion.setEditable(false);
+        cmbEstadoOrden.setEnabled(false);
+        cmbEstadoPago.setEnabled(false);
+    }
+    }//GEN-LAST:event_btnActualizarOrdenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,10 +295,10 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarOrden;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JComboBox<String> cmbEstadoOrden;
     private javax.swing.JComboBox<String> cmbEstadoPago;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -263,11 +309,11 @@ public class FrmDetalleCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tablaProductosEInsumos;
+    private javax.swing.JTextField txtEntregaEsperada;
     private javax.swing.JTextField txtFechRecepcion;
+    private javax.swing.JTextField txtFechaOrden;
+    private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
 
 }

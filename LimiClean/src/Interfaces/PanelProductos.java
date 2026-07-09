@@ -5,6 +5,7 @@
 package Interfaces;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import limiclean.Clases.Funciones_BD;
 import limiclean.Clases.ConexionBD;
@@ -172,8 +173,27 @@ public class PanelProductos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProductoActionPerformed
-        FrmDetalleProducto frm = new FrmDetalleProducto();
-        frm.setVisible(true);
+     int fila = JTProductos.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona un producto de la tabla.");
+        return;
+    }
+    String codigo = JTProductos.getValueAt(fila, 1).toString();
+    FrmDetalleProducto frm = new FrmDetalleProducto(codigo, () -> {
+        ArrayList<Object[]> listaActualizada = Funciones_BD.cargarProductos(ConexionBD.obtenerConexion(), "");
+        DefaultTableModel modeloActualizado = new DefaultTableModel();
+        modeloActualizado.addColumn("Nombre");
+        modeloActualizado.addColumn("Código");
+        modeloActualizado.addColumn("Precio");
+        modeloActualizado.addColumn("Stock");
+        modeloActualizado.addColumn("Descripcion");
+        modeloActualizado.addColumn("Categoría");
+        for (Object[] fila2 : listaActualizada) {
+            modeloActualizado.addRow(fila2);
+        }
+        JTProductos.setModel(modeloActualizado);
+    });
+    frm.setVisible(true);
     }//GEN-LAST:event_btnEditarProductoActionPerformed
 
     private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed

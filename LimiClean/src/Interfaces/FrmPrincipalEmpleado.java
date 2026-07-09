@@ -17,11 +17,20 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipalEmpleado.class.getName());
 
     /** Creates new form FrmPrincipalEmpleado */
+    private String nombreCompleto;
+    private String rol;
     public FrmPrincipalEmpleado() {
         initComponents();
         setLocationRelativeTo(null);
         panelContenido.setLayout(new BorderLayout());
     }
+    public FrmPrincipalEmpleado(String nombreCompleto, String rol) {
+    initComponents();
+    setLocationRelativeTo(null);
+    panelContenido.setLayout(new BorderLayout());
+    lblNombres.setText(nombreCompleto + ",");
+    lblRol.setText(rol);
+}
     
         public void mostrarPanel(JPanel panel){
        panelContenido.removeAll();
@@ -48,9 +57,8 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnServicios2 = new javax.swing.JButton();
         label1 = new java.awt.Label();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
+        lblRol = new javax.swing.JLabel();
         panelContenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,9 +68,9 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         panelSuperior.setToolTipText("");
         panelSuperior.setPreferredSize(new java.awt.Dimension(120, 60));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("LimiClean - Sistema de gestión");
+        jLabel1.setText("LiMiClean - Sistema Gestión");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -74,16 +82,16 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         panelSuperiorLayout.setHorizontalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuperiorLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(662, Short.MAX_VALUE))
+                .addContainerGap(638, Short.MAX_VALUE))
         );
         panelSuperiorLayout.setVerticalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuperiorLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelMenu.setBackground(new java.awt.Color(38, 38, 36));
@@ -102,7 +110,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
             }
         });
         btnOrdenes.addActionListener(this::btnOrdenesActionPerformed);
-        PanelMenu.add(btnOrdenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 200, 45));
+        PanelMenu.add(btnOrdenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 240, 45));
 
         btnVentas.setBackground(new java.awt.Color(38, 38, 36));
         btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -110,7 +118,7 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         btnVentas.setText("Ventas");
         btnVentas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVentas.addActionListener(this::btnVentasActionPerformed);
-        PanelMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 200, 41));
+        PanelMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 240, 41));
 
         btnSalir.setBackground(new java.awt.Color(38, 38, 36));
         btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -118,11 +126,11 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         btnSalir.setText("Cerrar sesión");
         btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalir.addActionListener(this::btnSalirActionPerformed);
-        PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 780, 210, 37));
+        PanelMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 780, 240, 50));
 
         jLabel3.setForeground(new java.awt.Color(136, 134, 127));
         jLabel3.setText("MI TRABAJO");
-        PanelMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 87, -1));
+        PanelMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 87, -1));
 
         btnServicios2.setBackground(new java.awt.Color(39, 39, 37));
         btnServicios2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -130,23 +138,23 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
         btnServicios2.setText("Clientes");
         btnServicios2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnServicios2.addActionListener(this::btnServicios2ActionPerformed);
-        PanelMenu.add(btnServicios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 200, 44));
+        PanelMenu.add(btnServicios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 240, 44));
 
         label1.setForeground(new java.awt.Color(136, 134, 127));
         label1.setText("__________________________________________");
         PanelMenu.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 240, -1));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("NOMBRE EMPLEADO");
-        PanelMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        lblNombres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNombres.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombres.setText("jLabel2");
+        PanelMenu.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ROL");
-        PanelMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+        lblRol.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblRol.setForeground(new java.awt.Color(255, 255, 255));
+        lblRol.setText("jLabel2");
+        PanelMenu.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("FOTO");
-        PanelMenu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        panelContenido.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
         panelContenido.setLayout(panelContenidoLayout);
@@ -250,11 +258,10 @@ public class FrmPrincipalEmpleado extends javax.swing.JFrame {
     private javax.swing.JButton btnServicios2;
     private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private java.awt.Label label1;
+    private javax.swing.JLabel lblNombres;
+    private javax.swing.JLabel lblRol;
     private javax.swing.JPanel panelContenido;
     private javax.swing.JPanel panelSuperior;
     // End of variables declaration//GEN-END:variables

@@ -4,6 +4,7 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
 import limiclean.Clases.ConexionBD;
 import limiclean.Clases.Funciones_BD;
 
@@ -161,8 +162,16 @@ public class PanelOrdenesCompra extends javax.swing.JPanel {
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         // TODO add your handling code here:
-        FrmDetalleCompra frm = new FrmDetalleCompra();
-        frm.setVisible(true);
+        int fila = JTordenesCompra.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona una orden de la tabla.");
+        return;
+    }
+    int idOrdenCompra = (int) JTordenesCompra.getValueAt(fila, 0); // columna "N°"
+    FrmDetalleCompra frm = new FrmDetalleCompra(idOrdenCompra, () -> {
+        Funciones_BD.cargarCompras(ConexionBD.obtenerConexion(), JTordenesCompra, "");
+    });
+    frm.setVisible(true);
     }//GEN-LAST:event_btnVerActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

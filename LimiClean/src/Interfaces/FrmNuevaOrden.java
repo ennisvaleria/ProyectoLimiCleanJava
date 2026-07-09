@@ -766,203 +766,325 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btncancelActionPerformed
 
     private void btnguardarordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarordenActionPerformed
-      int idCliente=0;
-        if (cmbTipoCliente.getSelectedItem().equals("Natural")){  
-   try {
-     
-    String nombre = panelNatural.txtNombre.getText().trim();
-    String apellido = panelNatural.txtApellido.getText().trim();
-    String direccion = panelNatural.txtDireccion.getText().trim();
-    String correo = panelNatural.txtCorreo.getText().trim();
-    String telefono = panelNatural.txtTelefono.getText().trim();
-    String dni = panelNatural.txtdni.getText().trim();
+      int idCliente = 0;
 
-    // Validaciones
-    if (nombre.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el nombre.");
-        panelNatural.txtNombre.requestFocus();
-        return;
-    }
+    if (cmbTipoCliente.getSelectedItem().equals("Natural")) {
+        try {
 
-    if (apellido.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el apellido.");
-        panelNatural.txtApellido.requestFocus();
-        return;
-    }
+            String nombre = panelNatural.txtNombre.getText().trim();
+            String apellido = panelNatural.txtApellido.getText().trim();
+            String direccion = panelNatural.txtDireccion.getText().trim();
+            String correo = panelNatural.txtCorreo.getText().trim();
+            String telefono = panelNatural.txtTelefono.getText().trim();
+            String dni = panelNatural.txtdni.getText().trim();
 
-    if (direccion.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese la dirección.");
-        panelNatural.txtDireccion.requestFocus();
-        return;
-    }
+            if (dni.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese el DNI.");
+                panelNatural.txtdni.requestFocus();
+                return;
+            }
 
-    if (telefono.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el teléfono.");
-        panelNatural.txtTelefono.requestFocus();
-        return;
-    }
+            if (!dni.matches("\\d{8}")) {
+                JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos.");
+                panelNatural.txtdni.requestFocus();
+                return;
+            }
 
-    if (!telefono.matches("\\d{9}")) {
-        JOptionPane.showMessageDialog(this, "El teléfono debe tener 9 dígitos.");
-        panelNatural.txtTelefono.requestFocus();
-        return;
-    }
+           //VERIFICA SI EL CLIENTE EXISTE
+            boolean existe = Funciones_BD.existeCliente(ConexionBD.obtenerConexion(), "cNatural", "DNI", dni);
 
-    if (dni.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el DNI.");
-        panelNatural.txtdni.requestFocus();
-        return;
-    }
+            if (existe) {
+                idCliente = Funciones_BD.obtenerId(
+                        ConexionBD.obtenerConexion(),
+                        "idCliente",
+                        "cNatural",
+                        "DNI",
+                        dni
+                );
+            } else {
+                // Cliente nuevo -> validar el resto de campos obligatorios
+                if (nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese el nombre.");
+                    panelNatural.txtNombre.requestFocus();
+                    return;
+                }
 
-    if (!dni.matches("\\d{8}")) {
-        JOptionPane.showMessageDialog(this, "El DNI debe tener 8 dígitos.");
-        panelNatural.txtdni.requestFocus();
-        return;
-    }
+                if (apellido.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese el apellido.");
+                    panelNatural.txtApellido.requestFocus();
+                    return;
+                }
 
-    if (!correo.isEmpty() &&
-        !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                if (direccion.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese la dirección.");
+                    panelNatural.txtDireccion.requestFocus();
+                    return;
+                }
 
-        JOptionPane.showMessageDialog(this, "Correo electrónico inválido.");
-        panelNatural.txtCorreo.requestFocus();
-        return;
-    }
+                if (telefono.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese el teléfono.");
+                    panelNatural.txtTelefono.requestFocus();
+                    return;
+                }
 
-    Natural n = new Natural(
-            0,
-            nombre,
-            direccion,
-            correo,
-            telefono,
-            dni,
-            apellido
-    );
+                if (!telefono.matches("\\d{9}")) {
+                    JOptionPane.showMessageDialog(this, "El teléfono debe tener 9 dígitos.");
+                    panelNatural.txtTelefono.requestFocus();
+                    return;
+                }
 
-    idCliente=Funciones_BD.guardar_cliente_natural(ConexionBD.obtenerConexion(),n);
+                if (!correo.isEmpty() &&
+                    !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
 
-   } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Correo electrónico inválido.");
+                    panelNatural.txtCorreo.requestFocus();
+                    return;
+                }
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Error: " + e.getMessage()
-        );
+                Natural n = new Natural(
+                        0,
+                        nombre,
+                        direccion,
+                        correo,
+                        telefono,
+                        dni,
+                        apellido
+                );
 
-        e.printStackTrace();
-       }
-     }
-      else if (cmbTipoCliente.getSelectedItem().equals("Juridico")){
-          try {
+                idCliente = Funciones_BD.guardar_cliente_natural(ConexionBD.obtenerConexion(), n);
+            }
 
-    String nombre = panelJuridico.txtNombre.getText().trim();
-    String direccion = panelJuridico.txtDireccion.getText().trim();
-    String correo = panelJuridico.txtCorreo.getText().trim();
-    String telefono = panelJuridico.txtTelefono.getText().trim();
-    String ruc = panelJuridico.txtRuc.getText().trim();
-    String razonSocial = panelJuridico.txtRazonSocial.getText().trim();
-    String valor = panelJuridico.cmboxestado.getSelectedItem().toString();
-
-    String estado = valor.equals("A") ? "Activo" : "Inactivo";
-
-    // Validaciones
-    if (nombre.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el nombre.");
-        panelJuridico.txtNombre.requestFocus();
-        return;
-    }
-
-    if (direccion.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese la dirección.");
-        panelJuridico.txtDireccion.requestFocus();
-        return;
-    }
-
-    if (telefono.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el teléfono.");
-        panelJuridico.txtTelefono.requestFocus();
-        return;
-    }
-
-    if (!telefono.matches("\\d{9}")) {
-        JOptionPane.showMessageDialog(this, "El teléfono debe tener 9 dígitos.");
-        panelJuridico.txtTelefono.requestFocus();
-        return;
-    }
-
-    if (ruc.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese el RUC.");
-        panelJuridico.txtRuc.requestFocus();
-        return;
-    }
-
-    if (!ruc.matches("\\d{11}")) {
-        JOptionPane.showMessageDialog(this, "El RUC debe tener 11 dígitos.");
-        panelJuridico.txtRuc.requestFocus();
-        return;
-    }
-
-    if (razonSocial.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese la razón social.");
-        panelJuridico.txtRazonSocial.requestFocus();
-        return;
-    }
-
-    if (!correo.isEmpty() &&
-        !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-
-        JOptionPane.showMessageDialog(this, "Correo electrónico inválido.");
-        panelJuridico.txtCorreo.requestFocus();
-        return;
-    }
-
-          Juridico j = new Juridico(
-            0,
-            nombre,
-            direccion,
-            correo,
-            telefono,
-            ruc,
-            razonSocial,
-            estado
-                  
-    );
-
-     idCliente=Funciones_BD.guardar_cliente_juridico(ConexionBD.obtenerConexion(),j);
-     
-} catch (Exception e) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Error: " + e.getMessage()
-            );
-
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
             e.printStackTrace();
         }
-      }
-        
-        String fechaOrdenLavado=txtfechaorden.getText().toString();
-        Double costoLavado=Double.parseDouble(txtcosto.getText().toString());
-        String fechaEntrega=txtFechaEntrega.getText().toString();
-        Double descuento=Double.parseDouble(txtDescuento.getText().toString());
-        String fechaEntregaReal=txtFechaRecojo.getText().toString();
-        String notasOrden = txtNotas.getText().toString();
-        String estadoPagoDB = "";
+    } else if (cmbTipoCliente.getSelectedItem().equals("Juridico")) {
+        try {
 
-        switch (cmboxestadopago.getSelectedItem().toString().toUpperCase()) {
-            case "PENDIENTE":
-                estadoPagoDB = "P";
-                break;
-            case "CANCELADO":
-                estadoPagoDB = "C";
-                break;
-            default:
-                estadoPagoDB="P";
+            String nombre = panelJuridico.txtNombre.getText().trim();
+            String direccion = panelJuridico.txtDireccion.getText().trim();
+            String correo = panelJuridico.txtCorreo.getText().trim();
+            String telefono = panelJuridico.txtTelefono.getText().trim();
+            String ruc = panelJuridico.txtRuc.getText().trim();
+            String razonSocial = panelJuridico.txtRazonSocial.getText().trim();
+            String valor = panelJuridico.cmboxestado.getSelectedItem().toString();
+            String estado = valor.equals("A") ? "Activo" : "Inactivo";
+
+            if (ruc.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese el RUC.");
+                panelJuridico.txtRuc.requestFocus();
+                return;
+            }
+
+            if (!ruc.matches("\\d{11}")) {
+                JOptionPane.showMessageDialog(this, "El RUC debe tener 11 dígitos.");
+                panelJuridico.txtRuc.requestFocus();
+                return;
+            }
+
+            // VERIFICA SI EXISTE EL CLIENTE
+            boolean existe = Funciones_BD.existeCliente(ConexionBD.obtenerConexion(), "cJuridico", "ruc", ruc);
+
+            if (existe) {
+                idCliente = Funciones_BD.obtenerId(
+                        ConexionBD.obtenerConexion(),
+                        "idCliente",
+                        "cJuridico",
+                        "ruc",
+                        ruc
+                );
+            } else {
+                if (nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese el nombre.");
+                    panelJuridico.txtNombre.requestFocus();
+                    return;
+                }
+
+                if (direccion.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese la dirección.");
+                    panelJuridico.txtDireccion.requestFocus();
+                    return;
+                }
+
+                if (telefono.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese el teléfono.");
+                    panelJuridico.txtTelefono.requestFocus();
+                    return;
+                }
+
+                if (!telefono.matches("\\d{9}")) {
+                    JOptionPane.showMessageDialog(this, "El teléfono debe tener 9 dígitos.");
+                    panelJuridico.txtTelefono.requestFocus();
+                    return;
+                }
+
+                if (razonSocial.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ingrese la razón social.");
+                    panelJuridico.txtRazonSocial.requestFocus();
+                    return;
+                }
+
+                if (!correo.isEmpty() &&
+                    !correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+
+                    JOptionPane.showMessageDialog(this, "Correo electrónico inválido.");
+                    panelJuridico.txtCorreo.requestFocus();
+                    return;
+                }
+
+                Juridico j = new Juridico(
+                        0,
+                        nombre,
+                        direccion,
+                        correo,
+                        telefono,
+                        ruc,
+                        razonSocial,
+                        estado
+                );
+
+                idCliente = Funciones_BD.guardar_cliente_juridico(ConexionBD.obtenerConexion(), j);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            e.printStackTrace();
         }
-        
-        
-        
-        //Funciones_BD.insertarOrdenLavado(ConexionBD.obtenerConexion(), fechaOrdenLavado, costoLavado, fechaEntrega, descuento, fechaEntregaReal, notasOrden, estadoOrden, estadoPago, idCliente)
-        
-        
+    }
+
+    if (idCliente <= 0) {
+        JOptionPane.showMessageDialog(this, "Error al registrar el cliente");
+        return;
+    }
+
+    String fechaOrdenLavado = txtfechaorden.getText().toString();
+    Double costoLavado = Double.parseDouble(txtcosto.getText().toString());
+    String fechaEntrega = txtFechaEntrega.getText().toString();
+    Double descuento = Double.parseDouble(txtDescuento.getText().toString());
+    String fechaEntregaReal = txtFechaRecojo.getText().toString();
+    String notasOrden = txtNotas.getText().toString();
+    String estadoPagoDB = "";
+
+switch (cmboxestadopago.getSelectedItem().toString().toUpperCase()) {
+    case "PENDIENTE":
+        estadoPagoDB = "P";
+        break;
+    case "CANCELADO":
+        estadoPagoDB = "C";
+        break;
+    default:
+        estadoPagoDB = "P";
+}
+
+String estadoOrdenDB = "";
+switch (jComboBox1.getSelectedItem().toString().toUpperCase()) {
+    case "PENDIENTE":
+        estadoOrdenDB = "P";
+        break;
+    case "EN PROCESO":
+        estadoOrdenDB = "R";
+        break;
+    case "LISTO":
+        estadoOrdenDB = "L";
+        break;
+    case "ENTREGADO":
+        estadoOrdenDB = "E";
+        break;
+    default:
+        estadoOrdenDB = "P";
+}
+SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy");
+SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd");
+
+String fechaOrdenLavadoSQL;
+String fechaEntregaSQL;
+String fechaEntregaRealSQL;
+
+try {
+    fechaOrdenLavadoSQL = sdfSalida.format(sdfEntrada.parse(fechaOrdenLavado));
+    fechaEntregaSQL = sdfSalida.format(sdfEntrada.parse(fechaEntrega));
+    fechaEntregaRealSQL = sdfSalida.format(sdfEntrada.parse(fechaEntregaReal));
+} catch (java.text.ParseException ex) {
+    JOptionPane.showMessageDialog(this, "Error en el formato de las fechas");
+    return;
+}
+int idOrdenLavado = Funciones_BD.insertarOrdenLavado(
+        ConexionBD.obtenerConexion(),
+        fechaOrdenLavadoSQL,
+        costoLavado,
+        fechaEntregaSQL,
+        descuento,
+        fechaEntregaRealSQL,
+        notasOrden,
+        estadoOrdenDB,
+        estadoPagoDB,
+        idCliente
+);
+if (idOrdenLavado == -1) {
+    JOptionPane.showMessageDialog(this, "Error al registrar la orden");
+    return;
+}
+   /* ---------------- CALZADO ---------------- */
+
+String nombCalzado = jTextField3.getText().trim();       // Nombre
+String descCalzado = txtnombrecalzado1.getText().trim(); // Descripción
+
+double precReferencia = 0;
+try {
+    precReferencia = Double.parseDouble(txtnombrecalzado2.getText().trim()); // Precio ref.
+} catch (NumberFormatException ex) {
+    precReferencia = 0;
+}
+
+int idTipoCalzado = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idTipoCalzado", "tipoCalzado", "nombTipoCalzado", cmbTipocalzado.getSelectedItem().toString());
+int idMaterial = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idMaterial", "Material", "nombMaterial", cmbTipoMaterial.getSelectedItem().toString());
+int idMarca = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idMarca", "Marca", "nombMarca", cmbMarca.getSelectedItem().toString());
+
+if (nombCalzado.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Ingrese el nombre del calzado.");
+    jTextField3.requestFocus();
+    return;
+}
+int idCalzado = Funciones_BD.insertarCalzado(
+        ConexionBD.obtenerConexion(),
+        nombCalzado,
+        descCalzado,
+        precReferencia,
+        idTipoCalzado,
+        idMaterial,
+        idMarca
+);
+
+if (idCalzado == -1) {
+    JOptionPane.showMessageDialog(this, "Error al registrar el calzado");
+    return;
+}    
+/* ---------------- DETALLE LAVADO ---------------- */
+
+int idTipoLavado = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idTipoLavado", "tipoLavado", "nombTipo", cmboxTipolavado.getSelectedItem().toString());
+String estadoEntrada = txtnombrecalzado3.getText().trim();
+String estadoSalida = txtestadosalida.getText().trim();
+String observaciones = txtObservacioneLavado.getText().trim();
+
+boolean detalleOk = Funciones_BD.insertarDetalleLavado(
+        ConexionBD.obtenerConexion(),
+        idOrdenLavado,
+        idCalzado,
+        idTipoLavado,
+        estadoSalida,
+        estadoEntrada,
+        observaciones,
+        fechaOrdenLavadoSQL,
+        null // fechFinalizacion aún no ocurre al crear la orden
+);
+
+if (!detalleOk) {
+    JOptionPane.showMessageDialog(this, "Error al registrar el detalle de lavado");
+    return;
+}
+
+JOptionPane.showMessageDialog(this, "Orden registrada correctamente");
+this.dispose();
     }//GEN-LAST:event_btnguardarordenActionPerformed
 
     private void cmboxTipolavadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipolavadoActionPerformed

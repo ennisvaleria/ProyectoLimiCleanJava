@@ -4,6 +4,10 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import limiclean.Clases.ConexionBD;
+import limiclean.Clases.Funciones_BD;
+
 /**
  *
  * @author valer
@@ -15,10 +19,28 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
     /**
      * Creates new form FrmDetalleProducto
      */
+    private String codigo;
+    private Runnable recarga;
     public FrmDetalleProducto() {
         initComponents();
         setLocationRelativeTo(null);
     }
+    public FrmDetalleProducto(String codigo, Runnable recarga) {
+    initComponents();
+    setLocationRelativeTo(null);
+    this.codigo = codigo;
+    this.recarga = recarga;
+    Funciones_BD.cargarDetalleProducto(
+        ConexionBD.obtenerConexion(),
+        codigo,
+        txtNombreProducto,
+        txtCodigoProducto,
+        cmbCategoria,
+        txtPrecio,
+        jTextField5,   // Stock
+        jTextArea1     // Descripción
+    );
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,9 +54,9 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        txtNombre = new javax.swing.JTextField();
+        txtNombreProducto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
+        txtCodigoProducto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
@@ -56,11 +78,11 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtNombre.setEditable(false);
+        txtNombreProducto.setEditable(false);
 
         jLabel2.setText("Nombre");
 
-        txtCodigo.setEditable(false);
+        txtCodigoProducto.setEditable(false);
 
         jLabel3.setText("Código");
 
@@ -93,8 +115,8 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(txtNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(txtCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
@@ -111,11 +133,11 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(4, 4, 4)
-                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(4, 4, 4)
@@ -194,7 +216,33 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       txtPrecio.setEditable(true);
+        if (!txtPrecio.isEditable()) {
+        txtPrecio.setEditable(true);
+        txtPrecio.requestFocus();
+        JOptionPane.showMessageDialog(this, "Ahora puede editar el precio. Presione 'Editar' de nuevo para guardar.");
+    } else {
+        String precioTexto = txtPrecio.getText().trim();
+        double nuevoPrecio;
+        try {
+            nuevoPrecio = Double.parseDouble(precioTexto);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
+            return;
+        }
+
+        boolean actualizado = Funciones_BD.actualizarPrecio(
+                ConexionBD.obtenerConexion(),
+                codigo,
+                nuevoPrecio
+        );
+
+        if (actualizado) {
+            JOptionPane.showMessageDialog(this, "Precio actualizado correctamente");
+            txtPrecio.setEditable(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el precio");
+        }
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -242,8 +290,8 @@ public class FrmDetalleProducto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtCodigoProducto;
+    private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

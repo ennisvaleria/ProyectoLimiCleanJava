@@ -24,7 +24,7 @@ public class PanelInsumo extends javax.swing.JPanel {
     public PanelInsumo(FormPrincipal principal) {
         initComponents();
         this.principal = principal;
-        ListaInsumo= Funciones_BD.obtenerInsumos(ConexionBD.obtenerConexion());
+        ListaInsumo= Funciones_BD.obtenerInsumos(ConexionBD.obtenerConexion(), "", "Todos");
           modelo = new DefaultTableModel();
 
         modelo.addColumn("Código");
@@ -205,40 +205,18 @@ public class PanelInsumo extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-         modelo.setRowCount(0);
+         String codigo = jTextField1.getText().trim();
+    if (codigo.equals("Codigo")) { 
+        codigo = "";
+    }
+    String filtroStock = cmboxStock.getSelectedItem().toString();
 
-    String filtro = cmboxStock.getSelectedItem().toString();
+    ListaInsumo = Funciones_BD.obtenerInsumos(ConexionBD.obtenerConexion(), codigo, filtroStock);
 
+    modelo.setRowCount(0);
     for (Object[] insumo : ListaInsumo) {
-
-        int stock = (int) insumo[4];
-        int stockMin = (int) insumo[5];
-
-        switch (filtro) {
-
-            case "Todos":
-                modelo.addRow(insumo);
-                break;
-
-            case "Disponible":
-                if (stock > 0) {
-                    modelo.addRow(insumo);
-                }
-                break;
-
-            case "Agotado":
-                if (stock == 0) {
-                    modelo.addRow(insumo);
-                }
-                break;
-
-            case "Bajo mínimo":
-                if (stock <=stockMin ) {
-                    modelo.addRow(insumo);
-                }
-                break;
-        }
-      }
+        modelo.addRow(insumo);
+    }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 

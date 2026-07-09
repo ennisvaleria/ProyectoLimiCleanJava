@@ -4,6 +4,10 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+import limiclean.Clases.ConexionBD;
+import limiclean.Clases.Funciones_BD;
+
 /**
  *
  * @author user
@@ -31,9 +35,9 @@ public class Login extends javax.swing.JFrame {
 
         btnIngresar = new javax.swing.JButton();
         lblusuario = new javax.swing.JLabel();
-        txtusuario = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         lblcontra = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtContrasena = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -41,6 +45,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(this::btnIngresarActionPerformed);
 
         lblusuario.setFont(new java.awt.Font("Segoe UI Variable", 0, 14)); // NOI18N
         lblusuario.setText("Usuario");
@@ -89,8 +94,8 @@ public class Login extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblcontra)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblusuario)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(141, 141, 141)
@@ -104,11 +109,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(lblusuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblcontra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnIngresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -123,6 +128,39 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        // TODO add your handling code here:
+        String usuario = txtUsuario.getText().trim();
+    String contrasena = new String(txtContrasena.getPassword()).trim(); 
+
+    if (usuario.isEmpty() || contrasena.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese usuario y contraseña.");
+        return;
+    }
+
+    String[] datos = Funciones_BD.validarCredenciales(ConexionBD.obtenerConexion(), usuario, contrasena);
+
+    if (datos == null) {
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
+        return;
+    }
+
+    String rol = datos[1];
+    String nombreCompleto = datos[2] + " " + datos [3];
+
+    if (rol.equalsIgnoreCase("Administrador")) {
+        FormPrincipal frm = new FormPrincipal(nombreCompleto, rol);
+        frm.setVisible(true);
+        this.dispose();
+    } else if (rol.equalsIgnoreCase("Recepcionista")) {
+        FrmPrincipalEmpleado frm = new FrmPrincipalEmpleado(nombreCompleto, rol);
+        frm.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Rol no reconocido: " + rol);
+    }
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,9 +192,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblcontra;
     private javax.swing.JLabel lblusuario;
-    private javax.swing.JTextField txtusuario;
+    private javax.swing.JPasswordField txtContrasena;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
