@@ -770,7 +770,7 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btncancelActionPerformed
 
     private void btnguardarordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarordenActionPerformed
-      int idCliente = 0;
+       int idCliente = 0;
 
     if (cmbTipoCliente.getSelectedItem().equals("Natural")) {
         try {
@@ -794,7 +794,6 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                 return;
             }
 
-           //VERIFICA SI EL CLIENTE EXISTE
             boolean existe = Funciones_BD.existeCliente(ConexionBD.obtenerConexion(), "cNatural", "DNI", dni);
 
             if (existe) {
@@ -806,7 +805,6 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                         dni
                 );
             } else {
-                // Cliente nuevo -> validar el resto de campos obligatorios
                 if (nombre.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Ingrese el nombre.");
                     panelNatural.txtNombre.requestFocus();
@@ -886,7 +884,6 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
                 return;
             }
 
-            // VERIFICA SI EXISTE EL CLIENTE
             boolean existe = Funciones_BD.existeCliente(ConexionBD.obtenerConexion(), "cJuridico", "ruc", ruc);
 
             if (existe) {
@@ -961,6 +958,24 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
         return;
     }
 
+    /* ---------------- VALIDAR STOCK DE INSUMOS ---------------- */
+
+    int idTipoLavado = Funciones_BD.obtenerId(
+        ConexionBD.obtenerConexion(), "idTipoLavado", "tipoLavado", "nombTipo",
+        cmboxTipolavado.getSelectedItem().toString()
+    );
+
+    String insumoFaltante = Funciones_BD.validarStockInsumosParaLavado(
+        ConexionBD.obtenerConexion(), idTipoLavado
+    );
+
+    if (insumoFaltante != null) {
+        JOptionPane.showMessageDialog(this, "No hay stock suficiente de: " + insumoFaltante);
+        return;
+    }
+
+    /* ---------------- ORDEN LAVADO ---------------- */
+
     String fechaOrdenLavado = txtfechaorden.getText().toString();
     Double costoLavado = Double.parseDouble(txtcosto.getText().toString());
     String fechaEntrega = txtFechaEntrega.getText().toString();
@@ -969,126 +984,129 @@ public final class FrmNuevaOrden extends javax.swing.JFrame {
     String notasOrden = txtNotas.getText().toString();
     String estadoPagoDB = "";
 
-switch (cmboxestadopago.getSelectedItem().toString().toUpperCase()) {
-    case "PENDIENTE":
-        estadoPagoDB = "P";
-        break;
-    case "CANCELADO":
-        estadoPagoDB = "C";
-        break;
-    default:
-        estadoPagoDB = "P";
-}
+    switch (cmboxestadopago.getSelectedItem().toString().toUpperCase()) {
+        case "PENDIENTE":
+            estadoPagoDB = "P";
+            break;
+        case "CANCELADO":
+            estadoPagoDB = "C";
+            break;
+        default:
+            estadoPagoDB = "P";
+    }
 
-String estadoOrdenDB = "";
-switch (jComboBox1.getSelectedItem().toString().toUpperCase()) {
-    case "PENDIENTE":
-        estadoOrdenDB = "P";
-        break;
-    case "EN PROCESO":
-        estadoOrdenDB = "R";
-        break;
-    case "LISTO":
-        estadoOrdenDB = "L";
-        break;
-    case "ENTREGADO":
-        estadoOrdenDB = "E";
-        break;
-    default:
-        estadoOrdenDB = "P";
-}
-SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy");
-SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd");
+    String estadoOrdenDB = "";
+    switch (jComboBox1.getSelectedItem().toString().toUpperCase()) {
+        case "PENDIENTE":
+            estadoOrdenDB = "P";
+            break;
+        case "EN PROCESO":
+            estadoOrdenDB = "R";
+            break;
+        case "LISTO":
+            estadoOrdenDB = "L";
+            break;
+        case "ENTREGADO":
+            estadoOrdenDB = "E";
+            break;
+        default:
+            estadoOrdenDB = "P";
+    }
 
-String fechaOrdenLavadoSQL;
-String fechaEntregaSQL;
-String fechaEntregaRealSQL;
+    SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd");
 
-try {
-    fechaOrdenLavadoSQL = sdfSalida.format(sdfEntrada.parse(fechaOrdenLavado));
-    fechaEntregaSQL = sdfSalida.format(sdfEntrada.parse(fechaEntrega));
-    fechaEntregaRealSQL = sdfSalida.format(sdfEntrada.parse(fechaEntregaReal));
-} catch (java.text.ParseException ex) {
-    JOptionPane.showMessageDialog(this, "Error en el formato de las fechas");
-    return;
-}
-int idOrdenLavado = Funciones_BD.insertarOrdenLavado(
-        ConexionBD.obtenerConexion(),
-        fechaOrdenLavadoSQL,
-        costoLavado,
-        fechaEntregaSQL,
-        descuento,
-        fechaEntregaRealSQL,
-        notasOrden,
-        estadoOrdenDB,
-        estadoPagoDB,
-        idCliente
-);
-if (idOrdenLavado == -1) {
-    JOptionPane.showMessageDialog(this, "Error al registrar la orden");
-    return;
-}
-   /* ---------------- CALZADO ---------------- */
+    String fechaOrdenLavadoSQL;
+    String fechaEntregaSQL;
+    String fechaEntregaRealSQL;
 
-String nombCalzado = jTextField3.getText().trim();       // Nombre
-String descCalzado = txtnombrecalzado1.getText().trim(); // Descripción
+    try {
+        fechaOrdenLavadoSQL = sdfSalida.format(sdfEntrada.parse(fechaOrdenLavado));
+        fechaEntregaSQL = sdfSalida.format(sdfEntrada.parse(fechaEntrega));
+        fechaEntregaRealSQL = sdfSalida.format(sdfEntrada.parse(fechaEntregaReal));
+    } catch (java.text.ParseException ex) {
+        JOptionPane.showMessageDialog(this, "Error en el formato de las fechas");
+        return;
+    }
 
-double precReferencia = 0;
-try {
-    precReferencia = Double.parseDouble(txtnombrecalzado2.getText().trim()); // Precio ref.
-} catch (NumberFormatException ex) {
-    precReferencia = 0;
-}
+    int idOrdenLavado = Funciones_BD.insertarOrdenLavado(
+            ConexionBD.obtenerConexion(),
+            fechaOrdenLavadoSQL,
+            costoLavado,
+            fechaEntregaSQL,
+            descuento,
+            fechaEntregaRealSQL,
+            notasOrden,
+            estadoOrdenDB,
+            estadoPagoDB,
+            idCliente
+    );
+    if (idOrdenLavado == -1) {
+        JOptionPane.showMessageDialog(this, "Error al registrar la orden");
+        return;
+    }
 
-int idTipoCalzado = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idTipoCalzado", "tipoCalzado", "nombTipoCalzado", cmbTipocalzado.getSelectedItem().toString());
-int idMaterial = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idMaterial", "Material", "nombMaterial", cmbTipoMaterial.getSelectedItem().toString());
-int idMarca = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idMarca", "Marca", "nombMarca", cmbMarca.getSelectedItem().toString());
+    /* ---------------- CALZADO ---------------- */
 
-if (nombCalzado.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Ingrese el nombre del calzado.");
-    jTextField3.requestFocus();
-    return;
-}
-int idCalzado = Funciones_BD.insertarCalzado(
-        ConexionBD.obtenerConexion(),
-        nombCalzado,
-        descCalzado,
-        precReferencia,
-        idTipoCalzado,
-        idMaterial,
-        idMarca
-);
+    String nombCalzado = jTextField3.getText().trim();       // Nombre
+    String descCalzado = txtnombrecalzado1.getText().trim(); // Descripción
 
-if (idCalzado == -1) {
-    JOptionPane.showMessageDialog(this, "Error al registrar el calzado");
-    return;
-}    
-/* ---------------- DETALLE LAVADO ---------------- */
+    double precReferencia = 0;
+    try {
+        precReferencia = Double.parseDouble(txtnombrecalzado2.getText().trim()); // Precio ref.
+    } catch (NumberFormatException ex) {
+        precReferencia = 0;
+    }
 
-int idTipoLavado = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idTipoLavado", "tipoLavado", "nombTipo", cmboxTipolavado.getSelectedItem().toString());
-String estadoEntrada = txtnombrecalzado3.getText().trim();
-String estadoSalida = txtestadosalida.getText().trim();
-String observaciones = txtObservacioneLavado.getText().trim();
+    int idTipoCalzado = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idTipoCalzado", "tipoCalzado", "nombTipoCalzado", cmbTipocalzado.getSelectedItem().toString());
+    int idMaterial = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idMaterial", "Material", "nombMaterial", cmbTipoMaterial.getSelectedItem().toString());
+    int idMarca = Funciones_BD.obtenerId(ConexionBD.obtenerConexion(), "idMarca", "Marca", "nombMarca", cmbMarca.getSelectedItem().toString());
 
-boolean detalleOk = Funciones_BD.insertarDetalleLavado(
-        ConexionBD.obtenerConexion(),
-        idOrdenLavado,
-        idCalzado,
-        idTipoLavado,
-        estadoSalida,
-        estadoEntrada,
-        observaciones,
-        fechaOrdenLavadoSQL,
-        null // fechFinalizacion aún no ocurre al crear la orden
-);
+    if (nombCalzado.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el nombre del calzado.");
+        jTextField3.requestFocus();
+        return;
+    }
+    int idCalzado = Funciones_BD.insertarCalzado(
+            ConexionBD.obtenerConexion(),
+            nombCalzado,
+            descCalzado,
+            precReferencia,
+            idTipoCalzado,
+            idMaterial,
+            idMarca
+    );
 
-if (!detalleOk) {
-    JOptionPane.showMessageDialog(this, "Error al registrar el detalle de lavado");
-    return;
-}
+    if (idCalzado == -1) {
+        JOptionPane.showMessageDialog(this, "Error al registrar el calzado");
+        return;
+    }
 
-JOptionPane.showMessageDialog(this, "Orden registrada correctamente");
-this.dispose();
+    /* ---------------- DETALLE LAVADO ---------------- */
+
+    String estadoEntrada = txtnombrecalzado3.getText().trim();
+    String estadoSalida = txtestadosalida.getText().trim();
+    String observaciones = txtObservacioneLavado.getText().trim();
+
+    boolean detalleOk = Funciones_BD.insertarDetalleLavado(
+            ConexionBD.obtenerConexion(),
+            idOrdenLavado,
+            idCalzado,
+            idTipoLavado,
+            estadoSalida,
+            estadoEntrada,
+            observaciones,
+            fechaOrdenLavadoSQL,
+            null
+    );
+
+    if (!detalleOk) {
+        JOptionPane.showMessageDialog(this, "Error al registrar el detalle de lavado");
+        return;
+    }
+
+    JOptionPane.showMessageDialog(this, "Orden registrada correctamente");
+    this.dispose();
     }//GEN-LAST:event_btnguardarordenActionPerformed
 
     private void cmboxTipolavadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboxTipolavadoActionPerformed

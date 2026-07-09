@@ -970,32 +970,54 @@ public static ArrayList<Object[]> obtenerInsumos(Connection conexion, String bus
         "i.nombInsumo, " +
         "c.nombCategoriaInsumo, " +
         "i.unidadMedida, " +
-        "COALESCE(SUM(d.cantCompra), 0) AS stock, " +
+        "(" +
+        "   COALESCE((SELECT SUM(dc.cantCompra) FROM detalleCompra dc WHERE dc.idInsumo = i.idInsumo), 0) - " +
+        "   COALESCE((SELECT SUM(di.cantInsumo) FROM detalleLavado dl " +
+        "             INNER JOIN detalleInsumo di ON di.idTipoLavado = dl.idTipoLavado " +
+        "             WHERE di.idInsumo = i.idInsumo), 0)" +
+        ") AS stock, " +
         "i.stockMin, " +
         "i.descInsumo " +
         "FROM Insumo i " +
-        "INNER JOIN categoriaInsumo c ON i.idCategoriaInsumo = c.idCategoriaInsumo " +
-        "LEFT JOIN detalleCompra d ON d.idInsumo = i.idInsumo ";
+        "INNER JOIN categoriaInsumo c ON i.idCategoriaInsumo = c.idCategoriaInsumo ";
 
     boolean filtrarBusqueda = busqueda != null && !busqueda.trim().isEmpty();
     if (filtrarBusqueda) {
         sql += "WHERE (i.nombInsumo LIKE ? OR i.codInsumo LIKE ?) ";
     }
 
-    sql += "GROUP BY i.idInsumo, i.codInsumo, i.nombInsumo, c.nombCategoriaInsumo, i.unidadMedida, i.stockMin, i.descInsumo ";
-
+    String condicionStock = "";
     switch (filtroStock) {
         case "Disponible":
-            sql += "HAVING stock > 0 ";
+            condicionStock = "(" +
+                "COALESCE((SELECT SUM(dc.cantCompra) FROM detalleCompra dc WHERE dc.idInsumo = i.idInsumo), 0) - " +
+                "COALESCE((SELECT SUM(di.cantInsumo) FROM detalleLavado dl " +
+                "INNER JOIN detalleInsumo di ON di.idTipoLavado = dl.idTipoLavado " +
+                "WHERE di.idInsumo = i.idInsumo), 0)" +
+                ") > 0 ";
             break;
         case "Bajo mínimo":
-            sql += "HAVING stock < i.stockMin ";
+            condicionStock = "(" +
+                "COALESCE((SELECT SUM(dc.cantCompra) FROM detalleCompra dc WHERE dc.idInsumo = i.idInsumo), 0) - " +
+                "COALESCE((SELECT SUM(di.cantInsumo) FROM detalleLavado dl " +
+                "INNER JOIN detalleInsumo di ON di.idTipoLavado = dl.idTipoLavado " +
+                "WHERE di.idInsumo = i.idInsumo), 0)" +
+                ") < i.stockMin ";
             break;
         case "Agotado":
-            sql += "HAVING stock = 0 ";
+            condicionStock = "(" +
+                "COALESCE((SELECT SUM(dc.cantCompra) FROM detalleCompra dc WHERE dc.idInsumo = i.idInsumo), 0) - " +
+                "COALESCE((SELECT SUM(di.cantInsumo) FROM detalleLavado dl " +
+                "INNER JOIN detalleInsumo di ON di.idTipoLavado = dl.idTipoLavado " +
+                "WHERE di.idInsumo = i.idInsumo), 0)" +
+                ") = 0 ";
             break;
         default: // "Todos"
             break;
+    }
+
+    if (!condicionStock.isEmpty()) {
+        sql += (filtrarBusqueda ? "AND " : "WHERE ") + condicionStock;
     }
 
     try {
@@ -1012,7 +1034,7 @@ public static ArrayList<Object[]> obtenerInsumos(Connection conexion, String bus
                 rs.getString("nombInsumo"),
                 rs.getString("nombCategoriaInsumo"),
                 rs.getString("unidadMedida"),
-                rs.getInt("stock"),
+                rs.getDouble("stock"),
                 rs.getInt("stockMin"),
                 rs.getString("descInsumo")
             });
@@ -1771,16 +1793,18 @@ public static ArrayList<Object[]> cargarProductos(Connection conexion, String te
 {
     ArrayList<Object[]> lista = new ArrayList<>();
     String sql =
-         "SELECT " +
-        "p.nombProducto AS Nombre, " +
-        "p.codProducto AS Codigo, " +
-        "p.precProducto AS Precio, " +
-        "COALESCE(SUM(dc.cantCompra), 0) AS Stock, " +
-        "p.descProducto AS Descripcion, " +
-        "cp.nombCategoriaProducto AS Categoria " +
-        "FROM Producto p " +
-        "LEFT JOIN detalleCompra dc ON dc.idProducto = p.idProducto " +
-        "INNER JOIN categoriaProducto cp ON p.idCategoriaProducto = cp.idCategoriaProducto ";
+                "SELECT " +
+           "p.nombProducto AS Nombre, " +
+           "p.codProducto AS Codigo, " +
+           "p.precProducto AS Precio, " +
+           "COALESCE(SUM(dc.cantCompra), 0) - COALESCE((" +
+           "   SELECT SUM(dv2.cantVenta) FROM detalleVenta dv2 WHERE dv2.idProducto = p.idProducto" +
+           "), 0) AS Stock, " +
+           "p.descProducto AS Descripcion, " +
+           "cp.nombCategoriaProducto AS Categoria " +
+           "FROM Producto p " +
+           "LEFT JOIN detalleCompra dc ON dc.idProducto = p.idProducto " +
+           "INNER JOIN categoriaProducto cp ON p.idCategoriaProducto = cp.idCategoriaProducto ";
 
     boolean filtrar = texto != null && !texto.trim().isEmpty();
 
@@ -2891,6 +2915,58 @@ public static boolean insertarProducto(Connection conexion, String nombProducto,
         return false;
     }
 }
+    public static int obtenerStockDisponible(Connection conexion, int idProducto) {
+    String sql =
+        "SELECT " +
+        "COALESCE(SUM(dc.cantCompra), 0) - COALESCE((" +
+        "   SELECT SUM(dv.cantVenta) FROM detalleVenta dv WHERE dv.idProducto = ?" +
+        "), 0) AS stockDisponible " +
+        "FROM detalleCompra dc " +
+        "WHERE dc.idProducto = ?";
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setInt(1, idProducto);
+        ps.setInt(2, idProducto);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("stockDisponible");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+    public static String validarStockInsumosParaLavado(Connection conexion, int idTipoLavado) {
+    String sql =
+        "SELECT " +
+        "i.nombInsumo, " +
+        "di.cantInsumo AS necesario, " +
+        "(" +
+        "   COALESCE((SELECT SUM(dc.cantCompra) FROM detalleCompra dc WHERE dc.idInsumo = i.idInsumo), 0) - " +
+        "   COALESCE((SELECT SUM(di2.cantInsumo) FROM detalleLavado dl " +
+        "             INNER JOIN detalleInsumo di2 ON di2.idTipoLavado = dl.idTipoLavado " +
+        "             WHERE di2.idInsumo = i.idInsumo), 0)" +
+        ") AS disponible " +
+        "FROM detalleInsumo di " +
+        "INNER JOIN Insumo i ON di.idInsumo = i.idInsumo " +
+        "WHERE di.idTipoLavado = ?";
+
+    try {
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setInt(1, idTipoLavado);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            double necesario = rs.getDouble("necesario");
+            double disponible = rs.getDouble("disponible");
+            if (necesario > disponible) {
+                return rs.getString("nombInsumo") + " (disponible: " + disponible + ", necesario: " + necesario + ")";
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        return null;
+    }
 }
 
 

@@ -80,6 +80,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         //importante
         PanelContenedorC.setLayout(new BorderLayout());
         panelCNatural = new PanelCNatural();
+        panelCJuridico = new PanelCJuridico();
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date hoy = new Date();
@@ -585,6 +586,16 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
             "nombProducto",
             producto
     );
+        SimpleDateFormat sdfEntrada = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd");
+    String fechaEmisionSQL;
+
+    try {
+        fechaEmisionSQL = sdfSalida.format(sdfEntrada.parse(fechaEmision));
+    } catch (java.text.ParseException ex) {
+        JOptionPane.showMessageDialog(null, "Error en el formato de la fecha");
+        return;
+    }
 
     //CLIENTE: VALIDA DUPLICADO Y OBTIENE O CREA
 
@@ -700,6 +711,15 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error al registrar el cliente");
         return;
     }
+    
+    int cantidadInt = Integer.parseInt(cantidad);
+    int stockDisponible = Funciones_BD.obtenerStockDisponible(ConexionBD.obtenerConexion(), idProducto);
+
+    if (cantidadInt > stockDisponible) {
+        JOptionPane.showMessageDialog(null,
+                "Stock insuficiente para completar la venta. Disponible: " + stockDisponible + " unidades.");
+        return;
+    }
 
     /* ---------------- INSERT VENTA ---------------- */
 
@@ -708,7 +728,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
             "Venta",
             "fechVenta, estadoPago, idCliente, idMetodoPago",
             "?, ?, ?, ?",
-            fechaEmision,
+            fechaEmisionSQL,
             estadoPagoBD,
             idCliente,
             idMetodoPago
@@ -729,7 +749,7 @@ public class FrmNuevaVenta extends javax.swing.JFrame {
         );
 
         if (idDetalleVenta > 0) {
-            int idComprobantePago = Funciones_BD.insertarGenerico(ConexionBD.obtenerConexion(), " comprobantePago", "fechaEmision,numComprobante,idTipoComprobante", "?,?,?", fechaEmision, txtBoletaFactura.getText(), tipo);
+            int idComprobantePago = Funciones_BD.insertarGenerico(ConexionBD.obtenerConexion(), "comprobantePago", "fechaEmision,numComprobante,idTipoComprobante", "?,?,?", fechaEmisionSQL, txtBoletaFactura.getText(), tipo);
 
             JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
 

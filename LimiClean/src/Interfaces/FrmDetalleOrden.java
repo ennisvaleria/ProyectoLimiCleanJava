@@ -19,11 +19,12 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
      * Creates new form FrmDetalleOrden
      */
     private Runnable recargar;
-    public FrmDetalleOrden(int idOrdenLavado,String cliente, String fechaOrdenLavado, String fechaEntregaEstimada, String descuentoOrden, String costoLavado, String estadoOrden, String estadoPago, String fechaInicio, String fechaFin,String notas, Runnable recargar) 
+    private int idordenLavado;
+    public FrmDetalleOrden(String cliente, String fechaOrdenLavado, String fechaEntregaEstimada, String descuentoOrden, String costoLavado, String estadoOrden, String estadoPago, String fechaInicio, String fechaFin,String notas, Runnable recargar, int idordenLavado) 
     {
         initComponents();
         this.recargar = recargar;
-        idordenlavado.setVisible(false);
+        this.idordenLavado = idordenLavado;
         setLocationRelativeTo(null);
         txtCliente.setText(cliente);
         txtFechFinalizacion.setText(fechaFin);
@@ -65,14 +66,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         cmbEstadoPago.setSelectedItem(EstadoPago.toString());
         txtFechInicio.setText(fechaInicio);
         txtNotas.setText(notas);
-        idordenlavado.setText(String.valueOf(idOrdenLavado));
-        Funciones_BD.cargarCalzadoLavado(ConexionBD.obtenerConexion(), JTCalzado,idOrdenLavado);
-        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaOrden, "dd/mm/aaaa");
-        FuncionesLimiclean.borrar_mensaje_defecto(txtFechInicio, "dd/mm/aaaa");
-        FuncionesLimiclean.borrar_mensaje_defecto(txtFechFinalizacion, "dd/mm/aaaa");
-        FuncionesLimiclean.borrar_mensaje_defecto(txtEntregaEstimado, "dd/mm/aaaa");
-        
-                
+        Funciones_BD.cargarCalzadoLavado(ConexionBD.obtenerConexion(), JTCalzado,idordenLavado);           
     }
 
     private FrmDetalleOrden() {
@@ -114,7 +108,6 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         txtFechFinalizacion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtnotas = new javax.swing.JTextArea();
-        idordenlavado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -217,9 +210,6 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
         txtnotas.setRows(5);
         jScrollPane1.setViewportView(txtnotas);
 
-        idordenlavado.setEditable(false);
-        idordenlavado.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -239,17 +229,16 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                             .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(idordenlavado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73))
+                        .addGap(171, 171, 171))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtDescuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2))
-                            .addComponent(txtDescuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -284,18 +273,19 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDescuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2)
+                                .addGap(118, 118, 118))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDescuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idordenlavado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,8 +293,8 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbEstadoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(cmbEstadoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)))
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,7 +424,7 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
             default -> "";
         };
 
-        int idOrden = Integer.parseInt(idordenlavado.getText().trim());
+        int idOrden = idordenLavado;
 
         Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenLavado", "estadoOrden", estadoOrdenBD, "idOrdenLavado", idOrden);
         Funciones_BD.actualizarCampo(ConexionBD.obtenerConexion(), "ordenLavado", "estadoPago", estadoPagoBD, "idOrdenLavado", idOrden);
@@ -484,7 +474,6 @@ public class FrmDetalleOrden extends javax.swing.JFrame {
     private javax.swing.JTable JTCalzado;
     private javax.swing.JComboBox<String> cmbEstadoOrden;
     private javax.swing.JComboBox<String> cmbEstadoPago;
-    private javax.swing.JTextField idordenlavado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

@@ -5,6 +5,7 @@
 package Interfaces;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import limiclean.Clases.ConexionBD;
 import limiclean.Clases.FuncionesLimiclean;
 import limiclean.Clases.Funciones_BD;
@@ -22,9 +23,9 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
     public PanelOrdenesEmpleado(FrmPrincipalEmpleado principal) {
         initComponents();
         this.principal = principal;
+        Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTableEmpleados);
+        JTextField txtdnioruc;
         FuncionesLimiclean.borrar_mensaje_defecto(txt_Buscar, "Nombre o DNI/RUC..");
-        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo, "dd/mm/aaaa");
-        FuncionesLimiclean.borrar_mensaje_defecto(txtFechaRecojo1, "dd/mm/aaaa");
     }
 
     /**
@@ -40,14 +41,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         txt_Buscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtFechaRecojo = new javax.swing.JTextField();
-        txtFechaRecojo1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         btnNuevaOrden = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -65,82 +59,30 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
 
         jLabel2.setText("Buscar cliente");
 
-        txtFechaRecojo.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechaRecojo.setText("dd/mm/aaaa");
-        txtFechaRecojo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtFechaRecojo1.setForeground(new java.awt.Color(102, 102, 102));
-        txtFechaRecojo1.setText("dd/mm/aaaa");
-        txtFechaRecojo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pendiente", "Cancelado" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton1.setText("Filtrar");
-
-        jButton2.setText("Limpiar");
-
-        jLabel3.setText("Desde");
-
-        jLabel4.setText("Hasta");
-
-        jLabel5.setText("Estado pago");
+        jButton1.setText("Buscar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaRecojo1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(jLabel5)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtFechaRecojo))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFechaRecojo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaRecojo1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         btnNuevaOrden.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -203,7 +145,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
                             .addComponent(btnNuevaOrden))
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +156,7 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
                     .addComponent(btnNuevaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(72, 72, 72)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jButton4)
@@ -224,43 +166,40 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int fila = JTableEmpleados.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this,
-                "Seleccione una fila primero.",
-                "Aviso",
-                JOptionPane.WARNING_MESSAGE);
-        return;
-    }
 
-    int codigo = Integer.parseInt(JTableEmpleados.getValueAt(fila, 0).toString());
-    String[] datos = Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(), codigo);
-    int idOrdenLavado = Integer.parseInt(datos[0]);
-    String cliente = datos[1];
-    String fechaOrdenLavado = datos[2];
-    String FechaEntregaEstimada = datos[3];
-    String DescuentOrden = datos[4];
-    String CostoLavado = datos[5];
-    String EstadoOrden = datos[6];
-    String EstadoPago = datos[7];
-    String FechaInicio = datos[8];
-    String FechaFin = datos[9];
-    String notas = datos[10];
-
-    FrmDetalleOrden frm = new FrmDetalleOrden(
-            idOrdenLavado, cliente, fechaOrdenLavado, FechaEntregaEstimada,
-            DescuentOrden, CostoLavado, EstadoOrden, EstadoPago,
-            FechaInicio, FechaFin, notas,
-            () -> {
-                Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTableEmpleados);
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this,
+                        "Seleccione una fila primero.",
+                        "Aviso",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
             }
-    );
+            
+            
+            int codigo = Integer.parseInt(JTableEmpleados.getValueAt(fila, 0).toString());
+            String[] datos=Funciones_BD.buscarOrdenLavado(ConexionBD.obtenerConexion(),codigo);
+            int idordenLavado=Integer.parseInt(datos[0]);
+            String cliente=datos[1];
+            String fechaOrdenLavado=datos[2];
+            String FechaEntregaEstimada=datos[3];
+            String DescuentOrden=datos[4];
+            String CostoLavado=datos[5];
+            String EstadoOrden=datos[6];
+            String EstadoPago=datos[7];
+            String FechaInicio=datos[8];
+            String FechaFin=datos[9];
+            String notas=datos[10];
 
-    frm.setVisible(true);
-
+        FrmDetalleOrden frm = new FrmDetalleOrden(cliente,fechaOrdenLavado,FechaEntregaEstimada,DescuentOrden,CostoLavado,EstadoOrden,EstadoPago,FechaInicio,FechaFin,notas, () ->  
+        {Funciones_BD.cargarOrdenes(ConexionBD.obtenerConexion(), JTableEmpleados);
+        }, idordenLavado
+        );
+        frm.setVisible(true);   
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnNuevaOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaOrdenMouseClicked
-
+        String dato=txt_Buscar.getText().toString();
+        Funciones_BD.Filtro_ordenes_lavado(ConexionBD.obtenerConexion(), JTableEmpleados,dato);
     }//GEN-LAST:event_btnNuevaOrdenMouseClicked
 
     private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed
@@ -273,19 +212,12 @@ public class PanelOrdenesEmpleado extends javax.swing.JPanel {
     private javax.swing.JTable JTableEmpleados;
     private javax.swing.JButton btnNuevaOrden;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtFechaRecojo;
-    private javax.swing.JTextField txtFechaRecojo1;
     private javax.swing.JTextField txt_Buscar;
     // End of variables declaration//GEN-END:variables
 }
